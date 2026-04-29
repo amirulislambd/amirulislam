@@ -1,2 +1,83 @@
 @import "tailwindcss";
 @import "@heroui/styles"; 
+
+:root {
+    --background: #060e20;
+    --surface: #0b1326;
+    --surface-container: #131b2e;
+    --surface-container-high: #222a3d;
+    --primary: #d0bcff;
+    --primary-container: #7c4dff;
+    --secondary: #adc6ff;
+    --tertiary: #4cd7f6;
+    --on-background: #dae2fd;
+    --on-surface: #dae2fd;
+    --on-surface-variant: #cbc3d7;
+    --outline: #494454;
+    --glass: rgba(23, 31, 51, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --accent-glow: rgba(124, 77, 255, 0.15);
+  }
+  
+  * {
+    box-sizing: border-box;
+    /* padding: 0;
+    margin: 0; */
+    cursor: default;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: var(--background);
+    color: var(--on-background);
+    font-family: var(--font-inter), sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+  
+  /* Background Animation */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 30%, var(--accent-glow) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(76, 215, 246, 0.1) 0%, transparent 40%);
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.05;
+    z-index: 1000;
+    pointer-events: none;
+    filter: contrast(150%) brightness(150%);
+  }
+  
+  /* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-container-high);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-container);
+}
