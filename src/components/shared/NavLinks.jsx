@@ -6,7 +6,8 @@ import {
   RiMenuFold2Fill,
   RiMenuUnfold2Line,
 } from "react-icons/ri";
-import ThemeSwitch from "./ThemeSwitch";
+import { ThemeSwitch } from "./ThemeSwitch";
+
 
 const NavLinks = ({ links }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
