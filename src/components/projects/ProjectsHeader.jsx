@@ -32,12 +32,7 @@ const HEADER_STYLES = `
 }
 `;
 
-export default function ProjectsHeader({ isDark }) {
-  const headingColor = isDark ? "#ffffff" : "#1e1b4b";
-  const subColor     = isDark ? "rgba(218,226,253,0.65)" : "rgba(30,27,75,0.60)";
-  const badgeBg      = isDark ? "rgba(124,77,255,0.12)" : "rgba(124,77,255,0.10)";
-  const badgeBorder  = isDark ? "rgba(124,77,255,0.35)" : "rgba(124,77,255,0.40)";
-  const badgeText    = isDark ? "#d0bcff" : "#6d28d9";
+export default function ProjectsHeader() {
 
   return (
     <>
@@ -52,8 +47,7 @@ export default function ProjectsHeader({ isDark }) {
         {/* Badge */}
         <motion.div variants={fadeUp} className="flex justify-center mb-6">
           <span
-            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase border"
-            style={{ background: badgeBg, borderColor: badgeBorder, color: badgeText }}
+            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase border bg-purple-500/10 dark:bg-purple-500/15 border-purple-500/30 dark:border-purple-500/40 text-purple-600 dark:text-purple-300"
           >
             <span
               className="inline-block w-1.5 h-1.5 rounded-full animate-pulse"
@@ -66,8 +60,7 @@ export default function ProjectsHeader({ isDark }) {
         {/* Heading */}
         <motion.h2
           variants={fadeUp}
-          className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4"
-          style={{ color: headingColor }}
+          className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4 text-slate-900 dark:text-white"
         >
           Things I&apos;ve{" "}
           <span className="projects-gradient-text">Built</span>
@@ -76,8 +69,7 @@ export default function ProjectsHeader({ isDark }) {
         {/* Sub */}
         <motion.p
           variants={fadeUp}
-          className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed"
-          style={{ color: subColor }}
+          className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed text-slate-600 dark:text-slate-300"
         >
           A selection of projects I&apos;ve designed, developed, and shipped —
           from concept to production.

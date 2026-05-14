@@ -5,7 +5,7 @@
    DESIGN TOKENS
 ═══════════════════════════════════════════════════════ */
 :root {
-  --bg: #f8fafc;
+  --bg: #ffffff;
   --bg-surface: #ffffff;
   --bg-surface-2: #f1f5f9;
   --border: rgba(0,0,0,0.08);
@@ -188,7 +188,7 @@ html:not(.dark) .bg-gradient-layer {
     -webkit-backdrop-filter: none !important;
   }
   .glass-nav, .glass-card {
-    background: rgba(2, 6, 23, 0.95) !important; /* Dark solid theme for mobile */
+    background: rgba(255, 255, 255, 0.95) !important; /* Light solid theme for mobile */
   }
   .dark .glass-nav, .dark .glass-card {
     background: rgba(6, 15, 35, 0.98) !important;

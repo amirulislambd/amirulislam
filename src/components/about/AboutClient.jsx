@@ -20,7 +20,7 @@ export default function AboutClient({ children }) {
     <section 
       id="about" 
       className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-24 transition-colors duration-500"
-      style={{ background: isDark ? "transparent" : "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 40%, #e0f2fe 100%)" }}
+      style={{ background: "transparent" }}
     >
       <style>{`
         @keyframes gradientShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
@@ -43,7 +43,7 @@ export default function AboutClient({ children }) {
             height: orb.size, 
             left: orb.x, 
             top: orb.y, 
-            background: isDark ? "rgba(124,77,255,0.22)" : "rgba(124,77,255,0.18)",
+            background: "rgba(124,77,255,0.18)",
             willChange: "transform, opacity",
             transform: 'translateZ(0)'
           }}

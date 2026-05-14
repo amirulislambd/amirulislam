@@ -38,8 +38,8 @@ export default function AboutPage() {
     <AboutClient>
       <div
         className="relative rounded-[2.5rem] border transition-all duration-500
-        bg-white/90 border-slate-200/60 shadow-[0_20px_50px_rgba(0,0,0,0.05)] 
-        dark:bg-[#0b1326]/50 dark:border-white/10 dark:shadow-2xl
+        bg-white dark:bg-[#0b1326]/50 border-slate-200 dark:border-white/10 
+        shadow-[0_20px_50px_rgba(124,77,255,0.08)] dark:shadow-2xl
         p-8 sm:p-16 overflow-hidden"
       >
         <span className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-50" />
@@ -62,7 +62,7 @@ export default function AboutPage() {
         <div className="grid lg:grid-cols-12 gap-12 items-center mb-16">
           <div className="lg:col-span-5 flex justify-center">
             {/* Image Hover: Scale and Rotate */}
-            <div className="group relative w-64 h-80 sm:w-72 sm:h-96 rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800 ring-1 ring-slate-200 dark:ring-white/10 transition-transform duration-500 hover:scale-[1.02] hover:rotate-1">
+            <div className="group relative w-64 h-80 sm:w-72 sm:h-96 rounded-3xl overflow-hidden shadow-2xl border-4 border-slate-50 dark:border-slate-800 ring-1 ring-slate-200 dark:ring-white/10 transition-transform duration-500 hover:scale-[1.02] hover:rotate-1">
               <Image
                 src={heroPng}
                 alt="Amirul Islam"
@@ -114,7 +114,7 @@ export default function AboutPage() {
               <div
                 key={item.title}
                 className="group p-6 rounded-2xl border transition-all duration-300
-                bg-white border-slate-100 shadow-sm hover:shadow-blue-500/10 hover:shadow-xl hover:-translate-y-1 dark:bg-white/5 dark:border-white/10"
+                bg-white border-slate-200/60 shadow-sm hover:shadow-purple-500/10 hover:shadow-xl hover:-translate-y-1 dark:bg-white/5 dark:border-white/10"
               >
                 <div className="flex gap-4">
                   <div className="p-3 rounded-xl bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
@@ -145,7 +145,7 @@ export default function AboutPage() {
                 key={tech.name}
                 className="group flex flex-col items-center gap-2 p-3 rounded-xl border min-w-[85px] 
           /* ডিফল্ট বর্ডার */
-          bg-slate-50 border-slate-100 dark:bg-white/5 dark:border-white/10 
+          bg-slate-50 border-slate-200 dark:bg-white/5 dark:border-white/10 
           /* হোভার ইফেক্টস */
           transition-all duration-500 hover:-translate-y-2 hover:shadow-lg 
           hover:bg-white dark:hover:bg-white/10
@@ -154,8 +154,8 @@ export default function AboutPage() {
               >
                 <tech.icon
                   size={22}
-                  style={{ color: tech.color }}
-                  className="opacity-70 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300"
+                  style={{ color: tech.color !== "inherit" ? tech.color : undefined }}
+                  className={`opacity-70 group-hover:opacity-100 group-hover:scale-125 transition-all duration-300 ${tech.color === "inherit" ? "text-slate-900 dark:text-white" : ""}`}
                 />
                 <span className="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                   {tech.name}

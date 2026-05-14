@@ -60,7 +60,7 @@ export default function Navbar() {
   const { resolvedTheme } = useTheme();
   
   useEffect(() => setMounted(true), []);
-  const dark = !mounted || resolvedTheme === "dark";
+  const dark = mounted && resolvedTheme === "dark";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);

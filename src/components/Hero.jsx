@@ -44,7 +44,7 @@ export default function Hero() {
     <section
       id="hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden transition-all duration-500 py-10"
-      style={{ background: isDark ? "transparent" : "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 40%, #e0f2fe 100%)" }}
+      style={{ background: isDark ? "transparent" : "transparent" }}
     >
       <style jsx global>{`
         @keyframes rotate-border {
@@ -124,7 +124,7 @@ export default function Hero() {
 
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 mb-10">
         <motion.div
-          className={`relative glass-card rounded-[2rem] sm:rounded-[2.5rem] border p-6 sm:p-14 text-center transition-all duration-700 ${mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} ${isDark ? 'bg-[#0b1326]/40 border-white/10' : 'bg-white/70 border-purple-500/10'} backdrop-blur-2xl shadow-2xl overflow-hidden`}
+          className={`relative glass-card rounded-[2rem] sm:rounded-[2.5rem] border p-6 sm:p-14 text-center transition-all duration-700 ${mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} bg-white/70 dark:bg-[#0b1326]/40 border-purple-500/10 dark:border-white/10 backdrop-blur-2xl shadow-2xl overflow-hidden`}
         >
           <div className="absolute -inset-1 bg-gradient-to-tr from-purple-500/5 to-blue-500/5 pointer-events-none" />
 
@@ -150,7 +150,7 @@ export default function Hero() {
             variants={fadeUpVariants}
             initial="hidden"
             animate={mounted ? "visible" : "hidden"}
-            className={`text-3xl sm:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}
+            className="text-3xl sm:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight text-slate-900 dark:text-white"
           >
             Crafting Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">Experiences</span>
             <span className="animated-gradient-text block text-xl sm:text-4xl mt-2 sm:mt-3 tracking-wide">Beyond Gravity</span>
@@ -160,7 +160,7 @@ export default function Hero() {
             variants={fadeUpVariants}
             initial="hidden"
             animate={mounted ? "visible" : "hidden"}
-            className={`text-sm sm:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 font-medium ${isDark ? 'text-slate-300' : 'text-slate-600'}`}
+            className="text-sm sm:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 font-medium text-slate-600 dark:text-slate-300"
           >
             Hi, I&apos;m <span className="text-purple-400 font-bold">Amirul Islam</span>, a Full Stack Developer specializing in MERN, Next.js & Flutter.
           </motion.p>

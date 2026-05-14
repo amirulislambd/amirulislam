@@ -116,10 +116,9 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <meta name="theme-color" content="#020617" />
+        <meta name="theme-color" content="#ffffff" />
       </head>
-      {/* Set Dark Background as default to avoid "fade-in" from light color */}
-      <body className="min-h-full flex flex-col relative bg-[#020617] dark:bg-[#020617] transition-all duration-300">
+      <body className="min-h-full flex flex-col relative bg-white dark:bg-[#020617] transition-all duration-300">
         <NextThemeProvider>
           <GalaxyBackground />
           <FloatingBackground />

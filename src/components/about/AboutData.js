@@ -3,10 +3,10 @@ import { SiReact, SiNextdotjs, SiNodedotjs, SiMongodb, SiExpress, SiJavascript, 
 
 export const TECH_STACK = [
   { name: "React", icon: SiReact, color: "#61DAFB" },
-  { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
+  { name: "Next.js", icon: SiNextdotjs, color: "inherit" },
   { name: "Node.js", icon: SiNodedotjs, color: "#68A063" },
   { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
-  { name: "Express", icon: SiExpress, color: "#ffffff" },
+  { name: "Express", icon: SiExpress, color: "inherit" },
   { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
   { name: "Tailwind", icon: SiTailwindcss, color: "#06B6D4" },
   { name: "Firebase", icon: SiFirebase, color: "#FFCA28" },

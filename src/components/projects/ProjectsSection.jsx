@@ -43,7 +43,7 @@ export default function ProjectsSection({ projects }) {
     <section
       id="projects"
       className="relative min-h-screen overflow-hidden py-12 sm:py-20 transition-all duration-500"
-      style={{ background: isDark ? "transparent" : "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 40%, #e0f2fe 100%)" }}
+      style={{ background: isDark ? "transparent" : "transparent" }}
     >
       {ORBS.map((orb, i) => (
         <motion.div key={i} className="pointer-events-none absolute rounded-full blur-3xl opacity-30 dark:opacity-50"
@@ -63,7 +63,7 @@ export default function ProjectsSection({ projects }) {
       <div className="pointer-events-none absolute inset-0 opacity-[0.03] sm:opacity-[0.05]" style={{ backgroundImage: `linear-gradient(rgba(124,77,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(124,77,255,0.05) 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6">
-        <ProjectsHeader isDark={isDark} />
+        <ProjectsHeader />
         
         <div className="mt-4 sm:mt-0">
           <ProjectFilter
@@ -92,7 +92,7 @@ export default function ProjectsSection({ projects }) {
           >
             {[...filtered, ...filtered, ...filtered].map((project, i) => (
               <SwiperSlide key={`${project.id}-${i}`} style={{ width: "min(400px, 85vw)", display: "flex", justifyContent: "center" }}>
-                <ProjectCard project={project} index={i % filtered.length} isDark={isDark} />
+                <ProjectCard project={project} index={i % filtered.length} />
               </SwiperSlide>
             ))}
           </Swiper>
