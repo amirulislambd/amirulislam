@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion, useMotionValue, useSpring } from "framer-motion";
-import { useRef, useCallback } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { useRef } from "react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
@@ -40,6 +40,28 @@ const PARTICLES = [
   { id:19, x:"28%", y:"48%", size:3.1, delay:1.7, duration:11 },
   { id:20, x:"88%", y:"8%",  size:1.6, delay:3.2, duration:8  },
   { id:21, x:"15%", y:"62%", size:2.6, delay:0.8, duration:7  },
+];
+
+// ─── Shooting comets — চারদিক থেকে আসবে ────────────────────────────────────
+// dir: "right"=ডান→বাম, "left"=বাম→ডান, "top"=উপর→নিচ, "bottom"=নিচ→উপর
+const COMETS = [
+  // ডান থেকে বাম
+  { id:0,  startX:"105%", startY:"15%",  dx:-650, dy: 120,  angle:170, delay:0,    dur:2.6, len:130 },
+  { id:1,  startX:"105%", startY:"55%",  dx:-650, dy:-80,   angle:187, delay:7.5,  dur:2.3, len:100 },
+  { id:2,  startX:"105%", startY:"35%",  dx:-650, dy: 60,   angle:175, delay:14.0, dur:3.0, len:150 },
+  // বাম থেকে ডান
+  { id:3,  startX:"-8%",  startY:"25%",  dx: 650, dy: 100,  angle:  8, delay:3.5,  dur:2.5, len:120 },
+  { id:4,  startX:"-8%",  startY:"65%",  dx: 650, dy:-60,   angle:354, delay:11.0, dur:2.8, len:110 },
+  // উপর থেকে নিচ
+  { id:5,  startX:"25%",  startY:"-5%",  dx: 120, dy: 650,  angle: 95, delay:5.0,  dur:2.7, len:130 },
+  { id:6,  startX:"70%",  startY:"-5%",  dx:-80,  dy: 650,  angle: 82, delay:13.0, dur:2.4, len:100 },
+  // নিচ থেকে উপর
+  { id:7,  startX:"40%",  startY:"105%", dx: 80,  dy:-650,  angle:278, delay:8.5,  dur:2.9, len:120 },
+  { id:8,  startX:"80%",  startY:"105%", dx:-100, dy:-650,  angle:265, delay:16.5, dur:2.6, len:140 },
+  // তির্যক (diagonal)
+  { id:9,  startX:"105%", startY:"-5%",  dx:-650, dy: 500,  angle:218, delay:2.0,  dur:3.2, len:160 },
+  { id:10, startX:"-5%",  startY:"-5%",  dx: 650, dy: 500,  angle:322, delay:9.0,  dur:2.8, len:130 },
+  { id:11, startX:"105%", startY:"105%", dx:-600, dy:-500,  angle:142, delay:18.0, dur:3.0, len:140 },
 ];
 
 const TECHS = ["React", "Next.js", "Node.js", "MongoDB", "Express", "JavaScript"];
@@ -126,6 +148,28 @@ const STATIC_STYLES = `
 .avatar-glow {
   box-shadow: 0 0 18px 4px rgba(124,77,255,0.45), 0 0 40px 8px rgba(76,215,246,0.18);
 }
+
+/* ── Shooting comet ── */
+.comet {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+  transform-origin: right center;
+}
+.comet::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 8px 3px rgba(124,77,255,0.95), 0 0 16px 6px rgba(76,215,246,0.5);
+}
+
+
 `;
 
 export default function Hero() {
@@ -134,23 +178,7 @@ export default function Hero() {
   const isDark = resolvedTheme === "dark";
   const sectionRef = useRef(null);
 
-  const rawX = useMotionValue(-500);
-  const rawY = useMotionValue(-500);
-  const glowX = useSpring(rawX, { stiffness: 80, damping: 20 });
-  const glowY = useSpring(rawY, { stiffness: 80, damping: 20 });
 
-  const handleMouseMove = useCallback((e) => {
-    if (shouldReduceMotion) return;
-    const rect = sectionRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    rawX.set(e.clientX - rect.left);
-    rawY.set(e.clientY - rect.top);
-  }, [rawX, rawY, shouldReduceMotion]);
-
-  const handleMouseLeave = useCallback(() => {
-    rawX.set(-500);
-    rawY.set(-500);
-  }, [rawX, rawY]);
 
   // ── Theme-aware design tokens ──────────────────────────────────────────────
   const t = {
@@ -164,9 +192,6 @@ export default function Hero() {
       ? ["rgba(124,77,255,0.18)", "rgba(76,215,246,0.14)", "rgba(124,77,255,0.10)", "rgba(76,215,246,0.10)"]
       : ["rgba(124,77,255,0.25)", "rgba(14,116,144,0.20)",  "rgba(109,40,217,0.16)", "rgba(14,116,144,0.14)"],
 
-    mouseGlow: isDark
-      ? "radial-gradient(circle, rgba(124,77,255,0.18) 0%, rgba(76,215,246,0.10) 50%, transparent 70%)"
-      : "radial-gradient(circle, rgba(124,77,255,0.16) 0%, rgba(14,116,144,0.10) 50%, transparent 70%)",
 
     cardBg:     isDark ? "rgba(11,19,38,0.55)"    : "rgba(255,255,255,0.75)",
     cardBorder: isDark ? "rgba(255,255,255,0.09)"  : "rgba(124,77,255,0.20)",
@@ -216,25 +241,8 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden transition-all duration-500"
       aria-label="Hero Section"
       style={{ background: t.sectionBg }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
     >
       <style>{STATIC_STYLES}</style>
-
-      {/* ── Mouse-follower glow ────────────────────────────────────── */}
-      {!shouldReduceMotion && (
-        <motion.div
-          aria-hidden="true"
-          className="pointer-events-none absolute rounded-full blur-3xl"
-          style={{
-            width: 340, height: 340,
-            x: glowX, y: glowY,
-            translateX: "-50%", translateY: "-50%",
-            background: t.mouseGlow,
-            zIndex: 1,
-          }}
-        />
-      )}
 
       {/* ── Background orbs ───────────────────────────────────────── */}
       {ORBS.map((orb, i) => (
@@ -265,6 +273,38 @@ export default function Hero() {
         />
       ))}
 
+      {/* ── Shooting comets — চারদিক থেকে কার্ডের উপর দিয়ে উড়ে যাবে ── */}
+      {!shouldReduceMotion && COMETS.map((comet) => (
+        <motion.div
+          key={comet.id}
+          aria-hidden="true"
+          className="comet"
+          style={{
+            left: comet.startX,
+            top:  comet.startY,
+            width:  comet.len,
+            height: 2,
+            rotate: comet.angle,
+            background: "linear-gradient(to left, rgba(255,255,255,0.95) 0%, rgba(124,77,255,0.70) 35%, rgba(76,215,246,0.25) 75%, transparent 100%)",
+            zIndex: 20,          /* কার্ডের উপরে (card z-index=10) */
+          }}
+          animate={{
+            x:      [0, comet.dx],
+            y:      [0, comet.dy],
+            opacity:[0, 1, 1, 0],
+            scaleX: [0.1, 1, 1, 0.5],
+          }}
+          transition={{
+            duration:    comet.dur,
+            repeat:      Infinity,
+            repeatDelay: 15 + comet.delay * 0.6,
+            delay:       comet.delay,
+            ease:        "easeIn",
+            times:       [0, 0.07, 0.87, 1],
+          }}
+        />
+      ))}
+
       {/* ── Grid overlay ──────────────────────────────────────────── */}
       <div
         aria-hidden="true"
@@ -287,7 +327,7 @@ export default function Hero() {
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         >
           <div
-            className="relative rounded-3xl border p-10 sm:p-14 text-center overflow-hidden transition-all duration-500"
+            className="relative rounded-3xl border p-10 sm:p-14 text-center transition-all duration-500"
             style={{
               background: t.cardBg,
               backdropFilter: "blur(24px)",
