@@ -1,44 +1,60 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { useTheme } from "next-themes";
+import { 
+  SiHtml5, SiCss, SiJavascript, SiReact, 
+  SiNextdotjs, SiNodedotjs, SiExpress, SiMongodb 
+} from "react-icons/si";
 import { useEffect, useState } from "react";
-import { SiHtml5, SiCss, SiJavascript, SiTailwindcss, SiReact, SiNextdotjs, SiMongodb, SiExpress, SiNodedotjs } from "react-icons/si";
+import { useTheme } from "next-themes";
 
 const ICONS = [
-  { I: SiHtml5,       t:"7%",  l:"4%",   s:42, o:0.18, c:"#e34f26", dx:[0,14,-8,0],  dy:[0,-20,10,0],  d:14, dl:0,   r:[0,12,-10,0] },
-  { I: SiCss,         t:"20%", l:"87%",  s:38, o:0.16, c:"#264de4", dx:[0,-12,8,0],  dy:[0,16,-18,0],  d:16, dl:1.2, r:[0,-10,8,0] },
-  { I: SiJavascript,  t:"64%", l:"7%",   s:36, o:0.18, c:"#f7df1e", dx:[0,10,-14,0], dy:[0,-12,20,0],  d:13, dl:2.5, r:[0,10,-8,0] },
-  { I: SiTailwindcss, t:"79%", l:"74%",  s:40, o:0.16, c:"#38bdf8", dx:[0,-16,8,0],  dy:[0,18,-10,0],  d:18, dl:0.7, r:[0,-8,12,0] },
-  { I: SiReact,       t:"11%", l:"44%",  s:48, o:0.14, c:"#61dafb", dx:[0,10,-6,0],  dy:[0,-24,12,0],  d:20, dl:3.1, r:[0,22,-16,0] },
-  { I: SiNextdotjs,   t:"44%", l:"91%",  s:36, o:0.16, c:"#e2e8f0", dx:[0,-8,12,0],  dy:[0,16,-8,0],   d:15, dl:1.8, r:[0,-10,6,0] },
-  { I: SiMongodb,     t:"54%", l:"1%",   s:34, o:0.17, c:"#4db33d", dx:[0,8,-12,0],  dy:[0,-14,22,0],  d:17, dl:0.4, r:[0,8,-14,0] },
-  { I: SiExpress,     t:"34%", l:"54%",  s:30, o:0.12, c:"#94a3b8", dx:[0,-14,10,0], dy:[0,20,-12,0],  d:19, dl:2.9, r:[0,-14,10,0] },
-  { I: SiNodedotjs,   t:"87%", l:"39%",  s:40, o:0.17, c:"#68a063", dx:[0,16,-10,0], dy:[0,-18,10,0],  d:16, dl:1.5, r:[0,12,-8,0] },
+  { Icon: SiHtml5,       x: "5%",   y: "35%", size: 45, color: "#E34F26", delay: 0,   duration: 35 },
+  { Icon: SiCss,         x: "90%",  y: "40%", size: 40, color: "#1572B6", delay: 5,   duration: 40 },
+  { Icon: SiJavascript,  x: "12%",  y: "75%", size: 48, color: "#F7DF1E", delay: 10,  duration: 38 },
+  { Icon: SiReact,       x: "82%",  y: "85%", size: 55, color: "#61DAFB", delay: 2,   duration: 32 },
+  { Icon: SiNextdotjs,   x: "45%",  y: "92%", size: 48, color: "#ffffff", delay: 7,   duration: 45 },
+  { Icon: SiNodedotjs,   x: "8%",   y: "60%", size: 42, delay: 12,  duration: 37 },
+  { Icon: SiExpress,     x: "92%",  y: "75%", size: 38, color: "#ffffff", delay: 15,  duration: 42 },
+  { Icon: SiMongodb,     x: "35%",  y: "45%", size: 50, color: "#47A248", delay: 4,   duration: 39 },
 ];
 
 export default function FloatingBackground() {
-  const reduce = useReducedMotion();
+  const shouldReduceMotion = useReducedMotion();
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
-  if (reduce || !mounted || resolvedTheme !== "dark") return null;
+  if (!mounted || resolvedTheme !== "dark") return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 overflow-hidden" style={{ zIndex: -10 }}>
-      {ICONS.map(({ I: Icon, t, l, s, o, c, dx, dy, d, dl, r }, i) => (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: -15 }}>
+      {ICONS.map(({ Icon, x, y, size, color, delay, duration }, i) => (
         <motion.div
           key={i}
           className="absolute"
-          style={{ top: t, left: l }}
-          animate={{ x: dx, y: dy, rotate: r }}
-          transition={{ duration: d, repeat: Infinity, ease: "easeInOut", delay: dl }}
+          style={{ 
+            left: x, 
+            top: y, 
+            fontSize: size,
+            color: color,
+            willChange: "transform, opacity"
+          }}
+          animate={shouldReduceMotion ? { opacity: 0.1 } : {
+            x: [0, 120, -120, 0],
+            y: [0, -80, 80, 0],
+            rotate: [0, 360],
+            opacity: [0.1, 0.2, 0.1]
+          }}
+          transition={{
+            duration: duration,
+            repeat: Infinity,
+            delay: delay,
+            ease: "linear"
+          }}
         >
-          <Icon style={{ width: s, height: s, opacity: o, color: c, transform: 'translateZ(0)' }} />
+          <Icon />
         </motion.div>
       ))}
     </div>

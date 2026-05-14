@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 // ─── Diverse Cosmic Colors ───────────────────────────────────────────────────
 const C = "#67e8f9";  // Cyan
@@ -18,18 +19,23 @@ const STARS = [
   [3,44,2.0,G,2.6,2.9],[14,53,1.2,F,0.7,4.8],[23,39,2.2,C,4.0,3.5],[31,62,1.5,W,1.3,2.7],
   [40,48,1.2,P,3.2,5.1],[49,56,2.2,G,0.6,3.9],[58,44,1.5,F,2.4,4.6],[67,69,1.2,C,4.5,3.3],
   [75,51,2.8,W,1.0,2.6],[83,63,2.0,P,3.6,5.4],[91,46,1.8,G,2.2,4.1],[8,76,2.8,F,0.4,3.7],
-  [2,11,2.8,C,1.1,4.2],[10,31,2.2,W,2.7,3.6],[18,21,1.8,P,0.2,5.3],[27,16,3.5,G,4.1,2.9],
-  [34,36,2.2,F,1.6,4.7],[43,24,1.8,C,3.3,3.4],[51,11,2.8,W,0.8,5.0],[60,33,2.2,P,2.5,2.7],
-  [70,19,1.8,G,4.4,4.4],[79,41,2.8,F,1.7,3.1],[88,27,2.2,C,0.1,5.6],[96,14,1.8,W,3.0,4.0],
+];
+
+// ─── Global Comets Data ─────────────────────────────────────────────────────
+const COMETS = [
+  { id:0,  startX:"105%", startY:"15%",  dx:-1200, dy: 300, angle:165, delay:0,    dur:4.5, len:180 },
+  { id:1,  startX:"105%", startY:"55%",  dx:-1200, dy:-200, angle:195, delay:8.0,  dur:4.0, len:150 },
+  { id:2,  startX:"-10%", startY:"30%",  dx: 1200, dy: 250, angle:15,  delay:4.5,  dur:5.0, len:200 },
+  { id:3,  startX:"105%", startY:"80%",  dx:-1200, dy:-300, angle:200, delay:12.0, dur:4.2, len:160 },
+  { id:4,  startX:"-10%", startY:"65%",  dx: 1200, dy:-150, angle:345, delay:16.0, dur:4.8, len:170 },
 ];
 
 export default function GalaxyBackground() {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
   if (!mounted || resolvedTheme !== "dark") return null;
 
@@ -40,42 +46,18 @@ export default function GalaxyBackground() {
           0%, 100% { opacity: 0.3; transform: scale(0.8) translateZ(0); }
           50% { opacity: 1; transform: scale(1.3) translateZ(0); filter: brightness(2) drop-shadow(0 0 8px currentColor); }
         }
-        @keyframes subtleGlow {
-          0%, 100% { opacity: 0.5; transform: scale(1) translateZ(0); }
-          50% { opacity: 0.8; transform: scale(1.05) translateZ(0); }
-        }
-        .focused-aura {
-          position: fixed;
-          top: -10%;
-          right: -5%;
-          width: 400px;
-          height: 400px;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(167,139,250,0.12) 0%, rgba(56,189,248,0.05) 40%, transparent 70%);
-          filter: blur(40px);
-          z-index: -20;
-          animation: subtleGlow 12s ease-in-out infinite;
-        }
-        .sharp-core {
-          position: fixed;
-          top: -2%;
-          right: -2%;
-          width: 150px;
-          height: 150px;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(124,77,255,0.05) 50%, transparent 80%);
-          filter: blur(20px);
-          z-index: -19;
-          animation: subtleGlow 8s ease-in-out infinite;
+        @keyframes planetPulse {
+          0%, 100% { opacity: 0.7; transform: scale(1) translateZ(0); }
+          50% { opacity: 0.9; transform: scale(1.05) translateZ(0); }
         }
       `}</style>
 
       {/* 1. Deep Space Base */}
       <div className="pointer-events-none fixed inset-0" style={{ zIndex: -22, background: "linear-gradient(150deg, #020617 0%, #08112b 100%)" }} />
 
-      {/* 2. Focused Celestial Aura (চিকন এবং সরু রোশনি) */}
-      <div className="focused-aura pointer-events-none" />
-      <div className="sharp-core pointer-events-none" />
+      {/* 2. Cosmic Planet */}
+      <div className="cosmic-planet pointer-events-none fixed" style={{ top:"-10%", right:"-5%", width:450, height:450, borderRadius:"50%", background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08) 0%, rgba(56,189,248,0.04) 40%, transparent 80%)", boxShadow: "inset -30px -30px 80px rgba(0,0,0,0.8), 0 0 50px rgba(59,130,246,0.1)", zIndex: -20, animation: "planetPulse 15s ease-in-out infinite" }} />
+      <div className="planet-glow pointer-events-none fixed" style={{ top:"-5%", right:"-5%", width:550, height:550, borderRadius:"50%", background: "radial-gradient(circle, rgba(124,77,255,0.08) 0%, transparent 70%)", filter: "blur(50px)", zIndex: -21 }} />
 
       {/* 3. Star Field */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden" style={{ zIndex: -18 }}>
@@ -98,6 +80,29 @@ export default function GalaxyBackground() {
           />
         ))}
       </div>
+
+      {/* 4. Global Comets (উড়ন্ত ধুমকেতু - সবার ওপরে) */}
+      {!shouldReduceMotion && (
+        <div className="pointer-events-none fixed inset-0 overflow-hidden" style={{ zIndex: 100 }}>
+          {COMETS.map((comet) => (
+            <motion.div
+              key={comet.id}
+              style={{
+                position: "absolute",
+                left: comet.startX,
+                top: comet.startY,
+                width: comet.len,
+                height: 2,
+                rotate: comet.angle,
+                background: "linear-gradient(to left, white, rgba(124,77,255,0.6), transparent)",
+                willChange: "transform, opacity",
+              }}
+              animate={{ x: [0, comet.dx], y: [0, comet.dy], opacity: [0, 1, 0] }}
+              transition={{ duration: comet.dur, repeat: Infinity, repeatDelay: 5 + comet.delay, delay: comet.delay }}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 }

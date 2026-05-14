@@ -24,14 +24,6 @@ const PARTICLES = [
   { id:4,  x:"67%", y:"30%", size:2.8, delay:3.1, duration:8  },
 ];
 
-const COMETS = [
-  { id:0,  startX:"105%", startY:"15%",  dx:-650, dy: 120,  angle:170, delay:0,    dur:2.6, len:130 },
-  { id:1,  startX:"105%", startY:"55%",  dx:-650, dy:-80,   angle:187, delay:7.5,  dur:2.3, len:100 },
-  { id:2,  startX:"105%", startY:"35%",  dx:-650, dy: 60,   angle:175, delay:14.0, dur:3.0, len:150 },
-  { id:3,  startX:"-8%",  startY:"25%",  dx: 650, dy: 100,  angle:  8, delay:3.5,  dur:2.5, len:120 },
-  { id:4,  startX:"-8%",  startY:"65%",  dx: 650, dy:-60,   angle:354, delay:11.0, dur:2.8, len:110 },
-];
-
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
@@ -130,28 +122,6 @@ export default function Hero() {
         />
       ))}
 
-      {/* Comets */}
-      {!shouldReduceMotion && isDark && COMETS.map((comet) => (
-        <motion.div
-          key={comet.id}
-          className="comet hidden sm:block"
-          style={{
-            position: "absolute",
-            left: comet.startX,
-            top:  comet.startY,
-            width:  comet.len,
-            height: 2,
-            rotate: comet.angle,
-            background: "linear-gradient(to left, white, rgba(124,77,255,0.6), transparent)",
-            zIndex: 2,
-            willChange: "transform",
-            transform: 'translateZ(0)'
-          }}
-          animate={{ x: [0, comet.dx], y: [0, comet.dy], opacity: [0, 1, 0] }}
-          transition={{ duration: comet.dur, repeat: Infinity, repeatDelay: 6 + comet.delay, delay: comet.delay }}
-        />
-      ))}
-
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 mb-10">
         <motion.div
           className={`relative glass-card rounded-[2rem] sm:rounded-[2.5rem] border p-6 sm:p-14 text-center transition-all duration-700 ${mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} ${isDark ? 'bg-[#0b1326]/40 border-white/10' : 'bg-white/70 border-purple-500/10'} backdrop-blur-2xl shadow-2xl overflow-hidden`}
@@ -160,9 +130,9 @@ export default function Hero() {
 
           <motion.div variants={fadeUpVariants} initial="hidden" animate={mounted ? "visible" : "hidden"} className="flex justify-center mb-6 sm:mb-8">
             <div className="relative w-[120px] h-[120px] sm:w-[160px] sm:h-[160px] flex items-center justify-center">
-              {/* Vibrant uniform rotating ring */}
+              <div className="absolute inset-[-100px] sm:inset-[-150px] bg-gradient-to-tr from-purple-600/25 to-blue-500/20 blur-[60px] sm:blur-[90px] rounded-full pointer-events-none animate-pulse" />
+              
               <div className="rotating-border-container absolute inset-0 rounded-full" />
-              {/* Removed black background for transparent look */}
               <div className="relative w-[116px] h-[116px] sm:w-[156px] sm:h-[156px] rounded-full overflow-hidden bg-transparent z-10">
                 <Image
                   src={heroPng}

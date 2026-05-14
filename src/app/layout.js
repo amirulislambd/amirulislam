@@ -37,7 +37,6 @@ export const metadata = {
     "React Specialist Bangladesh",
     "Next.js Developer Portfolio",
     "Best Web Developer in Dhaka",
-    "English Janala Developer",
     "Software Engineer Portfolio",
     "Hire React Developer Bangladesh",
     "Amirul Islam Web Developer",
@@ -80,12 +79,11 @@ export const metadata = {
     },
   },
   verification: {
-    google: "hqLUcA89yMna2GmB8rYnhUhqAWUXBjhAaL4FrLEwQaI", // Replace with your actual search console tag if different
+    google: "hqLUcA89yMna2GmB8rYnhUhqAWUXBjhAaL4FrLEwQaI", 
   },
 };
 
 export default function RootLayout({ children }) {
-  // Structured Data (JSON-LD) for better Google Rich Snippets
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -118,9 +116,10 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <meta name="theme-color" content="#7c4dff" />
+        <meta name="theme-color" content="#020617" />
       </head>
-      <body className="min-h-full flex flex-col relative bg-[#f8fafc] dark:bg-[#020617] transition-colors duration-500">
+      {/* Set Dark Background as default to avoid "fade-in" from light color */}
+      <body className="min-h-full flex flex-col relative bg-[#020617] dark:bg-[#020617] transition-all duration-300">
         <NextThemeProvider>
           <GalaxyBackground />
           <FloatingBackground />

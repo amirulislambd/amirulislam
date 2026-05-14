@@ -1,7 +1,11 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { HiOutlineMail, HiOutlineLocationMarker, HiOutlinePhone } from "react-icons/hi";
 import FooterSocials from "./FooterSocials";
 
-const NAV_LINKS = [
+const FOOTER_LINKS = [
   { name: "Home",     href: "/" },
   { name: "About",    href: "/about" },
   { name: "Projects", href: "/projects" },
@@ -9,53 +13,84 @@ const NAV_LINKS = [
 ];
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="w-full mt-auto border-t border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-slate-950/40 backdrop-blur-xl transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+    <footer className="relative bg-[#020617] border-t border-white/5 pt-16 pb-8 overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           
-          {/* Brand & Bio */}
-          <div className="flex flex-col items-center md:items-start gap-4 text-center md:text-left">
-            <span className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
-              Amirul<span className="text-[#7c4dff]">.dev</span>
-            </span>
-            <p className="text-sm leading-relaxed max-w-[280px] text-slate-600 dark:text-slate-400">
-              Full Stack Developer crafting high-performance, animated web experiences.
+          <div className="col-span-1 md:col-span-1">
+            <Link href="/" className="inline-flex items-center gap-2 mb-6 group">
+              <span className="text-2xl font-bold tracking-tighter text-white">
+                Amirul <span className="text-purple-500">Islam</span>
+              </span>
+            </Link>
+            <p className="text-slate-400 text-sm leading-relaxed mb-8 max-w-xs">
+              Crafting high-performance MERN & Next.js applications with pixel-perfect precision and a focus on user experience.
             </p>
-          </div>
-
-          {/* Quick Links */}
-          <div className="flex flex-col items-center gap-4">
-            <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 dark:text-slate-500">
-              Navigation
-            </span>
-            <div className="flex flex-wrap justify-center gap-6">
-              {NAV_LINKS.map(({ name, href }) => (
-                <Link key={name} href={href} className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-[#7c4dff] dark:hover:text-[#7c4dff] transition-colors">
-                  {name}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Socials */}
-          <div className="flex flex-col items-center md:items-end gap-4">
-            <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 dark:text-slate-500">
-              Connect
-            </span>
             <FooterSocials />
+          </div>
+
+          <div className="col-span-1">
+            <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Quick Links</h4>
+            <ul className="space-y-4">
+              {FOOTER_LINKS.map((link) => (
+                <li key={link.name}>
+                  <Link 
+                    href={link.href}
+                    className="text-slate-400 hover:text-purple-400 transition-colors text-sm font-medium"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="col-span-1">
+            <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Contact Info</h4>
+            <ul className="space-y-5">
+              <li className="flex items-start gap-3 text-slate-400">
+                <HiOutlineMail className="text-purple-500 text-lg shrink-0 mt-0.5" />
+                <span className="text-sm">amirulislambd.dev@gmail.com</span>
+              </li>
+              <li className="flex items-start gap-3 text-slate-400">
+                <HiOutlinePhone className="text-purple-500 text-lg shrink-0 mt-0.5" />
+                <span className="text-sm">+880 1234 567890</span>
+              </li>
+              <li className="flex items-start gap-3 text-slate-400">
+                <HiOutlineLocationMarker className="text-purple-500 text-lg shrink-0 mt-0.5" />
+                <span className="text-sm">Dhaka, Bangladesh</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="col-span-1">
+            <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Newsletter</h4>
+            <p className="text-slate-400 text-sm mb-6">Stay updated with my latest projects and tech insights.</p>
+            <form className="relative group" onSubmit={(e) => e.preventDefault()}>
+              <input 
+                type="email" 
+                placeholder="Email Address"
+                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-purple-500/50 transition-all"
+              />
+              <button className="absolute right-2 top-1.5 bg-purple-600 hover:bg-purple-500 text-white px-4 py-1.5 rounded-lg text-xs font-bold transition-all">
+                Join
+              </button>
+            </form>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-slate-200 dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[11px] font-medium text-slate-500 dark:text-slate-500">
-            © {new Date().getFullYear()} M. Amirul Islam. All rights reserved.
+        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-slate-500 text-xs">
+            © {currentYear} Amirul Islam. All rights reserved.
           </p>
-          
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-200 dark:border-[#7c4dff]/20 bg-slate-100 dark:bg-[#7c4dff]/5 text-[10px] font-bold text-slate-600 dark:text-slate-400">
-             <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-             Available for Freelance
+          <div className="flex items-center gap-6 text-xs text-slate-500">
+            <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
