@@ -22,11 +22,6 @@ const PARTICLES = [
   { id:2,  x:"38%", y:"5%",  size:3.2, delay:2.3, duration:9  },
   { id:3,  x:"55%", y:"82%", size:1.5, delay:0.7, duration:11 },
   { id:4,  x:"67%", y:"30%", size:2.8, delay:3.1, duration:8  },
-  { id:5,  x:"80%", y:"60%", size:2.0, delay:1.8, duration:10 },
-  { id:6,  x:"92%", y:"18%", size:1.6, delay:0.4, duration:7  },
-  { id:7,  x:"12%", y:"50%", size:3.5, delay:2.9, duration:12 },
-  { id:8,  x:"46%", y:"40%", size:1.9, delay:1.5, duration:9  },
-  { id:9,  x:"72%", y:"88%", size:2.3, delay:0.9, duration:8  },
 ];
 
 const COMETS = [
@@ -36,13 +31,6 @@ const COMETS = [
   { id:3,  startX:"-8%",  startY:"25%",  dx: 650, dy: 100,  angle:  8, delay:3.5,  dur:2.5, len:120 },
   { id:4,  startX:"-8%",  startY:"65%",  dx: 650, dy:-60,   angle:354, delay:11.0, dur:2.8, len:110 },
 ];
-
-const TECHS = ["React", "Next.js", "Node.js", "MongoDB", "Express", "JavaScript"];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
-};
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -66,6 +54,52 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden transition-all duration-500 py-10"
       style={{ background: isDark ? "transparent" : "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 40%, #e0f2fe 100%)" }}
     >
+      <style jsx global>{`
+        @keyframes rotate-border {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        .rotating-border-container::before {
+          content: "";
+          position: absolute;
+          inset: -4px;
+          background: conic-gradient(from 0deg, #7c4dff, #3b82f6, #7c4dff);
+          border-radius: 50%;
+          animation: rotate-border 3s linear infinite;
+          mask: radial-gradient(circle, transparent 69%, black 70%);
+          -webkit-mask: radial-gradient(circle, transparent 69%, black 70%);
+          filter: blur(3px);
+          box-shadow: 0 0 30px rgba(124, 77, 255, 0.6), 0 0 50px rgba(59, 130, 246, 0.4);
+        }
+        .btn-shine-effect {
+          position: relative;
+          overflow: hidden;
+        }
+        .btn-shine-effect::after {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -150%;
+          width: 60%;
+          height: 200%;
+          background: linear-gradient(
+            to right,
+            transparent,
+            rgba(255, 255, 255, 0.5),
+            transparent
+          );
+          transform: rotate(25deg);
+          transition: none;
+        }
+        .btn-shine-effect:hover::after {
+          animation: shine-animation 0.8s ease-in-out;
+        }
+        @keyframes shine-animation {
+          0% { left: -150%; }
+          100% { left: 150%; }
+        }
+      `}</style>
+
       {/* Orbs */}
       {ORBS.map((orb, i) => (
         <motion.div
@@ -97,7 +131,7 @@ export default function Hero() {
       ))}
 
       {/* Comets */}
-      {!shouldReduceMotion && COMETS.map((comet) => (
+      {!shouldReduceMotion && isDark && COMETS.map((comet) => (
         <motion.div
           key={comet.id}
           className="comet hidden sm:block"
@@ -109,7 +143,7 @@ export default function Hero() {
             height: 2,
             rotate: comet.angle,
             background: "linear-gradient(to left, white, rgba(124,77,255,0.6), transparent)",
-            zIndex: 20,
+            zIndex: 2,
             willChange: "transform",
             transform: 'translateZ(0)'
           }}
@@ -118,13 +152,18 @@ export default function Hero() {
         />
       ))}
 
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6">
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 mb-10">
         <motion.div
-          className={`relative glass-card rounded-[2rem] sm:rounded-[2.5rem] border p-6 sm:p-14 text-center transition-all duration-700 ${mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} ${isDark ? 'bg-[#0b1326]/70 border-white/10' : 'bg-white/90 border-purple-500/10'} backdrop-blur-2xl shadow-2xl`}
+          className={`relative glass-card rounded-[2rem] sm:rounded-[2.5rem] border p-6 sm:p-14 text-center transition-all duration-700 ${mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} ${isDark ? 'bg-[#0b1326]/40 border-white/10' : 'bg-white/70 border-purple-500/10'} backdrop-blur-2xl shadow-2xl overflow-hidden`}
         >
-          <motion.div variants={fadeUpVariants} className="flex justify-center mb-6 sm:mb-8">
-            <div className="relative w-[120px] h-[120px] sm:w-[160px] sm:h-[160px] p-1 rounded-full bg-gradient-to-tr from-purple-500 to-blue-400 shadow-[0_0_40px_rgba(124,77,255,0.35)]">
-              <div className="relative w-full h-full rounded-full overflow-hidden bg-white dark:bg-[#0b1326]">
+          <div className="absolute -inset-1 bg-gradient-to-tr from-purple-500/5 to-blue-500/5 pointer-events-none" />
+
+          <motion.div variants={fadeUpVariants} initial="hidden" animate={mounted ? "visible" : "hidden"} className="flex justify-center mb-6 sm:mb-8">
+            <div className="relative w-[120px] h-[120px] sm:w-[160px] sm:h-[160px] flex items-center justify-center">
+              {/* Vibrant uniform rotating ring */}
+              <div className="rotating-border-container absolute inset-0 rounded-full" />
+              {/* Removed black background for transparent look */}
+              <div className="relative w-[116px] h-[116px] sm:w-[156px] sm:h-[156px] rounded-full overflow-hidden bg-transparent z-10">
                 <Image
                   src={heroPng}
                   alt="Amirul Islam"
@@ -139,6 +178,8 @@ export default function Hero() {
 
           <motion.h1
             variants={fadeUpVariants}
+            initial="hidden"
+            animate={mounted ? "visible" : "hidden"}
             className={`text-3xl sm:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}
           >
             Crafting Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">Experiences</span>
@@ -147,16 +188,18 @@ export default function Hero() {
 
           <motion.p
             variants={fadeUpVariants}
+            initial="hidden"
+            animate={mounted ? "visible" : "hidden"}
             className={`text-sm sm:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 font-medium ${isDark ? 'text-slate-300' : 'text-slate-600'}`}
           >
-            Hi, I&apos;m <span className="text-purple-500 font-bold">Amirul Islam</span>, a Full Stack Developer specializing in MERN, Next.js & Flutter.
+            Hi, I&apos;m <span className="text-purple-400 font-bold">Amirul Islam</span>, a Full Stack Developer specializing in MERN, Next.js & Flutter.
           </motion.p>
 
-          <motion.div variants={fadeUpVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
+          <motion.div variants={fadeUpVariants} initial="hidden" animate={mounted ? "visible" : "hidden"} className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
               <Link
                 href="#projects"
-                className="btn-shine group relative inline-flex w-full sm:w-auto items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl sm:rounded-2xl font-bold shadow-xl shadow-purple-500/25 overflow-hidden transition-all"
+                className="btn-shine-effect group relative inline-flex w-full sm:w-auto items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl sm:rounded-2xl font-bold shadow-xl shadow-purple-500/25 overflow-hidden transition-all"
               >
                 View My Work
                 <HiArrowDown className="group-hover:translate-y-1 transition-transform" />
@@ -167,42 +210,35 @@ export default function Hero() {
               <a
                 href="/assets/Amirul_Islam_CV.pdf"
                 download
-                className="group relative inline-flex w-full sm:w-auto items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 border-2 border-purple-500/30 dark:border-purple-500/50 text-purple-600 dark:text-purple-400 rounded-xl sm:rounded-2xl font-bold hover:bg-purple-500/5 transition-all"
+                className="btn-shine-effect group relative inline-flex w-full sm:w-auto items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 border-2 border-purple-500/30 dark:border-purple-500/50 text-purple-600 dark:text-purple-300 rounded-xl sm:rounded-2xl font-bold hover:bg-purple-500/5 transition-all"
               >
                 <HiOutlineDocumentArrowDown className="text-xl" />
                 Download CV
               </a>
             </motion.div>
           </motion.div>
-
-          <motion.div variants={fadeUpVariants} className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-10 sm:mt-12">
-            {TECHS.map((tech) => (
-              <span key={tech} className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border transition-colors ${isDark ? 'bg-white/5 border-white/10 text-slate-400' : 'bg-purple-50 border-purple-100 text-purple-600'}`}>
-                {tech}
-              </span>
-            ))}
-          </motion.div>
         </motion.div>
       </div>
 
-      <style jsx global>{`
-        .btn-shine::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 50%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
-          transform: skewX(-20deg);
-        }
-        .btn-shine:hover::after {
-          animation: shine 0.8s ease-in-out;
-        }
-        @keyframes shine {
-          100% { left: 200%; }
-        }
-      `}</style>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 cursor-pointer group"
+        onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+      >
+        <div className="w-6 h-10 border-2 border-purple-500/30 dark:border-white/20 rounded-full relative overflow-hidden">
+          <motion.div
+            animate={{ y: [2, 18, 2] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-1.5 h-1.5 bg-purple-500 dark:bg-white rounded-full absolute left-1/2 -translate-x-1/2"
+          />
+        </div>
+        <span className="text-[10px] uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400 font-bold group-hover:text-purple-500 transition-colors">
+          Scroll
+        </span>
+      </motion.div>
+
     </section>
   );
 }

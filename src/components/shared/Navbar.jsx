@@ -17,122 +17,102 @@ const NAV_LINKS = [
   { name: "Contact",  href: "/contact" },
 ];
 
-// ─── Theme Toggle button ───────────────────────────────────────────────────────
 function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
-  if (!mounted) return <div className="w-9 h-9" />;
+  if (!mounted) return <div className="w-10 h-10" />;
 
   const dark = resolvedTheme === "dark";
   return (
     <button
       aria-label="Toggle theme"
       onClick={() => setTheme(dark ? "light" : "dark")}
-      className="relative w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 border"
+      className="relative w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 border shadow-inner overflow-hidden group"
       style={{
         background: dark ? "rgba(167,139,250,0.12)" : "rgba(124,77,255,0.08)",
-        borderColor: dark ? "rgba(167,139,250,0.35)" : "rgba(124,77,255,0.25)",
+        borderColor: dark ? "rgba(167,139,250,0.3)" : "rgba(124,77,255,0.2)",
         color: dark ? "#a78bfa" : "#7c4dff",
       }}
     >
+      <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={dark ? "moon" : "sun"}
           initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
           animate={{ rotate: 0,   opacity: 1, scale: 1   }}
           exit={{    rotate:  90, opacity: 0, scale: 0.5 }}
-          transition={{ duration: 0.22 }}
+          transition={{ duration: 0.3, ease: "backOut" }}
           className="absolute"
         >
-          {dark ? <HiOutlineMoon size={18} /> : <HiOutlineSun size={18} />}
+          {dark ? <HiOutlineMoon size={20} /> : <HiOutlineSun size={20} />}
         </motion.span>
       </AnimatePresence>
     </button>
   );
 }
 
-// ─── Main Navbar ──────────────────────────────────────────────────────────────
 export default function Navbar() {
   const pathname  = usePathname();
   const [open, setOpen]       = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
+  
   useEffect(() => setMounted(true), []);
-  // Default true (dark) until mounted to avoid flash
   const dark = !mounted || resolvedTheme === "dark";
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => setOpen(false), [pathname]);
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-400 ${
-        scrolled ? "glass-nav shadow-lg" : "bg-transparent"
+      className={`sticky top-0 z-50 w-full transition-all duration-500 ${
+        scrolled ? "glass-nav py-2 shadow-lg" : "bg-transparent py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14">
 
-          {/* ── Logo ───────────────────────────────────── */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0">
-            <div
-              className="w-9 h-9 rounded-full overflow-hidden border-2 shadow-lg transition-all duration-300"
+          {/* Logo Section - Full Name Restored */}
+          <Link href="/" className="flex items-center gap-3 shrink-0 group">
+            <motion.div
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              className="w-10 h-10 rounded-xl overflow-hidden border-2 shadow-[0_0_15px_rgba(124,77,255,0.3)] transition-all duration-300"
               style={{
-                borderColor: dark ? "rgba(167,139,250,0.5)" : "rgba(124,77,255,0.35)",
-                boxShadow: dark ? "0 0 12px rgba(167,139,250,0.3)" : "none",
+                borderColor: dark ? "rgba(167,139,250,0.4)" : "rgba(124,77,255,0.3)",
               }}
             >
-              <Image
-                src={logo}
-                alt="Amirul Islam"
-                width={36}
-                height={36}
-                className="w-full h-full object-cover rounded-full"
-              />
-            </div>
-            <span
-              className="hidden sm:block text-sm font-bold tracking-wide"
-              style={{ color: dark ? "#e2e8f0" : "#0f172a" }}
-            >
-              Amirul<span style={{ color: "#7c4dff" }}>.dev</span>
+              <Image src={logo} alt="Amirul Islam" width={40} height={40} className="w-full h-full object-cover" />
+            </motion.div>
+            <span className={`hidden sm:block text-lg font-bold tracking-tight transition-colors duration-300 ${dark ? 'text-white' : 'text-slate-900'}`}>
+              Amirul <span className="text-purple-500">Islam</span>
             </span>
           </Link>
 
-          {/* ── Desktop links ──────────────────────────── */}
-          <nav className="hidden md:flex items-center gap-1">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-2 p-1 rounded-2xl bg-white/5 dark:bg-black/10 backdrop-blur-md border border-white/10 shadow-inner">
             {NAV_LINKS.map(({ name, href }) => {
               const active = pathname === href;
               return (
                 <Link
                   key={name}
                   href={href}
-                  className="relative px-4 py-1.5 text-sm font-medium rounded-lg transition-all duration-200"
-                  style={{
-                    color: active
-                      ? "#7c4dff"
-                      : dark ? "#94a3b8" : "#475569",
-                  }}
+                  className={`relative px-5 py-2 text-sm font-semibold rounded-xl transition-all duration-300 ${
+                    active ? 'text-white' : dark ? 'text-slate-400 hover:text-slate-200' : 'text-slate-600 hover:text-slate-900'
+                  }`}
                 >
-                  {name}
+                  <span className="relative z-10">{name}</span>
                   {active && (
                     <motion.span
-                      layoutId="nav-pill"
-                      className="absolute inset-0 rounded-lg -z-10"
-                      style={{
-                        background: dark
-                          ? "rgba(124,77,255,0.15)"
-                          : "rgba(124,77,255,0.08)",
-                        border: "1px solid rgba(124,77,255,0.25)",
-                      }}
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      layoutId="nav-glow"
+                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-600 to-blue-500 shadow-[0_0_15px_rgba(124,77,255,0.4)]"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
                 </Link>
@@ -140,15 +120,12 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* ── Right side: Theme toggle + hamburger ───── */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <ThemeToggle />
-
-            {/* Hamburger (mobile only) */}
             <button
               aria-label="Toggle menu"
               onClick={() => setOpen((v) => !v)}
-              className="md:hidden p-2 rounded-lg text-xl transition-colors duration-200"
+              className="md:hidden w-10 h-10 rounded-xl flex items-center justify-center text-2xl transition-all duration-300 border bg-white/5 border-white/10"
               style={{ color: dark ? "#94a3b8" : "#475569" }}
             >
               {open ? <RiMenuFold2Fill /> : <RiMenuUnfold2Line />}
@@ -157,38 +134,26 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* ── Mobile menu ────────────────────────────────── */}
       <AnimatePresence>
         {open && (
           <motion.div
-            key="mobile-menu"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{   opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="md:hidden overflow-hidden"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="md:hidden absolute top-full left-0 w-full px-4 pt-2 pb-6 glass-nav border-t border-white/10 shadow-2xl"
           >
-            <nav
-              className="flex flex-col gap-1 px-4 pb-4 pt-2 border-t"
-              style={{ borderColor: "var(--glass-border)" }}
-            >
+            <nav className="flex flex-col gap-2">
               {NAV_LINKS.map(({ name, href }) => {
                 const active = pathname === href;
                 return (
                   <Link
                     key={name}
                     href={href}
-                    onClick={() => setOpen(false)}
-                    className="px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200"
-                    style={{
-                      background: active
-                        ? dark ? "rgba(124,77,255,0.18)" : "rgba(124,77,255,0.10)"
-                        : "transparent",
-                      color: active
-                        ? "#7c4dff"
-                        : dark ? "#94a3b8" : "#475569",
-                      border: active ? "1px solid rgba(124,77,255,0.25)" : "1px solid transparent",
-                    }}
+                    className={`px-6 py-3.5 rounded-2xl text-base font-bold transition-all duration-300 ${
+                      active 
+                        ? 'bg-gradient-to-r from-purple-600 to-blue-500 text-white shadow-lg' 
+                        : 'bg-white/5 text-slate-400'
+                    }`}
                   >
                     {name}
                   </Link>
