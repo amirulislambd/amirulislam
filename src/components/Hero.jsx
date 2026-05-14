@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { HiArrowDown } from "react-icons/hi";
 import { HiOutlineDocumentArrowDown } from "react-icons/hi2";
+import heroPng from '@/assets/amirulIslam.png'
 
 // ─── Floating orb data ────────────────────────────────────────────────────────
 const ORBS = [
@@ -349,16 +350,16 @@ export default function Hero() {
                 className="avatar-glow"
                 animate={shouldReduceMotion ? {} : { y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                style={{ position: "relative", width: 120, height: 120, borderRadius: "50%" }}
+                style={{ position: "relative", width: 150, height: 150, borderRadius: "50%" }}
               >
                 <span className="avatar-ring" aria-hidden="true" />
                 <span className="avatar-gap" aria-hidden="true" />
                 <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: "50%", overflow: "hidden", zIndex: 2 }}>
                   <Image
-                    src="https://i.ibb.co/Q37gdvNf/profile-pic.png"
+                    src={heroPng}
                     alt="Amirul Islam — Full Stack Developer"
                     fill
-                    sizes="120px"
+                    sizes="150px"
                     className="object-cover object-center"
                     priority
                     unoptimized
