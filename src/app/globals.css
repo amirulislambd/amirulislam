@@ -5,298 +5,127 @@
    DESIGN TOKENS
 ═══════════════════════════════════════════════════════ */
 :root {
-  --bg:               #f8fafc;
-  --bg-surface:       #ffffff;
-  --bg-surface-2:     #f1f5f9;
-
-  --border:           rgba(0,0,0,0.08);
-
-  --text-primary:     #0f172a;
-  --text-secondary:   #475569;
-
-  --accent:           #7c4dff;
-  --accent-2:         #4cd7f6;
-
-  --glass:            rgba(255,255,255,0.72);
-  --glass-border:     rgba(0,0,0,0.08);
-
-  --navbar-bg:        rgba(248,250,252,0.82);
+  --bg: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-2: #f1f5f9;
+  --border: rgba(0,0,0,0.08);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent: #7c4dff;
+  --accent-2: #4cd7f6;
+  --glass: rgba(255,255,255,0.72);
+  --glass-border: rgba(0,0,0,0.08);
+  --navbar-bg: rgba(248,250,252,0.82);
 }
 
-/* ═══════════════════════════════════════════════════════
-   DARK MODE TOKENS
-═══════════════════════════════════════════════════════ */
 .dark {
-  --bg:               #020617 !important;
-  --bg-surface:       #060f23;
-  --bg-surface-2:     #0f172a;
-
-  --border:           rgba(255,255,255,0.07);
-
-  --text-primary:     #e2e8f0;
-  --text-secondary:   #94a3b8;
-
-  --accent:           #a78bfa;
-  --accent-2:         #4cd7f6;
-
-  --glass:            rgba(6,15,35,0.55);
-  --glass-border:     rgba(255,255,255,0.08);
-
-  --navbar-bg:        rgba(2,6,23,0.55);
+  --bg: #020617;
+  --bg-surface: #060f23;
+  --bg-surface-2: #0f172a;
+  --border: rgba(255,255,255,0.07);
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --accent: #a78bfa;
+  --accent-2: #4cd7f6;
+  --glass: rgba(6,15,35,0.55);
+  --glass-border: rgba(255,255,255,0.08);
+  --navbar-bg: rgba(2,6,23,0.55);
 }
 
 /* ═══════════════════════════════════════════════════════
    BASE
 ═══════════════════════════════════════════════════════ */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   background-color: var(--bg);
   color: var(--text-primary);
-
   font-family: var(--font-geist-sans), system-ui, sans-serif;
-
   overflow-x: hidden;
   line-height: 1.65;
-
-  transition:
-    background-color 0.4s ease,
-    color 0.4s ease;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  min-height: 100vh; /* Fallback */
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
 }
 
-/* Force dark background */
-.dark body {
-  background: #020617 !important;
+/* Prevent layout shifts from scrollbar */
+html {
+  overflow-x: hidden;
+  width: 100vw;
 }
 
 /* ═══════════════════════════════════════════════════════
-   LIGHT MODE BACKGROUND
+   NEW MOBILE-FRIENDLY BACKGROUND LAYERS
 ═══════════════════════════════════════════════════════ */
-html:not(.dark) body::before {
-  content: "";
-
+.bg-gradient-layer {
   position: fixed;
   inset: 0;
-
   z-index: -20;
   pointer-events: none;
-
-  background:
-    radial-gradient(
-      ellipse 55% 42% at 92% 4%,
-      rgba(124,77,255,0.07) 0%,
-      transparent 60%
-    ),
-
-    radial-gradient(
-      ellipse 40% 36% at 5% 96%,
-      rgba(76,215,246,0.05) 0%,
-      transparent 60%
-    ),
-
-    linear-gradient(
-      180deg,
-      #f8fafc 0%,
-      #f1f5f9 100%
-    );
+  transform: translateZ(0); /* Hardware Acceleration */
 }
 
-/* ═══════════════════════════════════════════════════════
-   DARK MODE GALAXY BACKGROUND
-═══════════════════════════════════════════════════════ */
-.dark body::before {
-  content: "";
-
-  position: fixed;
-  inset: 0;
-
-  z-index: -20;
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(124,77,255,0.22) 0%,
-      transparent 30%
-    ),
-
-    radial-gradient(
-      circle at 80% 10%,
-      rgba(76,215,246,0.16) 0%,
-      transparent 28%
-    ),
-
-    radial-gradient(
-      circle at 50% 80%,
-      rgba(167,139,250,0.14) 0%,
-      transparent 30%
-    ),
-
-    linear-gradient(
-      180deg,
-      #020617 0%,
-      #030712 100%
-    );
+/* Light Mode Gradients */
+html:not(.dark) .bg-gradient-layer {
+  background: 
+    radial-gradient(ellipse 60% 50% at 90% 5%, rgba(124,77,255,0.07), transparent),
+    radial-gradient(ellipse 50% 40% at 10% 95%, rgba(76,215,246,0.05), transparent),
+    linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
 }
 
-/* ═══════════════════════════════════════════════════════
-   STARS EFFECT
-═══════════════════════════════════════════════════════ */
-.dark body::after {
-  content: "";
+/* Dark Mode Gradients */
+.dark .bg-gradient-layer {
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(124,77,255,0.18), transparent 35%),
+    radial-gradient(circle at 80% 15%, rgba(76,215,246,0.14), transparent 30%),
+    radial-gradient(circle at 50% 85%, rgba(167,139,250,0.12), transparent 35%),
+    linear-gradient(180deg, #020617 0%, #030712 100%);
+}
 
+/* Stars Layer (Only for Dark Mode) */
+.bg-stars-layer {
+}
+
+.dark .bg-stars-layer {
+  display: block;
   position: fixed;
   inset: 0;
-
   z-index: -19;
   pointer-events: none;
-
-  background-image:
-    radial-gradient(
-      2px 2px at 20px 30px,
-      rgba(255,255,255,0.8),
-      transparent
-    ),
-
-    radial-gradient(
-      1.5px 1.5px at 120px 80px,
-      rgba(255,255,255,0.6),
-      transparent
-    ),
-
-    radial-gradient(
-      1px 1px at 220px 180px,
-      rgba(255,255,255,0.5),
-      transparent
-    ),
-
-    radial-gradient(
-      2px 2px at 320px 120px,
-      rgba(255,255,255,0.7),
-      transparent
-    ),
-
-    radial-gradient(
-      1.5px 1.5px at 420px 220px,
-      rgba(255,255,255,0.5),
-      transparent
-    );
-
-  background-size: 500px 500px;
-
-  opacity: 0.55;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 150px 100px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 250px 200px, rgba(255,255,255,0.3), transparent);
+  background-size: 350px 350px;
+  opacity: 0.45;
 }
 
 /* ═══════════════════════════════════════════════════════
-   SCROLLBAR
+   COMPONENTS (Navbar, Scrollbar, etc.)
 ═══════════════════════════════════════════════════════ */
-::-webkit-scrollbar {
-  width: 6px;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 999px; }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-2);
-}
-
-/* ═══════════════════════════════════════════════════════
-   GLASS NAVBAR
-═══════════════════════════════════════════════════════ */
 .glass-nav {
   background: var(--navbar-bg);
-
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-
   border-bottom: 1px solid rgba(255,255,255,0.08);
-
-  box-shadow:
-    0 8px 32px rgba(0,0,0,0.25),
-    inset 0 1px 0 rgba(255,255,255,0.04);
-
-  transition:
-    background 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-/* Enhanced dark mode glass */
-.dark .glass-nav {
-  background: rgba(2,6,23,0.45);
-
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-
-  box-shadow:
-    0 10px 40px rgba(0,0,0,0.45),
-    inset 0 1px 0 rgba(255,255,255,0.03);
-}
-
-/* ═══════════════════════════════════════════════════════
-   ANIMATED GRADIENT TEXT
-═══════════════════════════════════════════════════════ */
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
 }
 
 .animated-gradient-text {
-  background:
-    linear-gradient(
-      270deg,
-      #d0bcff,
-      #7c4dff,
-      #4cd7f6,
-      #a78bfa,
-      #818cf8,
-      #d0bcff
-    );
-
+  background: linear-gradient(270deg, #d0bcff, #7c4dff, #4cd7f6, #a78bfa, #818cf8, #d0bcff);
   background-size: 400% 400%;
-
   animation: gradientShift 5s ease infinite;
-
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
   background-clip: text;
 }
 
-/* ═══════════════════════════════════════════════════════
-   BUTTON SHINE EFFECT
-═══════════════════════════════════════════════════════ */
-@keyframes shineSweep {
-  0% {
-    transform: translateX(-100%) skewX(-20deg);
-  }
-
-  100% {
-    transform: translateX(250%) skewX(-20deg);
-  }
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .btn-shine {
@@ -306,27 +135,65 @@ html:not(.dark) body::before {
 
 .btn-shine::after {
   content: "";
-
   position: absolute;
-
-  inset-block: 0;
-  left: 0;
-
+  inset: 0;
   width: 40%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,0.22),
-      transparent
-    );
-
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
   transform: translateX(-100%) skewX(-20deg);
-
-  pointer-events: none;
 }
 
 .btn-shine:hover::after {
   animation: shineSweep 0.6s ease forwards;
+}
+
+@keyframes shineSweep {
+  to { transform: translateX(250%) skewX(-20deg); }
+}
+
+/* MOBILE OPTIMIZATIONS */
+@media (max-width: 768px) {
+  .bg-stars-layer { background-size: 200px 200px; opacity: 0.3; }
+  .glass-nav { backdrop-filter: blur(12px) saturate(160%); -webkit-backdrop-filter: blur(12px) saturate(160%); }
+}
+
+@media (hover: none) {
+  .hover\:scale-\[1\.02\]:hover, .hover\:scale-110:hover, .hover\:-translate-y-1:hover, .hover\:-translate-y-2:hover { transform: none !important; }
+}
+
+
+/* ADVANCED MOBILE FIXES */
+@media (min-width: 768px) {
+}
+
+/* Force hardware acceleration on all animated elements */
+.comet, .star-item, .floating-icon {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform: translateZ(0);
+}
+
+/* Reduce blur even more for low-end Androids */
+@media (max-width: 480px) {
+  .glass-card, .glass-nav {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
+}
+
+
+@media (max-width: 640px) {
+  * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .glass-nav, .glass-card {
+    background: rgba(2, 6, 23, 0.95) !important; /* Dark solid theme for mobile */
+  }
+  .dark .glass-nav, .dark .glass-card {
+    background: rgba(6, 15, 35, 0.98) !important;
+  }
+  /* Disable heavy animations on small screens */
+  .floating-icon, .comet {
+  }
 }

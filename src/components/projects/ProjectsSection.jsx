@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -28,132 +28,88 @@ export default function ProjectsSection({ projects }) {
   const { resolvedTheme }  = useTheme();
   const isDark = resolvedTheme === "dark";
   const [activeFilter, setActiveFilter] = useState("All");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const filtered =
     activeFilter === "All"
       ? projects
       : projects.filter((p) => p.category === activeFilter);
 
-  const t = {
-    sectionBg: isDark
-      ? "transparent"
-      : "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 40%, #e0f2fe 100%)",
-    gridLine: isDark ? "rgba(255,255,255,0.03)" : "rgba(124,77,255,0.07)",
-    orbColors: isDark
-      ? ["rgba(124,77,255,0.16)", "rgba(76,215,246,0.12)", "rgba(167,139,250,0.10)"]
-      : ["rgba(124,77,255,0.20)", "rgba(14,116,144,0.16)", "rgba(109,40,217,0.12)"],
-    emptyText: isDark ? "rgba(148,163,184,0.7)" : "rgba(100,116,139,0.8)",
-  };
-
   return (
     <section
       id="projects"
-      className="relative min-h-screen overflow-hidden py-10 transition-all duration-500"
-      style={{ background: t.sectionBg }}
+      className="relative min-h-screen overflow-hidden py-12 sm:py-20 transition-all duration-500"
+      style={{ background: isDark ? "transparent" : "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 40%, #e0f2fe 100%)" }}
     >
-      {/* Background orbs & Grid overlay (আগের মতোই থাকবে) */}
       {ORBS.map((orb, i) => (
-        <motion.div key={i} className="pointer-events-none absolute rounded-full blur-3xl"
-          style={{ width: orb.size, height: orb.size, left: orb.x, top: orb.y, background: t.orbColors[i] }}
-          animate={shouldReduceMotion ? { opacity: 1 } : { scale: [1, 1.1, 0.95, 1], opacity: [0.5, 0.85, 0.6, 0.5], y: [0, -20, 8, 0] }}
-          transition={{ duration: 10 + i * 2, repeat: Infinity, ease: "easeInOut", delay: orb.delay }}
+        <motion.div key={i} className="pointer-events-none absolute rounded-full blur-3xl opacity-30 dark:opacity-50"
+          style={{ 
+            width: orb.size, 
+            height: orb.size, 
+            left: orb.x, 
+            top: orb.y, 
+            background: isDark ? "rgba(124,77,255,0.22)" : "rgba(124,77,255,0.18)",
+            willChange: "transform, opacity",
+            transform: 'translateZ(0)'
+          }}
+          animate={shouldReduceMotion ? { opacity: 1 } : { scale: [1, 1.2, 1], opacity: [0.4, 0.7, 0.4], y: [0, -30, 0] }}
+          transition={{ duration: 12 + i * 2, repeat: Infinity, ease: "easeInOut", delay: orb.delay }}
         />
       ))}
-      <div className="pointer-events-none absolute inset-0" style={{ backgroundImage: `linear-gradient(${t.gridLine} 1px, transparent 1px), linear-gradient(90deg, ${t.gridLine} 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
+      <div className="pointer-events-none absolute inset-0 opacity-[0.03] sm:opacity-[0.05]" style={{ backgroundImage: `linear-gradient(rgba(124,77,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(124,77,255,0.05) 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6">
         <ProjectsHeader isDark={isDark} />
         
-        <ProjectFilter
-          categories={CATEGORIES}
-          active={activeFilter}
-          onChange={setActiveFilter}
-          isDark={isDark}
-        />
+        <div className="mt-4 sm:mt-0">
+          <ProjectFilter
+            categories={CATEGORIES}
+            active={activeFilter}
+            onChange={setActiveFilter}
+            isDark={isDark}
+          />
+        </div>
 
-        {/* Swiper Slider */}
-        <div className="mt-12 overflow-visible">
+        <div className="mt-8 sm:mt-12 overflow-visible">
           {filtered.length > 0 ? (
-           // ProjectsSection.jsx এর Swiper অংশটুকু নিচের মতো করে আপডেট করো
-
-           // ProjectsSection.jsx এর Swiper অংশটুকু নিচের কোড দিয়ে পরিবর্তন করো
-
            <Swiper
-           modules={[Autoplay, EffectCoverflow, Pagination]}
-           effect={"coverflow"}
-           grabCursor={true}
-           centeredSlides={true}
-           slidesPerView={"auto"}
-           loop={true}
-           
-           // --- নতুন এবং উন্নত কনফিগারেশন ---
-           speed={1500} 
-           autoplay={{
-             delay: 2500,
-             disableOnInteraction: false,
-             pauseOnMouseEnter: true, // মাউস কার্ডের ওপর নিলে স্লাইডার থেমে যাবে
-           }}
-           
-           // দুপাশে কার্ড পরিপূর্ণ রাখার জন্য এই ট্রিকটি ব্যবহার করো
-           initialSlide={filtered.length} // মাঝখানের স্লাইড থেকে শুরু হবে
-           watchSlidesProgress={true}
-           loopedSlides={filtered.length * 2} // ডুপ্লিকেট স্লাইড ম্যানেজমেন্ট
-           
-           coverflowEffect={{
-             rotate: 0,
-             stretch: 0, // স্লাইডগুলোর মাঝের গ্যাপ কমাতে এটি ০ রাখাই ভালো
-             depth: 100,
-             modifier: 2,
-             slideShadows: false,
-           }}
-           
-           pagination={{ clickable: true }}
-           className="projects-swiper !py-10"
-         >
-           {/* ৩টি প্রজেক্টের ক্ষেত্রে ৩ বার রিপিট করা ভালো যাতে স্ক্রিন সবসময় ভর্তি থাকে */}
-           {[...filtered, ...filtered, ...filtered].map((project, i) => (
-             <SwiperSlide 
-               key={`${project.id}-${i}`} 
-               style={{ 
-                 width: "min(400px, 80vw)", // উইডথ একটু কমিয়েছি যাতে দুপাশের কার্ড উঁকি দেয়
-                 display: "flex",
-                 justifyContent: "center"
-               }}
-             >
-               <ProjectCard
-                 project={project}
-                 index={i % filtered.length}
-                 isDark={isDark}
-               />
-             </SwiperSlide>
-           ))}
-         </Swiper>
+            modules={[Autoplay, EffectCoverflow, Pagination]}
+            effect={"coverflow"}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={"auto"}
+            loop={true}
+            speed={1200} 
+            autoplay={{ delay: 3500, disableOnInteraction: false }}
+            watchSlidesProgress={true}
+            coverflowEffect={{ rotate: 0, stretch: 0, depth: 100, modifier: 2.5, slideShadows: false }}
+            pagination={{ clickable: true }}
+            className="projects-swiper !py-8 sm:!py-10"
+          >
+            {[...filtered, ...filtered, ...filtered].map((project, i) => (
+              <SwiperSlide key={`${project.id}-${i}`} style={{ width: "min(400px, 85vw)", display: "flex", justifyContent: "center" }}>
+                <ProjectCard project={project} index={i % filtered.length} isDark={isDark} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
           ) : (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-24">
-              <p className="text-lg" style={{ color: t.emptyText }}>No projects found.</p>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-20 text-slate-500">
+              <p className="text-lg">No projects found.</p>
             </motion.div>
           )}
         </div>
       </div>
 
       <style jsx global>{`
-        /* স্পিনিং রিং যাতে দেখা যায় তার জন্য overflow-visible */
-        .swiper {
-          overflow: visible !important;
-        }
-        .swiper-slide {
-          transition: all 0.5s ease-in-out;
-          opacity: 0.4;
-          filter: blur(2px) scale(0.9);
-        }
-        .swiper-slide-active {
-          opacity: 1;
-          filter: blur(0) scale(1);
-          z-index: 20;
-        }
-        .swiper-pagination-bullet-active {
-          background: #7c4dff !important;
-        }
+        .swiper { overflow: visible !important; }
+        .swiper-slide { transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); opacity: 0.3; filter: blur(3px) scale(0.85); }
+        .swiper-slide-active { opacity: 1; filter: blur(0) scale(1); z-index: 20; }
+        .swiper-pagination-bullet { background: rgba(124,77,255,0.3) !important; }
+        .swiper-pagination-bullet-active { background: #7c4dff !important; width: 24px !important; border-radius: 4px !important; transition: all 0.3s ease !important; }
       `}</style>
     </section>
   );

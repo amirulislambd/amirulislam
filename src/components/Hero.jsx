@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,7 +9,6 @@ import { HiArrowDown } from "react-icons/hi";
 import { HiOutlineDocumentArrowDown } from "react-icons/hi2";
 import heroPng from '@/assets/amirulIslam.png'
 
-// ─── Floating orb data ────────────────────────────────────────────────────────
 const ORBS = [
   { size: 420, x: "-10%", y: "-15%", delay: 0 },
   { size: 320, x: "75%",  y: "55%",  delay: 1.4 },
@@ -17,7 +16,6 @@ const ORBS = [
   { size: 160, x: "10%",  y: "70%",  delay: 0.8 },
 ];
 
-// ─── Particles ────────────────────────────────────────────────────────────────
 const PARTICLES = [
   { id:0,  x:"8%",  y:"15%", size:2.5, delay:0.2, duration:8  },
   { id:1,  x:"23%", y:"72%", size:1.8, delay:1.1, duration:7  },
@@ -29,506 +27,182 @@ const PARTICLES = [
   { id:7,  x:"12%", y:"50%", size:3.5, delay:2.9, duration:12 },
   { id:8,  x:"46%", y:"40%", size:1.9, delay:1.5, duration:9  },
   { id:9,  x:"72%", y:"88%", size:2.3, delay:0.9, duration:8  },
-  { id:10, x:"30%", y:"25%", size:1.4, delay:3.5, duration:11 },
-  { id:11, x:"85%", y:"45%", size:2.7, delay:2.0, duration:7  },
-  { id:12, x:"18%", y:"90%", size:1.7, delay:1.3, duration:10 },
-  { id:13, x:"60%", y:"12%", size:3.0, delay:0.6, duration:9  },
-  { id:14, x:"42%", y:"65%", size:2.1, delay:2.7, duration:8  },
-  { id:15, x:"95%", y:"75%", size:1.5, delay:1.0, duration:12 },
-  { id:16, x:"5%",  y:"38%", size:2.9, delay:3.8, duration:7  },
-  { id:17, x:"50%", y:"55%", size:1.8, delay:0.3, duration:10 },
-  { id:18, x:"75%", y:"22%", size:2.4, delay:2.5, duration:9  },
-  { id:19, x:"28%", y:"48%", size:3.1, delay:1.7, duration:11 },
-  { id:20, x:"88%", y:"8%",  size:1.6, delay:3.2, duration:8  },
-  { id:21, x:"15%", y:"62%", size:2.6, delay:0.8, duration:7  },
 ];
 
-// ─── Shooting comets — চারদিক থেকে আসবে ────────────────────────────────────
-// dir: "right"=ডান→বাম, "left"=বাম→ডান, "top"=উপর→নিচ, "bottom"=নিচ→উপর
 const COMETS = [
-  // ডান থেকে বাম
   { id:0,  startX:"105%", startY:"15%",  dx:-650, dy: 120,  angle:170, delay:0,    dur:2.6, len:130 },
   { id:1,  startX:"105%", startY:"55%",  dx:-650, dy:-80,   angle:187, delay:7.5,  dur:2.3, len:100 },
   { id:2,  startX:"105%", startY:"35%",  dx:-650, dy: 60,   angle:175, delay:14.0, dur:3.0, len:150 },
-  // বাম থেকে ডান
   { id:3,  startX:"-8%",  startY:"25%",  dx: 650, dy: 100,  angle:  8, delay:3.5,  dur:2.5, len:120 },
   { id:4,  startX:"-8%",  startY:"65%",  dx: 650, dy:-60,   angle:354, delay:11.0, dur:2.8, len:110 },
-  // উপর থেকে নিচ
-  { id:5,  startX:"25%",  startY:"-5%",  dx: 120, dy: 650,  angle: 95, delay:5.0,  dur:2.7, len:130 },
-  { id:6,  startX:"70%",  startY:"-5%",  dx:-80,  dy: 650,  angle: 82, delay:13.0, dur:2.4, len:100 },
-  // নিচ থেকে উপর
-  { id:7,  startX:"40%",  startY:"105%", dx: 80,  dy:-650,  angle:278, delay:8.5,  dur:2.9, len:120 },
-  { id:8,  startX:"80%",  startY:"105%", dx:-100, dy:-650,  angle:265, delay:16.5, dur:2.6, len:140 },
-  // তির্যক (diagonal)
-  { id:9,  startX:"105%", startY:"-5%",  dx:-650, dy: 500,  angle:218, delay:2.0,  dur:3.2, len:160 },
-  { id:10, startX:"-5%",  startY:"-5%",  dx: 650, dy: 500,  angle:322, delay:9.0,  dur:2.8, len:130 },
-  { id:11, startX:"105%", startY:"105%", dx:-600, dy:-500,  angle:142, delay:18.0, dur:3.0, len:140 },
 ];
 
 const TECHS = ["React", "Next.js", "Node.js", "MongoDB", "Express", "JavaScript"];
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.18, delayChildren: 0.3 } },
+  visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
 };
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.25, 0.4, 0.25, 1] } },
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
-
-// ─── Static keyframes (theme-independent) ────────────────────────────────────
-const STATIC_STYLES = `
-@keyframes gradientShift {
-  0%   { background-position: 0%   50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0%   50%; }
-}
-
-/* "Beyond Gravity" — dark mode */
-.dark .animated-gradient-text {
-  background: linear-gradient(270deg, #d0bcff, #7c4dff, #4cd7f6, #a78bfa, #818cf8, #d0bcff);
-  background-size: 400% 400%;
-  animation: gradientShift 5s ease infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* "Beyond Gravity" — light mode: deeper purples so it pops on white */
-.light .animated-gradient-text,
-:root:not(.dark) .animated-gradient-text {
-  background: linear-gradient(270deg, #6d28d9, #7c4dff, #0e7490, #5b21b6, #4338ca, #6d28d9);
-  background-size: 400% 400%;
-  animation: gradientShift 5s ease infinite;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Avatar ring */
-@keyframes borderSpin  { 0% { transform:rotate(0deg); } 100% { transform:rotate(360deg); } }
-@keyframes borderPulse { 0%,100% { opacity:.85; } 50% { opacity:1; } }
-.avatar-ring {
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  background: conic-gradient(from 0deg, #7c4dff, #4cd7f6, #a78bfa, #7c4dff);
-  animation: borderSpin 4s linear infinite, borderPulse 3s ease-in-out infinite;
-  z-index: 0;
-}
-
-/* Gap layer colour changes with theme */
-.dark  .avatar-gap { background: rgba(11,19,38,0.9); }
-.light .avatar-gap,
-:root:not(.dark) .avatar-gap { background: rgba(255,255,255,0.92); }
-.avatar-gap {
-  position: absolute;
-  inset: -1px;
-  border-radius: 50%;
-  z-index: 1;
-}
-
-/* Button shine */
-@keyframes shineSweep {
-  0%   { transform: translateX(-100%) skewX(-20deg); }
-  100% { transform: translateX(250%)  skewX(-20deg); }
-}
-.btn-shine::after {
-  content: '';
-  position: absolute;
-  inset-block: 0;
-  left: 0;
-  width: 40%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
-  transform: translateX(-100%) skewX(-20deg);
-  pointer-events: none;
-}
-.btn-shine:hover::after { animation: shineSweep 0.6s ease forwards; }
-
-.avatar-glow {
-  box-shadow: 0 0 18px 4px rgba(124,77,255,0.45), 0 0 40px 8px rgba(76,215,246,0.18);
-}
-
-/* ── Shooting comet ── */
-.comet {
-  position: absolute;
-  pointer-events: none;
-  border-radius: 9999px;
-  transform-origin: right center;
-}
-.comet::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 0 8px 3px rgba(124,77,255,0.95), 0 0 16px 6px rgba(76,215,246,0.5);
-}
-
-
-`;
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
   const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const isDark = resolvedTheme === "dark";
-  const sectionRef = useRef(null);
-
-
-
-  // ── Theme-aware design tokens ──────────────────────────────────────────────
-  const t = {
-    sectionBg: isDark
-      ? "transparent"
-      : "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 40%, #e0f2fe 100%)",
-
-    gridLine: isDark ? "rgba(255,255,255,0.03)" : "rgba(124,77,255,0.07)",
-
-    orbColors: isDark
-      ? ["rgba(124,77,255,0.18)", "rgba(76,215,246,0.14)", "rgba(124,77,255,0.10)", "rgba(76,215,246,0.10)"]
-      : ["rgba(124,77,255,0.25)", "rgba(14,116,144,0.20)",  "rgba(109,40,217,0.16)", "rgba(14,116,144,0.14)"],
-
-
-    cardBg:     isDark ? "rgba(11,19,38,0.55)"    : "rgba(255,255,255,0.75)",
-    cardBorder: isDark ? "rgba(255,255,255,0.09)"  : "rgba(124,77,255,0.20)",
-    cardShadow: isDark
-      ? "0 0 0 1px rgba(124,77,255,0.12), 0 24px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.07)"
-      : "0 0 0 1px rgba(124,77,255,0.15), 0 24px 80px rgba(124,77,255,0.12), inset 0 1px 0 rgba(255,255,255,0.95)",
-
-    topGlow: isDark
-      ? "linear-gradient(90deg, transparent, rgba(124,77,255,0.7), rgba(76,215,246,0.6), transparent)"
-      : "linear-gradient(90deg, transparent, rgba(109,40,217,0.5), rgba(14,116,144,0.4), transparent)",
-
-    headingMain: isDark ? "#ffffff" : "#1e1b4b",
-
-    expGradient: isDark
-      ? "linear-gradient(135deg, #d0bcff 0%, #7c4dff 40%, #4cd7f6 100%)"
-      : "linear-gradient(135deg, #6d28d9 0%, #7c4dff 50%, #0e7490 100%)",
-
-    subText:   isDark ? "rgba(218,226,253,0.65)" : "rgba(30,27,75,0.65)",
-    nameColor: isDark ? "#d0bcff" : "#6d28d9",
-    roleColor: isDark ? "#4cd7f6" : "#0e7490",
-
-    badgeBg:     isDark ? "rgba(124,77,255,0.12)" : "rgba(124,77,255,0.10)",
-    badgeBorder: isDark ? "rgba(124,77,255,0.35)" : "rgba(124,77,255,0.40)",
-    badgeText:   isDark ? "#d0bcff"                : "#6d28d9",
-
-    pillBg:     isDark ? "rgba(255,255,255,0.04)" : "rgba(124,77,255,0.07)",
-    pillBorder: isDark ? "rgba(255,255,255,0.10)" : "rgba(124,77,255,0.22)",
-    pillText:   isDark ? "rgba(218,226,253,0.55)" : "rgba(109,40,217,0.75)",
-    pillHoverText: isDark ? "#e9d5ff" : "#4c1d95",
-
-    cvBg:     "rgba(124,77,255,0.08)",
-    cvBgHov:  isDark ? "rgba(124,77,255,0.18)" : "rgba(124,77,255,0.16)",
-    cvBorder: isDark ? "rgba(124,77,255,0.40)" : "rgba(124,77,255,0.50)",
-    cvText:   isDark ? "#d0bcff" : "#6d28d9",
-
-    scrollText:   isDark ? "rgba(218,226,253,0.35)" : "rgba(109,40,217,0.45)",
-    scrollBorder: isDark ? "rgba(124,77,255,0.35)"  : "rgba(124,77,255,0.45)",
-
-    pColorA: isDark ? "rgba(124,77,255,0.55)" : "rgba(124,77,255,0.40)",
-    pColorB: isDark ? "rgba(76,215,246,0.45)" : "rgba(14,116,144,0.35)",
-  };
 
   return (
     <section
       id="hero"
-      ref={sectionRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden transition-all duration-500"
-      aria-label="Hero Section"
-      style={{ background: t.sectionBg }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden transition-all duration-500 py-10"
+      style={{ background: isDark ? "transparent" : "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 40%, #e0f2fe 100%)" }}
     >
-      <style>{STATIC_STYLES}</style>
-
-      {/* ── Background orbs ───────────────────────────────────────── */}
+      {/* Orbs */}
       {ORBS.map((orb, i) => (
         <motion.div
           key={i}
-          aria-hidden="true"
-          className="pointer-events-none absolute rounded-full blur-3xl"
-          style={{ width: orb.size, height: orb.size, left: orb.x, top: orb.y, background: t.orbColors[i] }}
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={
-            shouldReduceMotion
-              ? { opacity: 1 }
-              : { scale: [1, 1.12, 0.95, 1], opacity: [0.6, 1, 0.7, 0.6], y: [0, -28, 12, 0] }
-          }
-          transition={{ duration: 10 + i * 1.5, repeat: Infinity, ease: "easeInOut", delay: orb.delay }}
+          className="pointer-events-none absolute rounded-full blur-3xl opacity-40 dark:opacity-60"
+          style={{ 
+            width: orb.size, 
+            height: orb.size, 
+            left: orb.x, 
+            top: orb.y, 
+            background: i % 2 === 0 ? "rgba(124,77,255,0.22)" : "rgba(76,215,246,0.18)",
+            willChange: "transform",
+            transform: 'translateZ(0)'
+          }}
+          animate={shouldReduceMotion ? { opacity: 0.6 } : { scale: [1, 1.15, 1], opacity: [0.5, 0.9, 0.5], y: [0, -30, 0] }}
+          transition={{ duration: 12 + i, repeat: Infinity, ease: "easeInOut", delay: orb.delay }}
         />
       ))}
 
-      {/* ── Floating particles ────────────────────────────────────── */}
+      {/* Particles */}
       {!shouldReduceMotion && PARTICLES.map((p) => (
         <motion.span
           key={p.id}
-          aria-hidden="true"
-          className="pointer-events-none absolute rounded-full"
-          style={{ left: p.x, top: p.y, width: p.size, height: p.size, background: p.id % 2 === 0 ? t.pColorA : t.pColorB }}
-          animate={{ y: [0, -40, 0], opacity: [0, 0.9, 0] }}
-          transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "easeInOut" }}
+          className="pointer-events-none absolute rounded-full hidden sm:block"
+          style={{ left: p.x, top: p.y, width: p.size, height: p.size, background: "rgba(124,77,255,0.45)", transform: 'translateZ(0)' }}
+          animate={{ y: [0, -60, 0], opacity: [0, 1, 0] }}
+          transition={{ duration: p.duration, repeat: Infinity, delay: p.delay }}
         />
       ))}
 
-      {/* ── Shooting comets — চারদিক থেকে কার্ডের উপর দিয়ে উড়ে যাবে ── */}
+      {/* Comets */}
       {!shouldReduceMotion && COMETS.map((comet) => (
         <motion.div
           key={comet.id}
-          aria-hidden="true"
-          className="comet"
+          className="comet hidden sm:block"
           style={{
+            position: "absolute",
             left: comet.startX,
             top:  comet.startY,
             width:  comet.len,
             height: 2,
             rotate: comet.angle,
-            background: "linear-gradient(to left, rgba(255,255,255,0.95) 0%, rgba(124,77,255,0.70) 35%, rgba(76,215,246,0.25) 75%, transparent 100%)",
-            zIndex: 20,          /* কার্ডের উপরে (card z-index=10) */
+            background: "linear-gradient(to left, white, rgba(124,77,255,0.6), transparent)",
+            zIndex: 20,
+            willChange: "transform",
+            transform: 'translateZ(0)'
           }}
-          animate={{
-            x:      [0, comet.dx],
-            y:      [0, comet.dy],
-            opacity:[0, 1, 1, 0],
-            scaleX: [0.1, 1, 1, 0.5],
-          }}
-          transition={{
-            duration:    comet.dur,
-            repeat:      Infinity,
-            repeatDelay: 15 + comet.delay * 0.6,
-            delay:       comet.delay,
-            ease:        "easeIn",
-            times:       [0, 0.07, 0.87, 1],
-          }}
+          animate={{ x: [0, comet.dx], y: [0, comet.dy], opacity: [0, 1, 0] }}
+          transition={{ duration: comet.dur, repeat: Infinity, repeatDelay: 6 + comet.delay, delay: comet.delay }}
         />
       ))}
 
-      {/* ── Grid overlay ──────────────────────────────────────────── */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage: `linear-gradient(${t.gridLine} 1px, transparent 1px), linear-gradient(90deg, ${t.gridLine} 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-        }}
-      />
-
-      {/* ── Main glassmorphism card ────────────────────────────────── */}
-      <motion.div
-        className="relative z-10 w-full max-w-4xl mx-auto px-6 sm:px-8"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6">
         <motion.div
-          animate={shouldReduceMotion ? {} : { y: [0, -14, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className={`relative glass-card rounded-[2rem] sm:rounded-[2.5rem] border p-6 sm:p-14 text-center transition-all duration-700 ${mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} ${isDark ? 'bg-[#0b1326]/70 border-white/10' : 'bg-white/90 border-purple-500/10'} backdrop-blur-2xl shadow-2xl`}
         >
-          <div
-            className="relative rounded-3xl border p-10 sm:p-14 text-center transition-all duration-500"
-            style={{
-              background: t.cardBg,
-              backdropFilter: "blur(24px)",
-              WebkitBackdropFilter: "blur(24px)",
-              borderColor: t.cardBorder,
-              boxShadow: t.cardShadow,
-            }}
+          <motion.div variants={fadeUpVariants} className="flex justify-center mb-6 sm:mb-8">
+            <div className="relative w-[120px] h-[120px] sm:w-[160px] sm:h-[160px] p-1 rounded-full bg-gradient-to-tr from-purple-500 to-blue-400 shadow-[0_0_40px_rgba(124,77,255,0.35)]">
+              <div className="relative w-full h-full rounded-full overflow-hidden bg-white dark:bg-[#0b1326]">
+                <Image
+                  src={heroPng}
+                  alt="Amirul Islam"
+                  fill
+                  sizes="160px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.h1
+            variants={fadeUpVariants}
+            className={`text-3xl sm:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}
           >
-            {/* Top glow line */}
-            <span
-              aria-hidden="true"
-              className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px"
-              style={{ background: t.topGlow }}
-            />
+            Crafting Digital <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">Experiences</span>
+            <span className="animated-gradient-text block text-xl sm:text-4xl mt-2 sm:mt-3 tracking-wide">Beyond Gravity</span>
+          </motion.h1>
 
-            {/* ── Profile image ─────────────────────────────────── */}
-            <motion.div variants={fadeUpVariants} className="flex justify-center mb-8">
-              <motion.div
-                className="avatar-glow"
-                animate={shouldReduceMotion ? {} : { y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                style={{ position: "relative", width: 150, height: 150, borderRadius: "50%" }}
-              >
-                <span className="avatar-ring" aria-hidden="true" />
-                <span className="avatar-gap" aria-hidden="true" />
-                <div style={{ position: "relative", width: "100%", height: "100%", borderRadius: "50%", overflow: "hidden", zIndex: 2 }}>
-                  <Image
-                    src={heroPng}
-                    alt="Amirul Islam — Full Stack Developer"
-                    fill
-                    sizes="150px"
-                    className="object-cover object-center"
-                    priority
-                    unoptimized
-                  />
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* ── "Available" badge ─────────────────────────────── */}
-            <motion.div variants={fadeUpVariants} className="flex justify-center mb-6">
-              <motion.span
-                className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase border transition-colors duration-500"
-                style={{ background: t.badgeBg, borderColor: t.badgeBorder, color: t.badgeText }}
-                animate={shouldReduceMotion ? {} : { scale: [1, 1.06, 1], opacity: [0.85, 1, 0.85] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <span className="inline-block w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "#7c4dff" }} />
-                Available for hire
-              </motion.span>
-            </motion.div>
-
-            {/* ── Headline ──────────────────────────────────────── */}
-            <motion.h1
-              variants={fadeUpVariants}
-              className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-6"
-            >
-              <span className="block drop-shadow-lg transition-colors duration-500" style={{ color: t.headingMain }}>
-                Crafting Digital
-              </span>
-              {/* Scoped style fixes WebkitTextFillColor rendering bug in Chromium
-                  when parent has overflow:hidden + backdrop-filter */}
-              <style>{`
-                .exp-gradient-text {
-                  background: ${t.expGradient};
-                  -webkit-background-clip: text;
-                  -webkit-text-fill-color: transparent;
-                  background-clip: text;
-                  color: transparent;
-                  display: block;
-                  margin-top: 0.25rem;
-                }
-              `}</style>
-              <span className="exp-gradient-text">Experiences</span>
-              <span className="animated-gradient-text block text-2xl sm:text-3xl md:text-4xl font-extrabold mt-3 tracking-wide drop-shadow-xl">
-                Beyond Gravity
-              </span>
-            </motion.h1>
-
-            {/* ── Sub-headline ──────────────────────────────────── */}
-            <motion.p
-              variants={fadeUpVariants}
-              className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed transition-colors duration-500"
-              style={{ color: t.subText }}
-            >
-              Hi, I&apos;m{" "}
-              <span className="font-semibold transition-colors duration-500" style={{ color: t.nameColor }}>Amirul Islam</span>
-              , a{" "}
-              <span className="font-semibold transition-colors duration-500" style={{ color: t.roleColor }}>Full Stack Developer</span>{" "}
-              specialising in MERN, Next.js &amp; Flutter — turning ideas into
-              blazing-fast, pixel-perfect web applications.
-            </motion.p>
-
-            {/* ── CTA Buttons ───────────────────────────────────── */}
-            <motion.div variants={fadeUpVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} className="relative">
-                <Link
-                  href="#projects"
-                  id="hero-view-work-btn"
-                  className="btn-shine group relative inline-flex items-center justify-center gap-2.5 rounded-xl overflow-hidden font-semibold text-sm sm:text-base transition-shadow duration-300"
-                  style={{
-                    background: "linear-gradient(135deg, #7c4dff 0%, #5a3ed9 60%, #4cd7f6 160%)",
-                    color: "#fff",
-                    boxShadow: "0 4px 24px rgba(124,77,255,0.45)",
-                    padding: "14px 32px",
-                    minHeight: "52px",
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.boxShadow = "0 0 0 2px rgba(124,77,255,0.6), 0 8px 32px rgba(124,77,255,0.55)"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "0 4px 24px rgba(124,77,255,0.45)"; }}
-                >
-                  View My Work
-                  <motion.span
-                    animate={shouldReduceMotion ? {} : { y: [0, 4, 0] }}
-                    transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <HiArrowDown className="text-lg" />
-                  </motion.span>
-                </Link>
-              </motion.div>
-
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} className="relative">
-                <a
-                  href="/assets/Amirul_Islam_CV.pdf"
-                  download="Amirul_Islam_CV.pdf"
-                  id="hero-download-cv-btn"
-                  className="btn-shine relative inline-flex items-center justify-center gap-2.5 rounded-xl overflow-hidden font-semibold text-sm sm:text-base border transition-all duration-300"
-                  style={{
-                    background: t.cvBg,
-                    borderColor: t.cvBorder,
-                    color: t.cvText,
-                    backdropFilter: "blur(8px)",
-                    padding: "14px 32px",
-                    minHeight: "52px",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = t.cvBgHov;
-                    e.currentTarget.style.boxShadow = "0 0 0 2px rgba(124,77,255,0.5), 0 8px 28px rgba(124,77,255,0.28)";
-                    e.currentTarget.style.borderColor = "rgba(124,77,255,0.7)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = t.cvBg;
-                    e.currentTarget.style.boxShadow = "none";
-                    e.currentTarget.style.borderColor = t.cvBorder;
-                  }}
-                >
-                  <HiOutlineDocumentArrowDown className="text-lg" />
-                  Download CV
-                </a>
-              </motion.div>
-            </motion.div>
-
-            {/* ── Tech pills ────────────────────────────────────── */}
-            <motion.div variants={fadeUpVariants} className="flex flex-wrap justify-center gap-2 mt-10">
-              {TECHS.map((tech) => (
-                <motion.span
-                  key={tech}
-                  className="relative rounded-full px-4 py-1.5 text-xs font-semibold border cursor-default select-none overflow-hidden transition-colors duration-500"
-                  style={{ background: t.pillBg, borderColor: t.pillBorder, color: t.pillText }}
-                  whileHover={{
-                    background: "rgba(124,77,255,0.18)",
-                    borderColor: "rgba(124,77,255,0.55)",
-                    color: t.pillHoverText,
-                    scale: 1.12,
-                    boxShadow: "0 0 14px rgba(124,77,255,0.45), 0 0 4px rgba(76,215,246,0.3)",
-                  }}
-                  transition={{ duration: 0.18, ease: "easeOut" }}
-                >
-                  {tech}
-                </motion.span>
-              ))}
-            </motion.div>
-          </div>
-        </motion.div>
-      </motion.div>
-
-      {/* ── Scroll indicator ──────────────────────────────────────── */}
-      {!shouldReduceMotion && (
-        <motion.div
-          aria-label="Scroll down"
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 cursor-pointer z-10"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
-        >
-          <span className="text-xs tracking-widest uppercase transition-colors duration-500" style={{ color: t.scrollText }}>
-            scroll
-          </span>
-          <div
-            className="w-5 h-8 rounded-full border flex items-start justify-center pt-1.5 transition-colors duration-500"
-            style={{ borderColor: t.scrollBorder }}
+          <motion.p
+            variants={fadeUpVariants}
+            className={`text-sm sm:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 font-medium ${isDark ? 'text-slate-300' : 'text-slate-600'}`}
           >
-            <motion.div
-              className="w-1 h-2 rounded-full"
-              style={{ background: "#7c4dff" }}
-              animate={{ opacity: [1, 0], y: [0, 12] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeIn" }}
-            />
-          </div>
+            Hi, I&apos;m <span className="text-purple-500 font-bold">Amirul Islam</span>, a Full Stack Developer specializing in MERN, Next.js & Flutter.
+          </motion.p>
+
+          <motion.div variants={fadeUpVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
+              <Link
+                href="#projects"
+                className="btn-shine group relative inline-flex w-full sm:w-auto items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl sm:rounded-2xl font-bold shadow-xl shadow-purple-500/25 overflow-hidden transition-all"
+              >
+                View My Work
+                <HiArrowDown className="group-hover:translate-y-1 transition-transform" />
+              </Link>
+            </motion.div>
+
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
+              <a
+                href="/assets/Amirul_Islam_CV.pdf"
+                download
+                className="group relative inline-flex w-full sm:w-auto items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 border-2 border-purple-500/30 dark:border-purple-500/50 text-purple-600 dark:text-purple-400 rounded-xl sm:rounded-2xl font-bold hover:bg-purple-500/5 transition-all"
+              >
+                <HiOutlineDocumentArrowDown className="text-xl" />
+                Download CV
+              </a>
+            </motion.div>
+          </motion.div>
+
+          <motion.div variants={fadeUpVariants} className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-10 sm:mt-12">
+            {TECHS.map((tech) => (
+              <span key={tech} className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold border transition-colors ${isDark ? 'bg-white/5 border-white/10 text-slate-400' : 'bg-purple-50 border-purple-100 text-purple-600'}`}>
+                {tech}
+              </span>
+            ))}
+          </motion.div>
         </motion.div>
-      )}
+      </div>
+
+      <style jsx global>{`
+        .btn-shine::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+          transform: skewX(-20deg);
+        }
+        .btn-shine:hover::after {
+          animation: shine 0.8s ease-in-out;
+        }
+        @keyframes shine {
+          100% { left: 200%; }
+        }
+      `}</style>
     </section>
   );
 }

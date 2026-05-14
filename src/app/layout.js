@@ -18,66 +18,119 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Amirul Islam | Full Stack Web Developer",
+  title: {
+    default: "Amirul Islam | Professional Full Stack Web Developer & MERN Specialist",
+    template: "%s | Amirul Islam"
+  },
   description:
-    "M. Amirul Islam is a Full Stack Web Developer from Dhaka, Bangladesh. Skilled in MERN Stack, React, Next.js, and Flutter. Explore projects like PAYOO and English Janala.",
-  verification: {
-    google: "hqLUcA89yMna2GmB8rYnhUhqAWUXBjhAaL4FrLEwQaI",
+    "Amirul Islam is a top-rated Full Stack Web Developer from Dhaka, Bangladesh. Specializing in MERN Stack (MongoDB, Express, React, Node.js), Next.js, and Mobile App Development (Flutter). Transforming complex ideas into high-performance web solutions.",
+  metadataBase: new URL("https://amirulislam.vercel.app"),
+  alternates: {
+    canonical: "/",
   },
   keywords: [
     "Amirul Islam",
-    "Full Stack Developer",
-    "MERN Stack Developer",
-    "React Developer",
-    "Next.js Developer",
-    "Bangladesh Web Developer",
-    "Portfolio",
+    "Amirul Islam Developer",
+    "Amirul Islam Portfolio",
+    "Full Stack Developer Bangladesh",
+    "MERN Stack Developer Dhaka",
+    "React Specialist Bangladesh",
+    "Next.js Developer Portfolio",
+    "Best Web Developer in Dhaka",
+    "English Janala Developer",
+    "Software Engineer Portfolio",
+    "Hire React Developer Bangladesh",
+    "Amirul Islam Web Developer",
   ],
-  authors: [{ name: "Amirul Islam" }],
-  metadataBase: new URL("https://amirulislam.vercel.app"),
+  authors: [{ name: "Amirul Islam", url: "https://amirulislam.vercel.app" }],
+  creator: "Amirul Islam",
+  publisher: "Amirul Islam",
   openGraph: {
-    title: "Amirul Islam | Developer Portfolio",
-    description: "Full Stack Developer specializing in MERN, Next.js and Flutter.",
+    title: "Amirul Islam | Expert Full Stack Developer Portfolio",
+    description: "Building modern, scalable, and high-performance web applications with MERN and Next.js.",
     url: "https://amirulislam.vercel.app",
-    siteName: "Amirul Islam Portfolio",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Amirul Islam Portfolio" }],
+    siteName: "Amirul Islam - Full Stack Developer",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Amirul Islam - Professional Web Developer Portfolio",
+      },
+    ],
+    locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Amirul Islam Portfolio",
-    description: "Full Stack Web Developer",
+    title: "Amirul Islam | Full Stack Developer",
+    description: "Expert MERN & Next.js Developer crafting pixel-perfect web experiences.",
+    creator: "@amirulislambd",
     images: ["/og-image.jpg"],
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: "hqLUcA89yMna2GmB8rYnhUhqAWUXBjhAaL4FrLEwQaI", // Replace with your actual search console tag if different
+  },
 };
 
 export default function RootLayout({ children }) {
+  // Structured Data (JSON-LD) for better Google Rich Snippets
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Amirul Islam",
+    "url": "https://amirulislam.vercel.app",
+    "image": "https://amirulislam.vercel.app/og-image.jpg",
+    "jobTitle": "Full Stack Web Developer",
+    "description": "Professional Full Stack Developer specializing in MERN Stack and Next.js.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dhaka",
+      "addressCountry": "Bangladesh"
+    },
+    "knowsAbout": ["React", "Next.js", "Node.js", "MongoDB", "MERN Stack", "Flutter", "Web Development"],
+    "sameAs": [
+      "https://github.com/amirulislambd",
+      "https://linkedin.com/in/amirulislambd",
+      "https://facebook.com/amirulislambd"
+    ]
+  };
+
   return (
     <html
       lang="en"
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <meta name="theme-color" content="#7c4dff" />
+      </head>
+      <body className="min-h-full flex flex-col relative bg-[#f8fafc] dark:bg-[#020617] transition-colors duration-500">
         <NextThemeProvider>
-          {/* Layer order (back → front):
-              z-22: deep-space base         (GalaxyBackground)
-              z-21: moonlight + nebulae     (GalaxyBackground)
-              z-19: sharp star dots         (GalaxyBackground)
-              z-10: floating skill icons    (FloatingBackground)
-              z-0 : page content
-              z-50: navbar                  (sticky)
-          */}
           <GalaxyBackground />
           <FloatingBackground />
 
           <Navbar />
-          <main className="w-full flex-1">
+          <main className="w-full flex-1 relative z-0">
             {children}
           </main>
           <Footer />
-          <ScrollToTop/>
+          <ScrollToTop />
         </NextThemeProvider>
       </body>
     </html>
