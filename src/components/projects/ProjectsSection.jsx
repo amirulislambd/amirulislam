@@ -48,7 +48,7 @@ export default function ProjectsSection({ projects }) {
   return (
     <section
       id="projects"
-      className="relative min-h-screen overflow-hidden pb-10 transition-all duration-500"
+      className="relative min-h-screen overflow-hidden py-10 transition-all duration-500"
       style={{ background: t.sectionBg }}
     >
       {/* Background orbs & Grid overlay (আগের মতোই থাকবে) */}
@@ -108,7 +108,7 @@ export default function ProjectsSection({ projects }) {
            }}
            
            pagination={{ clickable: true }}
-           className="projects-swiper !py-20"
+           className="projects-swiper !py-10"
          >
            {/* ৩টি প্রজেক্টের ক্ষেত্রে ৩ বার রিপিট করা ভালো যাতে স্ক্রিন সবসময় ভর্তি থাকে */}
            {[...filtered, ...filtered, ...filtered].map((project, i) => (

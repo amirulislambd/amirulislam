@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import NextThemeProvider from "@/components/provider/Provider";
 import GalaxyBackground from "@/components/GalaxyBackground";
 import FloatingBackground from "@/components/FloatingBackground";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -76,6 +77,7 @@ export default function RootLayout({ children }) {
             {children}
           </main>
           <Footer />
+          <ScrollToTop/>
         </NextThemeProvider>
       </body>
     </html>

@@ -1,19 +1,5 @@
-"use client";
-
 import Link from "next/link";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
-import { HiOutlineMail } from "react-icons/hi";
-import { SiLeetcode } from "react-icons/si";
-
-const SOCIALS = [
-  { label: "GitHub",   href: "https://github.com/amirulislambd",         Icon: FaGithub   },
-  { label: "LinkedIn", href: "https://linkedin.com/in/amirulislambd",    Icon: FaLinkedin },
-  { label: "Facebook", href: "https://facebook.com/amirulislambd",       Icon: FaFacebook },
-  { label: "Email",    href: "mailto:amirulislam@example.com",           Icon: HiOutlineMail },
-  { label: "LeetCode", href: "https://leetcode.com/amirulislambd",       Icon: SiLeetcode },
-];
+import FooterSocials from "./FooterSocials";
 
 const NAV_LINKS = [
   { name: "Home",     href: "/" },
@@ -23,109 +9,54 @@ const NAV_LINKS = [
 ];
 
 export default function Footer() {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  const dark = mounted && resolvedTheme === "dark";
-
   return (
-    <footer
-      className="w-full mt-auto border-t"
-      style={{
-        borderColor: "var(--glass-border)",
-        background: dark
-          ? "rgba(3,7,18,0.80)"
-          : "rgba(248,250,252,0.90)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        {/* Top row */}
-        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8">
-
-          {/* Brand */}
-          <div className="flex flex-col items-center md:items-start gap-2 max-w-xs text-center md:text-left">
-            <span className="text-lg font-bold" style={{ color: "var(--text-primary)" }}>
-              Amirul<span style={{ color: "#7c4dff" }}>.dev</span>
+    <footer className="w-full mt-auto border-t border-slate-200 dark:border-white/10 bg-slate-50/50 dark:bg-slate-950/40 backdrop-blur-xl transition-colors duration-500">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+          
+          {/* Brand & Bio */}
+          <div className="flex flex-col items-center md:items-start gap-4 text-center md:text-left">
+            <span className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
+              Amirul<span className="text-[#7c4dff]">.dev</span>
             </span>
-            <p className="text-xs leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-              Full Stack Developer building blazing-fast, pixel-perfect web experiences
-              with MERN, Next.js &amp; Flutter.
+            <p className="text-sm leading-relaxed max-w-[280px] text-slate-600 dark:text-slate-400">
+              Full Stack Developer crafting high-performance, animated web experiences.
             </p>
           </div>
 
-          {/* Nav links */}
-          <div className="flex flex-col items-center md:items-start gap-2">
-            <span className="text-xs font-semibold tracking-widest uppercase mb-1"
-              style={{ color: "var(--text-secondary)" }}>
+          {/* Quick Links */}
+          <div className="flex flex-col items-center gap-4">
+            <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 dark:text-slate-500">
               Navigation
             </span>
-            {NAV_LINKS.map(({ name, href }) => (
-              <Link
-                key={name}
-                href={href}
-                className="text-sm transition-colors duration-200 hover:text-[#7c4dff]"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                {name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Socials */}
-          <div className="flex flex-col items-center md:items-start gap-3">
-            <span className="text-xs font-semibold tracking-widest uppercase mb-1"
-              style={{ color: "var(--text-secondary)" }}>
-              Connect
-            </span>
-            <div className="flex items-center gap-3 flex-wrap justify-center md:justify-start">
-              {SOCIALS.map(({ label, href, Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="p-2.5 rounded-xl border transition-all duration-200"
-                  style={{
-                    borderColor: "var(--glass-border)",
-                    color: "var(--text-secondary)",
-                    background: "transparent",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(124,77,255,0.45)";
-                    e.currentTarget.style.color = "#7c4dff";
-                    e.currentTarget.style.background = "rgba(124,77,255,0.10)";
-                    e.currentTarget.style.boxShadow = "0 0 10px rgba(124,77,255,0.2)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "var(--glass-border)";
-                    e.currentTarget.style.color = "var(--text-secondary)";
-                    e.currentTarget.style.background = "transparent";
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
-                >
-                  <Icon size={16} />
-                </a>
+            <div className="flex flex-wrap justify-center gap-6">
+              {NAV_LINKS.map(({ name, href }) => (
+                <Link key={name} href={href} className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-[#7c4dff] dark:hover:text-[#7c4dff] transition-colors">
+                  {name}
+                </Link>
               ))}
             </div>
           </div>
+
+          {/* Socials */}
+          <div className="flex flex-col items-center md:items-end gap-4">
+            <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-slate-400 dark:text-slate-500">
+              Connect
+            </span>
+            <FooterSocials />
+          </div>
         </div>
 
-        {/* Divider */}
-        <div
-          className="mt-8 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-2"
-          style={{ borderColor: "var(--glass-border)" }}
-        >
-          <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
-            © {new Date().getFullYear()} Amirul Islam. All rights reserved.
+        {/* Bottom Bar */}
+        <div className="mt-12 pt-8 border-t border-slate-200 dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[11px] font-medium text-slate-500 dark:text-slate-500">
+            © {new Date().getFullYear()} M. Amirul Islam. All rights reserved.
           </p>
-          <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
-            Built with{" "}
-            <span style={{ color: "#7c4dff" }}>Next.js</span> &amp;{" "}
-            <span style={{ color: "#4cd7f6" }}>Tailwind CSS</span>
-          </p>
+          
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-200 dark:border-[#7c4dff]/20 bg-slate-100 dark:bg-[#7c4dff]/5 text-[10px] font-bold text-slate-600 dark:text-slate-400">
+             <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+             Available for Freelance
+          </div>
         </div>
       </div>
     </footer>
