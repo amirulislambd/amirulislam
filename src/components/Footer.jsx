@@ -16,32 +16,32 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#020617] border-t border-white/5 pt-16 pb-8 overflow-hidden">
+    <footer className="relative bg-[#020617] border-t border-white/5 pt-10 pb-6 sm:pt-16 sm:pb-8 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-10 md:mb-16">
           
           <div className="col-span-1 md:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-2 mb-6 group">
-              <span className="text-2xl font-bold tracking-tighter text-white">
+            <Link href="/" className="inline-flex items-center gap-2 mb-4 md:mb-6 group">
+              <span className="text-xl md:text-2xl font-bold tracking-tighter text-white">
                 Amirul <span className="text-purple-500">Islam</span>
               </span>
             </Link>
-            <p className="text-slate-400 text-sm leading-relaxed mb-8 max-w-xs">
+            <p className="text-slate-400 text-xs md:text-sm leading-relaxed mb-6 md:mb-8 max-w-xs">
               Crafting high-performance MERN & Next.js applications with pixel-perfect precision and a focus on user experience.
             </p>
             <FooterSocials />
           </div>
 
-          <div className="col-span-1">
-            <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Quick Links</h4>
-            <ul className="space-y-4">
+          <div className="col-span-1 hidden sm:block">
+            <h4 className="text-white font-bold mb-4 md:mb-6 uppercase tracking-widest text-[10px] md:text-xs">Quick Links</h4>
+            <ul className="space-y-2 md:space-y-4">
               {FOOTER_LINKS.map((link) => (
                 <li key={link.name}>
                   <Link 
                     href={link.href}
-                    className="text-slate-400 hover:text-purple-400 transition-colors text-sm font-medium"
+                    className="text-slate-400 hover:text-purple-400 transition-colors text-xs md:text-sm font-medium"
                   >
                     {link.name}
                   </Link>
@@ -51,38 +51,39 @@ export default function Footer() {
           </div>
 
           <div className="col-span-1">
-            <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Contact Info</h4>
-            <ul className="space-y-5">
+            <h4 className="text-white font-bold mb-4 md:mb-6 uppercase tracking-widest text-[10px] md:text-xs">Contact Info</h4>
+            <ul className="space-y-3 md:space-y-5">
               <li className="flex items-start gap-3 text-slate-400">
-                <HiOutlineMail className="text-purple-500 text-lg shrink-0 mt-0.5" />
-                <span className="text-sm">amirulislambd.dev@gmail.com</span>
+                <HiOutlineMail className="text-purple-500 text-base md:text-lg shrink-0 mt-0.5" />
+                <span className="text-xs md:text-sm truncate">amirulislambd313@gmail.com</span>
               </li>
               <li className="flex items-start gap-3 text-slate-400">
-                <HiOutlinePhone className="text-purple-500 text-lg shrink-0 mt-0.5" />
-                <span className="text-sm">+880 1234 567890</span>
+                <HiOutlinePhone className="text-purple-500 text-base md:text-lg shrink-0 mt-0.5" />
+                <span className="text-xs md:text-sm">+880 1814-022917</span>
               </li>
               <li className="flex items-start gap-3 text-slate-400">
-                <HiOutlineLocationMarker className="text-purple-500 text-lg shrink-0 mt-0.5" />
-                <span className="text-sm">Dhaka, Bangladesh</span>
+                <HiOutlineLocationMarker className="text-purple-500 text-base md:text-lg shrink-0 mt-0.5" />
+                <span className="text-xs md:text-sm">Dhaka, Bangladesh</span>
               </li>
             </ul>
           </div>
 
-          <div className="col-span-1">
-            <h4 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Newsletter</h4>
-            <p className="text-slate-400 text-sm mb-6">Stay updated with my latest projects and tech insights.</p>
+          <div className="col-span-1 hidden md:block">
+            <h4 className="text-white font-bold mb-4 md:mb-6 uppercase tracking-widest text-[10px] md:text-xs">Newsletter</h4>
+            <p className="text-slate-400 text-xs md:text-sm mb-4 md:mb-6">Stay updated with my latest projects and tech insights.</p>
             <form className="relative group" onSubmit={(e) => e.preventDefault()}>
               <input 
                 type="email" 
                 placeholder="Email Address"
-                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-purple-500/50 transition-all"
+                className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 md:py-3 px-4 text-xs md:text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-purple-500/50 transition-all"
               />
-              <button className="absolute right-2 top-1.5 bg-purple-600 hover:bg-purple-500 text-white px-4 py-1.5 rounded-lg text-xs font-bold transition-all">
+              <button className="absolute right-2 top-1.5 bg-purple-600 hover:bg-purple-500 text-white px-3 py-1 md:px-4 md:py-1.5 rounded-lg text-[10px] md:text-xs font-bold transition-all">
                 Join
               </button>
             </form>
           </div>
         </div>
+
 
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-slate-500 text-xs">

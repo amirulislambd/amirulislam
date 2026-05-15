@@ -1,17 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaFacebook, FaTwitter } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { SiLeetcode } from "react-icons/si";
 
 const SOCIALS = [
-  { label: "GitHub",   href: "https://github.com/amirul-dev",    Icon: FaGithub,   color: "#333" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/amirul", Icon: FaLinkedin, color: "#0077b5" },
+  { label: "GitHub",   href: "https://github.com/amirulislambd",    Icon: FaGithub,   color: "#333" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/amirulislambd", Icon: FaLinkedin, color: "#0077b5" },
+  { label: "Twitter",  href: "https://twitter.com/amirulislambd",  Icon: FaTwitter,  color: "#1da1f2" },
   { label: "Facebook", href: "https://facebook.com/amirulislambd",   Icon: FaFacebook, color: "#1877f2" },
   { label: "Email",    href: "mailto:amirulislambd313@gmail.com",    Icon: HiOutlineMail, color: "#ea4335" },
-  { label: "LeetCode", href: "https://leetcode.com/amirulislambd",    Icon: SiLeetcode, color: "#ffa116" },
 ];
+
 
 export default function FooterSocials() {
   return (

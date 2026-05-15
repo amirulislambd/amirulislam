@@ -11,11 +11,12 @@ import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi2";
 import logo from "@/assets/logo.png";
 
 const NAV_LINKS = [
-  { name: "Home",     href: "/" },
-  { name: "About",    href: "/about" },
-  { name: "Projects", href: "/projects" },
-  { name: "Contact",  href: "/contact" },
+  { name: "Home",     href: "/#hero" },
+  { name: "About",    href: "/#about" },
+  { name: "Projects", href: "/#projects" },
+  { name: "Contact",  href: "/#contact" },
 ];
+
 
 function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();

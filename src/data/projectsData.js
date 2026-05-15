@@ -1,0 +1,90 @@
+export const PROJECTS_DATA = [
+  {
+    id: "mangobooks",
+    title: "Mango Books",
+    tagline: "Explore, borrow, and read books online.",
+    description:
+      "An online book borrowing platform where users can browse, search, and borrow books digitally. Features category filtering, secure authentication via BetterAuth (Email/Password + Google), private routes, user profile management, and an animated Swiper banner.",
+    tech: ["Next.js", "MongoDB", "BetterAuth", "HeroUI"],
+    liveUrl: "https://mango-books.vercel.app/",
+    githubUrl: "https://github.com/amirulislambd/mango-books",
+    category: "Full Stack",
+    accent: "#7c3aed",
+    accentSecondary: "#6d28d9",
+    featured: true,
+    challenges:
+      "Setting up BetterAuth with the MongoDB adapter for secure session-based auth, including Google OAuth, while protecting private routes for book details and user profiles in the Next.js App Router.",
+    improvements:
+      "Adding a return/due-date system for borrowed books, user reviews and ratings, and a recommendation engine based on borrowing history.",
+  },
+  {
+    id: "zapshift",
+    title: "ZapShift",
+    tagline: "Logistics, redefined.",
+    description:
+      "A fast, modern logistics and shift management web app. Handles real-time scheduling, delivery tracking, and team coordination.",
+    tech: ["MERN Stack", "Firebase", "Express.js", "JWT"],
+    liveUrl: "https://zap-shift-e9cfa.web.app/",
+    githubUrl: "https://github.com/amirulislambd/zap-shift-client",
+    category: "Full Stack",
+    accent: "#4cd7f6",
+    accentSecondary: "#06b6d4",
+    featured: true,
+    challenges: "Handling real-time updates for shift assignments and delivery tracking using Firebase was challenging. Ensuring secure authentication with JWT and managing different user roles (admin, driver, customer) required careful planning.",
+    improvements: "I plan to implement push notifications for drivers, a more robust reporting dashboard for admins, and a mobile-specific app using Flutter for better on-the-go access."
+  },
+  {
+    id: "digitools",
+    title: "Digital Tools Hub",
+    tagline: "Browse and buy digital productivity tools.",
+    description:
+      "A fully responsive e-commerce single-page application for browsing and purchasing digital tools like resume builders, design software, and productivity resources. Features dynamic cart management, real-time item count, and toast notifications.",
+    tech: ["React", "Tailwind CSS", "DaisyUI", "JavaScript"],
+    liveUrl: "https://programing-assignment-6.vercel.app/",
+    githubUrl: "https://github.com/amirulislambd/programing-assignment-6",
+    category: "Frontend",
+    accent: "#818cf8",
+    accentSecondary: "#6366f1",
+    featured: false,
+    challenges:
+      "Building a fully functional cart system with real-time navbar count updates and smooth add/remove interactions, while keeping the component structure clean across a single-page layout.",
+    improvements:
+      "Adding a backend with user authentication, order history, and payment integration. Expanding the product catalog with filtering and search functionality.",
+  },
+  {
+    id: "keenkeeper",
+    title: "KeenKeeper",
+    tagline: "Keep your friendships alive.",
+    description:
+      "A smart relationship management tool that helps users track and nurture personal connections. Automatically categorizes friends as Overdue, Almost Due, or On-Track based on last contact date, and lets you log check-ins, view interaction history, and analyze communication habits.",
+    tech: ["Next.js", "Tailwind CSS", "DaisyUI", "Recharts"],
+    liveUrl: "https://programing-assignment-7.vercel.app/",
+    githubUrl: "https://github.com/amirulislambd/programing-assignment-7",
+    category: "Frontend",
+    accent: "#34d399",
+    accentSecondary: "#10b981",
+    featured: false,
+    challenges:
+      "Implementing dynamic status logic that automatically recategorizes friends based on elapsed time and communication goals, while keeping the dashboard summaries reactive and accurate without a backend.",
+    improvements:
+      "Adding a real database and user authentication so data persists across sessions. Implementing push or email reminders so users get notified outside the app when a friend is overdue.",
+  },
+  {
+    id: "github-issue-tracker",
+    title: "GitHub Issue Tracker",
+    tagline: "Track and manage GitHub issues from a custom dashboard.",
+    description:
+      "A vanilla JavaScript web app that connects to the GitHub API to fetch and display repository issues. Features a login page with credential-based auth, a dashboard view, and issue browsing — all built without any framework.",
+    tech: ["HTML", "Tailwind CSS", "JavaScript", "GitHub API"],
+    liveUrl: "https://amirulislambd.github.io/programing-assignment-5/",
+    githubUrl: "https://github.com/amirulislambd/programing-assignment-5",
+    category: "Frontend",
+    accent: "#238636",
+    accentSecondary: "#2ea043",
+    featured: false,
+    challenges:
+      "Fetching and displaying GitHub API data using vanilla JavaScript without a framework, and implementing a credential-based login flow without a real backend.",
+    improvements:
+      "Adding real OAuth-based GitHub login, pagination for large issue lists, and filtering by label, assignee, or status.",
+  }
+];

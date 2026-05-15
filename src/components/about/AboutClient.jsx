@@ -19,7 +19,7 @@ export default function AboutClient({ children }) {
   return (
     <section 
       id="about" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 sm:py-24 transition-colors duration-500"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden py-16  transition-colors duration-500"
       style={{ background: "transparent" }}
     >
       <style>{`

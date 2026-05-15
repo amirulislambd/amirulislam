@@ -49,7 +49,7 @@ export default function ContactSection() {
   ];
 
   return (
-    <section className="relative py-16 sm:py-20 px-4 sm:px-6 overflow-hidden transition-opacity duration-700">
+    <section id="contact" className="relative py-16 sm:py-20 px-4 sm:px-6 overflow-hidden transition-opacity duration-700">
       {/* Background Atoms/Icons */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.1] sm:opacity-[0.2]">
         {BACKGROUND_ICONS.map((item, i) => (

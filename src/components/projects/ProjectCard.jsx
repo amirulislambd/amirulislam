@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { HiExternalLink, HiCode, HiStar } from "react-icons/hi";
 
 export default function ProjectCard({ project, index }) {
@@ -60,19 +61,27 @@ export default function ProjectCard({ project, index }) {
 
           <div className="mb-5 h-px w-full opacity-20" style={{ background: project.accent }} />
 
-          <div className="grid grid-cols-2 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 gap-3 md:gap-4">
             <motion.a href={project.liveUrl} target="_blank"
-              className="flex items-center justify-center gap-1 md:gap-2 rounded-lg md:rounded-xl py-2.5 md:py-3 text-[12px] md:text-[13px] font-bold text-white shadow-lg"
+              className="flex items-center justify-center gap-2 rounded-lg md:rounded-xl py-3 text-[13px] font-bold text-white shadow-lg"
               style={{ background: btnPrimaryBg }}
               whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <HiExternalLink className="text-base md:text-lg" /> Live
+              <HiExternalLink className="text-lg" /> Live Preview
             </motion.a>
 
-            <motion.a href={project.githubUrl} target="_blank"
-              className="flex items-center justify-center gap-1 md:gap-2 rounded-lg md:rounded-xl py-2.5 md:py-3 text-[12px] md:text-[13px] font-bold border border-purple-500/20 dark:border-white/10 text-purple-600 dark:text-purple-300"
-              whileHover={{ scale: 1.02, borderColor: project.accent }} whileTap={{ scale: 0.98 }}>
-              <HiCode className="text-base md:text-lg" /> Code
-            </motion.a>
+            <div className="grid grid-cols-2 gap-3">
+              <Link href={`/projects/${project.id}`}
+                className="flex items-center justify-center gap-2 rounded-lg md:rounded-xl py-3 text-[13px] font-bold border border-purple-500/20 dark:border-white/10 text-purple-600 dark:text-purple-300 hover:bg-purple-500/5 transition-all text-center"
+              >
+                View Details
+              </Link>
+
+              <motion.a href={project.githubUrl} target="_blank"
+                className="flex items-center justify-center gap-2 rounded-lg md:rounded-xl py-3 text-[13px] font-bold border border-purple-500/20 dark:border-white/10 text-purple-600 dark:text-purple-300"
+                whileHover={{ scale: 1.02, borderColor: project.accent }} whileTap={{ scale: 0.98 }}>
+                <HiCode className="text-lg" /> Code
+              </motion.a>
+            </div>
           </div>
         </div>
       </div>

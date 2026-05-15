@@ -172,7 +172,7 @@ export default function Hero() {
                 className="btn-shine-effect group relative inline-flex w-full sm:w-auto items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-xl sm:rounded-2xl font-bold shadow-xl shadow-purple-500/25 overflow-hidden transition-all"
               >
                 View My Work
-                <HiArrowDown className="group-hover:translate-y-1 transition-transform" />
+                <HiArrowDown className="group-hover:translate-y-1 transition-transform animate-bounce" />
               </Link>
             </motion.div>
 
