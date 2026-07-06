@@ -26,10 +26,10 @@ export const SKILLS = {
 export const EDUCATION = [
   {
     degree: "Advanced Full Stack Web Development (MERN)",
-    institution: "Programming Hero (Batch 13 & SCIC)",
-    duration: "2023 — 2024",
-    result: "Top Performer (Selected for SCIC)",
-    desc: "Completed an intensive web development program. Currently selected for SCIC (Super Charged Intern Club), working on industry-standard, complex full-stack projects and advanced problem-solving."
+    institution: "Programming Hero",
+    duration: "2023 — Present",
+    result: "Selected for SCIC",
+    desc: "Completed an intensive web development program. Currently participating in SCIC (Super Charged Intern Club) for advanced problem-solving and industry-level training."
   },
   {
     degree: "Dawra-e-Hadith (Masters in Islamic Studies)",
@@ -50,22 +50,16 @@ export const EDUCATION = [
 
 export const EXPERIENCE = [
   {
-    role: "MERN Stack Developer (Intern)",
-    company: "Programming Hero (SCIC)",
-    duration: "2024 — Present",
-    desc: "Working on enterprise-level team projects, participating in code reviews, and building scalable full-stack web applications under tight deadlines."
+    role: "Teacher (Islamic Studies)",
+    company: "Islamic Educational Institution",
+    duration: "Present",
+    desc: "Serving as an educator. This role has deeply enhanced my communication, patience, discipline, and mentoring skills, which I consistently apply to my programming journey."
   },
   {
-    role: "Full Stack Developer (Freelance)",
-    company: "Self-Employed",
+    role: "Full Stack Developer (Self-Driven)",
+    company: "Personal Projects & Open Source",
     duration: "2023 — Present",
-    desc: "Building custom web solutions for clients using the MERN stack. Focused on creating responsive, SEO-friendly, and high-performance applications."
-  },
-  {
-    role: "Open Source Contributor",
-    company: "GitHub Community",
-    duration: "2022 — Present",
-    desc: "Actively contributing to various web development projects and maintaining my own suite of tools for the developer community."
+    desc: "Continuously building, deploying, and maintaining full-stack web applications to solve real-world problems. Actively learning new technologies and contributing to the GitHub community."
   }
 ];
 
