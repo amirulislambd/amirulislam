@@ -13,7 +13,7 @@ export default function ProjectCard({ project, index }) {
 
   return (
     <div
-      className="relative h-full group"
+      className="relative h-[480px] md:h-[520px] w-full group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >

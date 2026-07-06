@@ -1,6 +1,7 @@
 import { PROJECTS_DATA } from "@/data/projectsData";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import {
   HiExternalLink,
   HiCode,
@@ -51,7 +52,7 @@ export default async function ProjectDetailsPage({ params }) {
         </Link>
 
         {/* Hero Section */}
-        <div className="relative rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0b1326]/50 p-8 sm:p-16 mb-12 shadow-2xl backdrop-blur-xl hover:border-purple-500/40 hover:shadow-purple-500/10 transition-all duration-300">
+        <div className="relative rounded-[2.5rem] overflow-hidden border border-slate-200 dark:border-white/10 bg-white dark:bg-[#0b1326]/50 p-8 sm:p-12 mb-12 shadow-2xl backdrop-blur-xl hover:border-purple-500/40 hover:shadow-purple-500/10 transition-all duration-300 flex flex-col lg:flex-row gap-10 items-center">
           <div className="absolute top-0 right-0 p-10 opacity-10">
             <HiOutlineRocketLaunch
               size={120}
@@ -59,7 +60,7 @@ export default async function ProjectDetailsPage({ params }) {
             />
           </div>
 
-          <div className="relative z-10">
+          <div className="relative z-10 flex-1 w-full">
             <div className="flex items-center gap-3 mb-6">
               <span
                 className="w-3 h-3 rounded-full"
@@ -86,9 +87,8 @@ export default async function ProjectDetailsPage({ params }) {
               {project.tagline}
             </p>
 
-            <div className="flex flex-wrap gap-4 mb-12">
+            <div className="flex flex-wrap gap-4">
               <a
-              id="#projects" 
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -109,6 +109,18 @@ export default async function ProjectDetailsPage({ params }) {
               </a>
             </div>
           </div>
+          
+          {project.image && (
+            <div className="hidden lg:block relative w-full lg:w-5/12 min-h-[300px] shrink-0 overflow-hidden rounded-[1.5rem] border border-white/10 shadow-2xl mt-8 lg:mt-0">
+              <Image 
+                src={project.image} 
+                alt={project.title} 
+                fill 
+                className="object-cover transition-transform duration-700 hover:scale-105"
+                priority
+              />
+            </div>
+          )}
         </div>
 
         {/* Content Grid */}
