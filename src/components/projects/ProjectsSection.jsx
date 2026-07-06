@@ -26,13 +26,15 @@ const CATEGORIES = ["All", "Full Stack", "Frontend", "Backend"];
 export default function ProjectsSection({ projects }) {
   const shouldReduceMotion = useReducedMotion();
   const { resolvedTheme }  = useTheme();
-  const isDark = resolvedTheme === "dark";
   const [activeFilter, setActiveFilter] = useState("All");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Only use dark styles after mount to prevent hydration mismatch
+  const isDark = mounted && resolvedTheme === "dark";
 
   const filtered =
     activeFilter === "All"
