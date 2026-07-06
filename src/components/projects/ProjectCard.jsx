@@ -52,17 +52,9 @@ export default function ProjectCard({ project, index }) {
             {project.featured && <HiStar className="text-lg md:text-xl animate-pulse" style={{ color: project.accent }} />}
           </div>
 
-          <h3 className="text-xl md:text-2xl font-bold mb-1 transition-colors duration-300 text-slate-900 dark:text-slate-100" style={{ color: hovered ? project.accent : undefined }}>
+          <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 flex-1 transition-colors duration-300 text-slate-900 dark:text-slate-100" style={{ color: hovered ? project.accent : undefined }}>
             {project.title}
           </h3>
-
-          <p className="text-[10px] md:text-[11px] font-bold mb-4 uppercase tracking-wide opacity-80" style={{ color: project.accentSecondary }}>
-            {project.tagline}
-          </p>
-
-          <p className="text-sm md:text-[14.5px] leading-relaxed mb-6 md:mb-8 flex-1 text-slate-700 dark:text-slate-300">
-            {project.description}
-          </p>
 
           <div className="flex flex-wrap gap-2 mb-6 md:mb-8">
             {project.tech.map((tag) => (
