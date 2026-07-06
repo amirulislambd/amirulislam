@@ -85,14 +85,6 @@ export default function ContactSection() {
       color: "from-purple-500 to-violet-400",
       shadow: "shadow-purple-500/20",
     },
-    {
-      icon: HiOutlineCalendar,
-      label: "Book a Meeting",
-      value: "Schedule a 30-min chat",
-      link: "https://calendly.com/amirulislambd313/30min", 
-      color: "from-orange-500 to-red-400",
-      shadow: "shadow-orange-500/20",
-    },
   ];
 
   return (
@@ -216,6 +208,35 @@ export default function ContactSection() {
             ))}
           </div>
         </div>
+
+        {/* Full Width Meeting Link */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-10 lg:mt-16 group relative p-1 rounded-[2rem] transition-all duration-500 hover:scale-[1.01]"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/50 to-red-500/50 opacity-0 group-hover:opacity-100 rounded-[2rem] transition-opacity duration-500 blur-[2px]" />
+          <div className="relative p-6 sm:p-10 rounded-[1.9rem] bg-white dark:bg-[#0f172a] border border-slate-100 dark:border-white/5 flex flex-col sm:flex-row items-center gap-6 sm:gap-8 shadow-xl justify-between">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 text-center sm:text-left">
+              <div className="p-4 rounded-2xl text-white bg-gradient-to-br from-orange-500 to-red-400 shadow-orange-500/20 shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6 shrink-0">
+                <HiOutlineCalendar size={32} />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-slate-800 dark:text-white mb-2">Book a Meeting</h3>
+                <p className="text-slate-500 dark:text-slate-400 font-medium">Want to discuss a project in detail? Schedule a 30-min chat directly on my calendar.</p>
+              </div>
+            </div>
+            <a 
+              href="https://calendly.com/amirulislambd313/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 rounded-xl bg-slate-900 dark:bg-white/10 text-white font-bold text-sm uppercase tracking-wider hover:bg-orange-500 transition-colors shrink-0"
+            >
+              Contact Now
+            </a>
+          </div>
+        </motion.div>
+
         <Toaster position="bottom-right" />
       </div>
     </section>
