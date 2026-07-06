@@ -162,13 +162,77 @@ export const PROJECTS_DATA = [
         { title: "Database", desc: "MongoDB Atlas with indexed collections for fast car listing queries, booking conflict detection, and user history retrieval." },
       ],
       keyChallenge: "The most complex part was implementing JWT-based authentication that works seamlessly across Next.js App Router's server components, client components, and the separate Express.js API — all while preventing token leakage and ensuring booking data is always user-scoped.",
-      solution: "Used NextAuth's JWT callback to embed custom claims (userId, role) into the token. The Express API verifies tokens using a JWKS endpoint exposed by NextAuth — creating a stateless, cryptographically secure bridge between the two systems without sharing secrets.",
-      impact: [
+      "solution": "Used NextAuth's JWT callback to embed custom claims (userId, role) into the token. The Express API verifies tokens using a JWKS endpoint exposed by NextAuth — creating a stateless, cryptographically secure bridge between the two systems without sharing secrets.",
+      "impact": [
         "Cinematic hero slider with 60fps Framer Motion transitions elevates perceived quality",
         "Date-range conflict detection prevents double-bookings at the database query level",
         "Stateless JWT auth eliminates session storage overhead and scales horizontally",
-        "Full CRUD admin panel built with React Hook Form for zero-boilerplate form validation",
-      ],
-    },
+        "Full CRUD admin panel built with React Hook Form for zero-boilerplate form validation"
+      ]
+    }
   },
+  {
+    id: "gymvortex",
+    title: "GYMVORTEXT",
+    tagline: "Comprehensive Fitness & Gym Management Platform.",
+    description: "A comprehensive platform built for fitness enthusiasts, professional trainers, and administrators. It provides a seamless experience for discovering and booking fitness classes, participating in community discussions, and managing the entire gym ecosystem.",
+    tech: ["Next.js 15", "Tailwind CSS", "Stripe", "MongoDB", "Better Auth"],
+    liveUrl: "https://gymvortex.vercel.app/",
+    githubUrl: "https://github.com/amirulislambd/GymVortex",
+    category: "Full Stack",
+    image: "/screenshots/gymvortex.png",
+    accent: "#f97316",
+    accentSecondary: "#ea580c",
+    featured: true,
+    challenges: "Building a unified platform with role-based access control for Admins, Trainers, and Members. Integrating Stripe checkout for class bookings and building a complete community forum with pagination and liking systems.",
+    improvements: "Adding real-time chat between trainers and members, and video uploading functionality for fitness tutorials.",
+    caseStudy: {
+      goal: "Create a one-stop fitness hub where members can book classes, trainers can manage their schedule and students, and admins can oversee the entire platform.",
+      architecture: [
+        { title: "Frontend", desc: "Next.js 15 App Router with Framer Motion for animations and Tailwind CSS for styling." },
+        { title: "Authentication", desc: "Better Auth supporting both Email/Password and Google OAuth login with JWT stored in HTTPOnly cookies." },
+        { title: "Payments", desc: "Stripe integration for processing class bookings securely." },
+        { title: "Database", desc: "MongoDB Atlas utilizing $regex search and $in filters for advanced class discovery." }
+      ],
+      keyChallenge: "Handling three distinct user roles (Admin, Trainer, Member) securely within a single application, ensuring users only see relevant dashboard routes and actions.",
+      solution: "Implemented comprehensive Role-Based Access Control (RBAC) at both the routing level (protecting dashboard paths) and API level, driven by robust JWT verification.",
+      impact: [
+        "Streamlined onboarding for trainers with a dedicated application and approval workflow",
+        "Secure, friction-less payment flow with Stripe Checkout",
+        "Engaging community forum that increases user retention and interaction"
+      ]
+    }
+  },
+  {
+    id: "placifydev",
+    title: "Placifydev",
+    tagline: "The Modern Job Hunting Portal.",
+    description: "A full-featured job hunting portal bridging the gap between job seekers and employers. Features role-based dynamic dashboards, subscription-based premium features via Stripe, applicant tracking (ATS), and an advanced management toolkit for platform administrators.",
+    tech: ["Next.js", "Express.js", "MongoDB", "Stripe", "Firebase Auth"],
+    liveUrl: "#",
+    githubUrl: "https://github.com/amirulislambd/placifydev",
+    category: "Full Stack",
+    image: "/screenshots/placifydev.png",
+    accent: "#3b82f6",
+    accentSecondary: "#2563eb",
+    featured: true,
+    challenges: "Developing an Applicant Tracking System (ATS) for recruiters while simultaneously providing a job discovery portal for seekers. Integrating Stripe for recurring prorated subscription billing across multiple tiers.",
+    improvements: "Implementing AI-powered resume parsing and job matching algorithms to connect seekers with the most relevant roles automatically.",
+    caseStudy: {
+      goal: "Streamline job discovery, application management, and company recruitment—all in one unified platform with premium monetization features.",
+      architecture: [
+        { title: "Frontend", desc: "React.js / Next.js with Recharts for visual data analytics and Tailwind CSS." },
+        { title: "Backend", desc: "Node.js & Express.js REST API connected to MongoDB for scalable data storage." },
+        { title: "Authentication", desc: "Firebase Auth integrated with custom JWTs for secure sessions." },
+        { title: "Monetization", desc: "Stripe integration for managing Free, Pro/Growth, and Premium/Enterprise subscription tiers." }
+      ],
+      keyChallenge: "Building a complex state flow for applications (Applied ➡️ Under Review ➡️ Shortlisted ➡️ Offered/Rejected) that updates in real-time across both Seeker and Recruiter dashboards.",
+      solution: "Engineered a robust database schema and API layer that triggers automated email notifications upon status changes, keeping both parties synchronized.",
+      impact: [
+        "Enabled companies to manage entire recruitment pipelines directly on the platform",
+        "Created a new revenue stream through tiered subscription plans via Stripe",
+        "Provided actionable insights to both seekers and recruiters using visual data charts"
+      ]
+    }
+  }
 ];
