@@ -126,7 +126,7 @@ export default function ContactSection() {
           <motion.div 
             initial={{ opacity: 0, x: -30 }} 
             whileInView={{ opacity: 1, x: 0 }} 
-            className="p-8 sm:p-10 rounded-[2.5rem] bg-white dark:bg-[#0f172a] border border-slate-100 dark:border-white/5 shadow-2xl relative overflow-hidden"
+            className="p-6 sm:p-10 rounded-[2rem] bg-white dark:bg-[#0f172a] border border-slate-100 dark:border-white/5 shadow-2xl relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 blur-[80px] rounded-full pointer-events-none" />
             <h3 className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white mb-8">Send me a message</h3>
@@ -194,13 +194,13 @@ export default function ContactSection() {
                 className="group relative p-1 rounded-[2rem] transition-all duration-500 hover:scale-[1.02]"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/50 to-blue-500/50 opacity-0 group-hover:opacity-100 rounded-[2rem] transition-opacity duration-500 blur-[2px]" />
-                <div className="relative p-6 sm:p-8 rounded-[1.9rem] bg-white dark:bg-[#0f172a] border border-slate-100 dark:border-white/5 flex items-center gap-6 shadow-xl">
-                  <div className={`p-4 rounded-2xl text-white bg-gradient-to-br ${method.color} ${method.shadow} shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6 shrink-0`}>
-                    <method.icon size={28} />
+                <div className="relative p-4 sm:p-6 rounded-[1.9rem] bg-white dark:bg-[#0f172a] border border-slate-100 dark:border-white/5 flex items-center gap-4 shadow-xl">
+                  <div className={`p-3 sm:p-4 rounded-2xl text-white bg-gradient-to-br ${method.color} ${method.shadow} shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6 shrink-0`}>
+                    <method.icon size={22} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-1">{method.label}</h3>
-                    <p className="text-slate-500 dark:text-slate-400 font-medium truncate mb-2">{method.value}</p>
+                    <h3 className="text-base sm:text-xl font-bold text-slate-800 dark:text-white mb-1">{method.label}</h3>
+                    <p className="text-slate-500 dark:text-slate-400 font-medium text-sm break-all mb-2">{method.value}</p>
                     <ContactButton link={method.link} />
                   </div>
                 </div>
