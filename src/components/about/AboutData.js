@@ -50,6 +50,12 @@ export const EDUCATION = [
 
 export const EXPERIENCE = [
   {
+    role: "MERN Stack Developer (Intern)",
+    company: "Programming Hero (SCIC)",
+    duration: "2024 — Present",
+    desc: "Working on enterprise-level team projects, participating in code reviews, and building scalable full-stack web applications under tight deadlines."
+  },
+  {
     role: "Full Stack Developer (Freelance)",
     company: "Self-Employed",
     duration: "2023 — Present",
