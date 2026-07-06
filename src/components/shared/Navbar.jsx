@@ -12,10 +12,10 @@ import { HiOutlineSearch } from "react-icons/hi";
 import logo from "@/assets/logo.png";
 
 const NAV_LINKS = [
-  { name: "Home",     href: "/#hero" },
-  { name: "About",    href: "/#about" },
+  { name: "Home", href: "/#hero" },
+  { name: "About", href: "/#about" },
   { name: "Projects", href: "/#projects" },
-  { name: "Contact",  href: "/#contact" },
+  { name: "Contact", href: "/#contact" },
 ];
 
 
@@ -42,8 +42,8 @@ function ThemeToggle() {
         <motion.span
           key={dark ? "moon" : "sun"}
           initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
-          animate={{ rotate: 0,   opacity: 1, scale: 1   }}
-          exit={{    rotate:  90, opacity: 0, scale: 0.5 }}
+          animate={{ rotate: 0, opacity: 1, scale: 1 }}
+          exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
           transition={{ duration: 0.3, ease: "backOut" }}
           className="absolute"
         >
@@ -55,12 +55,12 @@ function ThemeToggle() {
 }
 
 export default function Navbar() {
-  const pathname  = usePathname();
-  const [open, setOpen]       = useState(false);
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
-  
+
   useEffect(() => setMounted(true), []);
   const dark = mounted && resolvedTheme === "dark";
 
@@ -74,9 +74,8 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-500 ${
-        scrolled ? "glass-nav py-2 shadow-lg" : "bg-transparent py-4"
-      }`}
+      className={`sticky top-0 z-50 w-full transition-all duration-500 ${scrolled ? "glass-nav py-2 shadow-lg" : "bg-transparent py-4"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
@@ -116,9 +115,8 @@ export default function Navbar() {
                 <Link
                   key={name}
                   href={href}
-                  className={`relative px-5 py-2 text-sm font-semibold rounded-xl transition-all duration-300 ${
-                    active ? 'text-white' : dark ? 'text-slate-400 hover:text-slate-200' : 'text-slate-600 hover:text-slate-900'
-                  }`}
+                  className={`relative px-5 py-2 text-sm font-semibold rounded-xl transition-all duration-300 ${active ? 'text-white' : dark ? 'text-slate-400 hover:text-slate-200' : 'text-slate-600 hover:text-slate-900'
+                    }`}
                 >
                   <span className="relative z-10">{name}</span>
                   {active && (
@@ -184,11 +182,10 @@ export default function Navbar() {
                   <Link
                     key={name}
                     href={href}
-                    className={`px-6 py-3.5 rounded-2xl text-base font-bold transition-all duration-300 ${
-                      active 
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-500 text-white shadow-lg' 
+                    className={`px-6 py-3.5 rounded-2xl text-base font-bold transition-all duration-300 ${active
+                        ? 'bg-gradient-to-r from-purple-600 to-blue-500 text-white shadow-lg'
                         : 'bg-white/5 text-slate-400'
-                    }`}
+                      }`}
                   >
                     {name}
                   </Link>

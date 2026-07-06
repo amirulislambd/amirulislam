@@ -85,10 +85,10 @@ Any AI assistant can use this document as a master plan to implement these featu
     - `/projects/zapshift` (Logistics Platform)
     - `/projects/veluxora` (Premium Car Rental)
   - Structure each page: **The Goal** ➡️ **Tech Stack & Architecture** ➡️ **Key Challenges** ➡️ **The Solution/Impact**.
-- [ ] **Performance & Accessibility Perfection (Lighthouse 100/100):**
+- [x] **Performance & Accessibility Perfection (Lighthouse 100/100):**
   - Implement strict lazy loading for all images and off-screen components.
   - Ensure 100% ARIA accessibility (screen-reader friendly, keyboard navigable).
-- [ ] **Page Transition Animations:**
+- [x] **Page Transition Animations:**
   - Use `framer-motion` `AnimatePresence` to create smooth, app-like transitions when navigating between Home, About, Projects, and Contact.
 - [x] **Analytics & Visitor Tracking:**
   - Integrate **Vercel Analytics** or **Google Analytics** so you know exactly how many recruiters are visiting, where they click, and how long they stay.
