@@ -7,6 +7,7 @@ import GalaxyBackground from "@/components/GalaxyBackground";
 import FloatingBackground from "@/components/FloatingBackground";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Analytics } from "@vercel/analytics/next";
+import CommandPalette from "@/components/CommandPalette";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -226,6 +227,7 @@ export default function RootLayout({ children }) {
           </main>
           <Footer />
           <ScrollToTop />
+          <CommandPalette />
           <Analytics />
         </NextThemeProvider>
       </body>

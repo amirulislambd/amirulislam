@@ -67,11 +67,11 @@ Any AI assistant can use this document as a master plan to implement these featu
 ## 🚀 Phase 5: Advanced Polish & Developer Experience (DX)
 *Goal: Show off advanced frontend skills.*
 
-- [ ] **Command Palette (⌘K):**
+- [x] **Command Palette (⌘K):**
   - Implement a developer-centric search/navigation menu (like `cmdk`) that opens with `Ctrl+K` / `Cmd+K`, allowing quick jumps to Projects, Contact, or Resume.
-- [ ] **Theme Persistence:**
+- [x] **Theme Persistence:**
   - Ensure Dark/Light mode preferences are properly saved in `localStorage` and don't flicker on reload.
-- [ ] **Printable Resume:**
+- [x] **Printable Resume:**
   - Ensure the `/assets/Amirul_Islam_Resume.pdf` is updated and highly professional. Add an HTML version of the resume that looks good when printed directly from the browser.
 
 ---
