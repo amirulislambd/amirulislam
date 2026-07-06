@@ -8,6 +8,7 @@ import Link from "next/link";
 import { HiArrowDown } from "react-icons/hi";
 import { HiOutlineDocumentArrowDown } from "react-icons/hi2";
 import heroPng from '@/assets/amirulIslam.png'
+import { TypeAnimation } from 'react-type-animation';
 
 const ORBS = [
   { size: 420, x: "-10%", y: "-15%", delay: 0 },
@@ -196,8 +197,22 @@ export default function Hero() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">
               Amirul Islam
             </span>
-            <span className="animated-gradient-text block text-xl sm:text-4xl mt-2 sm:mt-3 tracking-wide">
-              Full Stack Web Developer
+            <span className="animated-gradient-text block text-xl sm:text-4xl mt-2 sm:mt-3 tracking-wide h-[30px] sm:h-[48px]">
+              <TypeAnimation
+                sequence={[
+                  'Full Stack Developer',
+                  1500,
+                  'MERN Stack Expert',
+                  1500,
+                  'Next.js Specialist',
+                  1500,
+                  'Software Engineer',
+                  1500
+                ]}
+                wrapper="span"
+                speed={50}
+                repeat={Infinity}
+              />
             </span>
           </motion.h1>
 

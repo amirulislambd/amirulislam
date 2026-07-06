@@ -91,9 +91,20 @@ export default function Navbar() {
             >
               <Image src={logo} alt="Amirul Islam" width={40} height={40} className="w-full h-full object-cover" />
             </motion.div>
-            <span className={`hidden sm:block text-lg font-bold tracking-tight transition-colors duration-300 ${dark ? 'text-white' : 'text-slate-900'}`}>
-              Amirul <span className="text-purple-500">Islam</span>
-            </span>
+            <div className="flex flex-col">
+              <span className={`hidden sm:block text-lg font-bold tracking-tight leading-none transition-colors duration-300 ${dark ? 'text-white' : 'text-slate-900'}`}>
+                Amirul <span className="text-purple-500">Islam</span>
+              </span>
+              <div className="hidden sm:flex items-center gap-1.5 mt-1">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span className="text-[9px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+                  Available for hire
+                </span>
+              </div>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

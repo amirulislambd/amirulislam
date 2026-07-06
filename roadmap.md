@@ -25,14 +25,14 @@ Any AI assistant can use this document as a master plan to implement these featu
 ## 🎨 Phase 2: Visual & UX Enhancements
 *Goal: Make the site instantly appealing and easier to navigate for recruiters.*
 
-- [ ] **Add "Open to Work" Badge:**
+- [x] **Add "Open to Work" Badge:**
   - Add a pulsing green badge in the Navbar or Hero section indicating availability for hire.
-- [ ] **Dynamic Hero Section:**
+- [x] **Dynamic Hero Section:**
   - Add a typing animation (e.g., using `react-type-animation`) for the roles: "Full Stack Developer | Next.js Expert | MERN Specialist".
   - Replace the repeated `hero.png` in the About section with a different, professional photo, or keep it distinct from the Hero section.
-- [ ] **Visual Project Previews (CRITICAL):**
+- [x] **Visual Project Previews (CRITICAL):**
   - Add high-quality screenshots/mockups for every project in the `ProjectCard`. Recruiters need to *see* the work immediately without clicking links.
-- [ ] **Custom Cursor & Interactions (Bonus):**
+- [x] **Custom Cursor & Interactions (Bonus):**
   - Implement a subtle custom cursor (e.g., a glowing dot) that expands when hovering over clickable elements.
 
 ---

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { HiExternalLink, HiCode, HiStar } from "react-icons/hi";
 
 export default function ProjectCard({ project, index }) {
@@ -23,10 +24,22 @@ export default function ProjectCard({ project, index }) {
         }}
       >
         <span
-          className="absolute top-2 right-4 md:top-4 md:right-6 text-5xl md:text-7xl font-black leading-none select-none opacity-50 md:opacity-100 text-purple-500/10 dark:text-white/10"
+          className="absolute top-2 right-4 md:top-4 md:right-6 text-5xl md:text-7xl font-black leading-none select-none opacity-50 md:opacity-100 text-purple-500/10 dark:text-white/10 z-20"
         >
           {String(index + 1).padStart(2, "0")}
         </span>
+
+        {project.image && (
+          <div className="relative w-full h-48 md:h-56 overflow-hidden shrink-0 border-b border-purple-500/10 dark:border-white/10">
+            <div className="absolute inset-0 bg-gradient-to-t from-white/90 dark:from-[#0b1326] via-transparent to-transparent z-10 opacity-90" />
+            <Image 
+              src={project.image} 
+              alt={project.title} 
+              fill 
+              className="object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+        )}
 
         <div className="p-6 md:p-8 flex flex-col flex-1 relative z-10">
           <div className="flex items-start justify-between mb-4 md:mb-5">
