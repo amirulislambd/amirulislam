@@ -18,7 +18,6 @@ const NAV_LINKS = [
   { name: "Contact", href: "/#contact" },
 ];
 
-
 function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -37,7 +36,7 @@ function ThemeToggle() {
         color: dark ? "#a78bfa" : "#7c4dff",
       }}
     >
-      <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-linear-to-tr from-purple-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={dark ? "moon" : "sun"}
@@ -59,6 +58,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [clickedLink, setClickedLink] = useState("/#hero");
   const { resolvedTheme } = useTheme();
 
   useEffect(() => setMounted(true), []);
@@ -74,25 +74,34 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-500 ${scrolled ? "glass-nav py-2 shadow-lg" : "bg-transparent py-4"
-        }`}
+      className={`sticky top-0 z-50 w-full transition-all duration-500 ${
+        scrolled ? "glass-nav py-2 shadow-lg" : "bg-transparent py-4"
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
-
-          {/* Logo Section - Full Name Restored */}
           <Link href="/" className="flex items-center gap-3 shrink-0 group">
             <motion.div
               whileHover={{ scale: 1.1, rotate: 5 }}
               className="w-10 h-10 rounded-xl overflow-hidden border-2 shadow-[0_0_15px_rgba(124,77,255,0.3)] transition-all duration-300"
               style={{
-                borderColor: dark ? "rgba(167,139,250,0.4)" : "rgba(124,77,255,0.3)",
+                borderColor: dark
+                  ? "rgba(167,139,250,0.4)"
+                  : "rgba(124,77,255,0.3)",
               }}
             >
-              <Image src={logo} alt="Amirul Islam" width={40} height={40} className="w-full h-full object-cover" />
+              <Image
+                src={logo}
+                alt="Amirul Islam"
+                width={40}
+                height={40}
+                className="w-full h-full object-cover"
+              />
             </motion.div>
             <div className="flex flex-col">
-              <span className={`hidden sm:block text-lg font-bold tracking-tight leading-none transition-colors duration-300 ${dark ? 'text-white' : 'text-slate-900'}`}>
+              <span
+                className={`hidden sm:block text-lg font-bold tracking-tight leading-none transition-colors duration-300 ${dark ? "text-white" : "text-slate-900"}`}
+              >
                 Amirul <span className="text-purple-500">Islam</span>
               </span>
               <div className="hidden sm:flex items-center gap-1.5 mt-1">
@@ -107,43 +116,60 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-2 p-1 rounded-2xl bg-white/5 dark:bg-black/10 backdrop-blur-md border border-white/10 shadow-inner">
             {NAV_LINKS.map(({ name, href }) => {
-              const active = pathname === href;
+              const active = clickedLink === href;
               return (
                 <Link
                   key={name}
                   href={href}
-                  className={`relative px-5 py-2 text-sm font-semibold rounded-xl transition-all duration-300 ${active ? 'text-white' : dark ? 'text-slate-400 hover:text-slate-200' : 'text-slate-600 hover:text-slate-900'
-                    }`}
+                  onClick={() => setClickedLink(href)}
+                  className={`group relative px-5 py-2 text-sm font-semibold rounded-xl transition-all duration-300 ${
+                    dark
+                      ? "text-slate-400 hover:text-slate-200"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
                 >
                   <span className="relative z-10">{name}</span>
-                  {active && (
-                    <motion.span
-                      layoutId="nav-glow"
-                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-600 to-blue-500 shadow-[0_0_15px_rgba(124,77,255,0.4)]"
-                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                    />
-                  )}
+                  <span
+                    className={`absolute bottom-1 left-1/2 h-0.5 rounded-full bg-linear-to-r from-purple-500 to-blue-500 transition-all duration-300 ${
+                      active
+                        ? "w-4/5 -translate-x-1/2"
+                        : "w-0 -translate-x-1/2 group-hover:w-4/5"
+                    }`}
+                  />
                 </Link>
               );
             })}
           </nav>
 
           <div className="flex items-center gap-3">
-            {/* ⌘K Search Button — desktop only */}
             <button
               aria-label="Open command palette"
-              onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true, bubbles: true }))}
+              onClick={() =>
+                window.dispatchEvent(
+                  new KeyboardEvent("keydown", {
+                    key: "k",
+                    ctrlKey: true,
+                    bubbles: true,
+                  }),
+                )
+              }
               className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium border transition-all duration-300 hover:border-purple-500/50 hover:text-purple-500 group"
               style={{
-                background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)",
-                borderColor: dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)",
+                background: dark
+                  ? "rgba(255,255,255,0.04)"
+                  : "rgba(0,0,0,0.04)",
+                borderColor: dark
+                  ? "rgba(255,255,255,0.1)"
+                  : "rgba(0,0,0,0.08)",
                 color: dark ? "#94a3b8" : "#64748b",
               }}
             >
-              <HiOutlineSearch size={15} className="group-hover:text-purple-500 transition-colors" />
+              <HiOutlineSearch
+                size={15}
+                className="group-hover:text-purple-500 transition-colors"
+              />
               <span>Search</span>
               <span className="flex items-center gap-0.5 ml-1">
                 <kbd className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-white/10 dark:bg-white/10 border border-white/10">
@@ -177,15 +203,20 @@ export default function Navbar() {
           >
             <nav className="flex flex-col gap-2">
               {NAV_LINKS.map(({ name, href }) => {
-                const active = pathname === href;
+                const active = clickedLink === href;
                 return (
                   <Link
                     key={name}
                     href={href}
-                    className={`px-6 py-3.5 rounded-2xl text-base font-bold transition-all duration-300 ${active
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-500 text-white shadow-lg'
-                        : 'bg-white/5 text-slate-400'
-                      }`}
+                    onClick={() => {
+                      setClickedLink(href);
+                      setOpen(false);
+                    }}
+                    className={`px-6 py-3.5 rounded-2xl text-base font-bold transition-all duration-300 ${
+                      active
+                        ? "bg-linear-to-r from-purple-600 to-blue-500 text-white shadow-lg"
+                        : "bg-white/5 text-slate-400"
+                    }`}
                   >
                     {name}
                   </Link>
