@@ -226,11 +226,12 @@ export default function AboutPage() {
             <div className="space-y-8">
               {EDUCATION.map((edu, idx) => (
                 <div key={idx} className="group relative flex gap-6 h-full">
-                  <div className="flex flex-col items-center">
-                    <div className="w-4 h-4 rounded-full bg-purple-500 shadow-[0_0_15px_#a855f7] z-10" />
-                    <div className="w-0.5 h-full bg-gradient-to-b from-purple-500/30 to-transparent -mt-1" />
+                  <div className="flex flex-col items-center mt-2">
+                    <div className="w-4 h-4 rounded-full bg-purple-500 shadow-[0_0_15px_#a855f7] z-10 shrink-0" />
+                    {idx !== EDUCATION.length - 1 && <div className="w-0.5 h-full bg-purple-500/20 -mt-2" />}
+                    {idx === EDUCATION.length - 1 && <div className="w-0.5 h-full bg-gradient-to-b from-purple-500/20 to-transparent -mt-2" />}
                   </div>
-                  <div className="flex-1 pb-4">
+                  <div className="flex-1 pb-8">
                     <div className="h-full p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-white/[0.02] backdrop-blur-sm transition-all duration-500 group-hover:translate-x-2 group-hover:bg-white dark:group-hover:bg-white/[0.05] group-hover:shadow-2xl flex flex-col">
                       <span className="inline-block w-fit px-3 py-1 rounded-full bg-purple-500/10 text-purple-500 text-[10px] font-black uppercase tracking-widest mb-4">
                         {edu.duration}
@@ -239,8 +240,8 @@ export default function AboutPage() {
                       <p className="text-slate-500 dark:text-slate-400 font-medium text-sm mb-4 leading-relaxed">{edu.institution}</p>
                       <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6 flex-grow">{edu.desc}</p>
                       {edu.result && (
-                        <div className="mt-auto inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-bold text-[10px] uppercase w-fit">
-                           Achievement: {edu.result}
+                        <div className="mt-auto inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-bold text-[11px] w-fit max-w-full">
+                           <span className="truncate whitespace-normal leading-tight">{edu.result}</span>
                         </div>
                       )}
                     </div>
@@ -261,11 +262,12 @@ export default function AboutPage() {
             <div className="space-y-8">
               {EXPERIENCE.map((exp, idx) => (
                 <div key={idx} className="group relative flex gap-6 h-full">
-                  <div className="flex flex-col items-center">
-                    <div className="w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_#3b82f6] z-10" />
-                    <div className="w-0.5 h-full bg-gradient-to-b from-blue-500/30 to-transparent -mt-1" />
+                  <div className="flex flex-col items-center mt-2">
+                    <div className="w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_#3b82f6] z-10 shrink-0" />
+                    {idx !== EXPERIENCE.length - 1 && <div className="w-0.5 h-full bg-blue-500/20 -mt-2" />}
+                    {idx === EXPERIENCE.length - 1 && <div className="w-0.5 h-full bg-gradient-to-b from-blue-500/20 to-transparent -mt-2" />}
                   </div>
-                  <div className="flex-1 pb-4">
+                  <div className="flex-1 pb-8">
                     <div className="h-full p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-white/[0.02] backdrop-blur-sm transition-all duration-500 group-hover:translate-x-2 group-hover:bg-white dark:group-hover:bg-white/[0.05] group-hover:shadow-2xl flex flex-col">
                       <span className="inline-block w-fit px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-[10px] font-black uppercase tracking-widest mb-4">
                         {exp.duration}
