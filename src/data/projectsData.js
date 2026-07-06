@@ -209,7 +209,7 @@ export const PROJECTS_DATA = [
     tagline: "The Modern Job Hunting Portal.",
     description: "A full-featured job hunting portal bridging the gap between job seekers and employers. Features role-based dynamic dashboards, subscription-based premium features via Stripe, applicant tracking (ATS), and an advanced management toolkit for platform administrators.",
     tech: ["Next.js", "Express.js", "MongoDB", "Stripe", "Firebase Auth"],
-    liveUrl: "#",
+    liveUrl: "https://placifydev.vercel.app/",
     githubUrl: "https://github.com/amirulislambd/placifydev",
     category: "Full Stack",
     image: "/screenshots/placifydev.png",
