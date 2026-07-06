@@ -25,6 +25,13 @@ export const SKILLS = {
 
 export const EDUCATION = [
   {
+    degree: "Advanced Full Stack Web Development (MERN)",
+    institution: "Programming Hero (Batch 13 & SCIC)",
+    duration: "2023 — 2024",
+    result: "Top Performer (Selected for SCIC)",
+    desc: "Completed an intensive web development program. Currently selected for SCIC (Super Charged Intern Club), working on industry-standard, complex full-stack projects and advanced problem-solving."
+  },
+  {
     degree: "Dawra-e-Hadith (Masters in Islamic Studies)",
     institution: "Jamia Arabia Ashraful Uloom, Dhaka",
     duration: "2023 — 2024",
