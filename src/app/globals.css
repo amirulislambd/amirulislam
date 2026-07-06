@@ -101,9 +101,20 @@ html:not(.dark) .bg-gradient-layer {
 /* ═══════════════════════════════════════════════════════
    COMPONENTS (Navbar, Scrollbar, etc.)
 ═══════════════════════════════════════════════════════ */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 999px; }
+
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
 
 .glass-nav {
   background: var(--navbar-bg);

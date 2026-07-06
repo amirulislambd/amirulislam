@@ -45,7 +45,7 @@ Any AI assistant can use this document as a master plan to implement these featu
   - **Integration:** Use **EmailJS** or **Web3Forms** to send the form data directly to your email (`amirulislambd313@gmail.com`) without needing a backend.
 - [x] **Instant Notifications:**
   - Set up email alerts so that the moment someone submits the form, you get an immediate email notification on your phone.
-- [ ] **Direct Meeting Link:**
+- [x] **Direct Meeting Link:**
   - Add a "Book a Meeting" button integrated with **Calendly**, allowing recruiters to schedule a quick 15-min chat directly.
 
 ---
@@ -55,11 +55,11 @@ Any AI assistant can use this document as a master plan to implement these featu
 
 - [x] **GitHub Contribution Heatmap:**
   - Fetch and display your real-time GitHub contribution graph (using GitHub API or `react-github-calendar`).
-- [ ] **Professional Experience Section:**
+- [x] **Professional Experience Section:**
   - Update the "Self-Employed" and "GitHub Community" experiences with more descriptive, professional titles (e.g., "Freelance Full Stack Developer", "Open Source Engineer"). Add specific achievements (e.g., "Optimized load time by 40%").
-- [ ] **Testimonials/Recommendations:**
+- [x] **Testimonials/Recommendations:**
   - Add a section for quotes from previous clients, peers, or mentors to build trust.
-- [ ] **Tech Proficiency Visuals:**
+- [x] **Tech Proficiency Visuals:**
   - Enhance the Skills section with visual proficiency indicators (e.g., progress bars or circular rings for React, Node, etc.).
 
 ---

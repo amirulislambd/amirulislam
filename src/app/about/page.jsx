@@ -1,7 +1,7 @@
 import AboutClient from "@/components/about/AboutClient";
 import GitHubHeatmap from "@/components/about/GitHubHeatmap";
 import Image from "next/image";
-import { SKILLS, STATS, EDUCATION, EXPERIENCE } from "@/components/about/AboutData";
+import { SKILLS, STATS, EDUCATION, EXPERIENCE, TESTIMONIALS } from "@/components/about/AboutData";
 import {
   HiOutlineCode,
   HiOutlineLightningBolt,
@@ -203,9 +203,16 @@ export default function AboutPage() {
                         <tech.icon 
                           size={32} 
                           style={{ color: tech.color !== "inherit" ? tech.color : undefined }} 
-                          className={`transition-transform duration-500 group-hover/item:scale-125 group-hover/item:rotate-6 ${tech.color === "inherit" ? "text-slate-900 dark:text-white" : ""}`} 
+                          className={`transition-transform duration-500 group-hover/item:scale-110 group-hover/item:-translate-y-1 ${tech.color === "inherit" ? "text-slate-900 dark:text-white" : ""}`} 
                         />
                         <span className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">{tech.name}</span>
+                        {/* Progress Bar */}
+                        <div className="w-full h-1.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden mt-1">
+                          <div 
+                            style={{ width: `${tech.level}%` }}
+                            className="h-full rounded-full bg-gradient-to-r from-purple-500 to-blue-500 relative transition-all duration-1000 ease-out"
+                          />
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -308,6 +315,39 @@ export default function AboutPage() {
                 <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
                   {item.desc}
                 </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Testimonials / Recommendations */}
+        <div className="mb-20">
+          <div className="flex flex-col items-center text-center mb-16">
+            <h3 className="text-4xl sm:text-5xl font-black mb-4 text-slate-900 dark:text-white">Recommendations</h3>
+            <div className="w-24 h-1.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mb-4" />
+            <p className="text-slate-500 dark:text-slate-400 font-medium max-w-2xl">What people say about my work and work ethic.</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {TESTIMONIALS.map((testi, idx) => (
+              <div 
+                key={idx}
+                className="relative p-8 rounded-[2rem] border border-slate-200 dark:border-white/10 bg-white/50 dark:bg-white/[0.02] backdrop-blur-xl hover:-translate-y-2 hover:shadow-2xl transition-all duration-500"
+              >
+                <div className="text-4xl text-purple-500/20 absolute top-6 right-8 font-serif">&quot;</div>
+                <p className="text-lg text-slate-600 dark:text-slate-300 italic mb-8 relative z-10 leading-relaxed">
+                  &quot;{testi.text}&quot;
+                </p>
+                <div className="flex items-center gap-4">
+                  {/* Avatar fallback if Image not working perfectly without proper domains */}
+                  <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-purple-500/50 bg-slate-200 dark:bg-white/10 shrink-0">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={testi.avatar} alt={testi.name} className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 dark:text-white">{testi.name}</h4>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">{testi.role}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

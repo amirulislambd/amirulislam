@@ -10,9 +10,22 @@ import { FaGithub } from "react-icons/fa";
 export default function GitHubHeatmap() {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [blockSize, setBlockSize] = useState(14);
 
   useEffect(() => {
     setMounted(true);
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setBlockSize(10);
+      } else if (window.innerWidth < 1024) {
+        setBlockSize(12);
+      } else {
+        setBlockSize(14);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const isDark = mounted && resolvedTheme === "dark";
@@ -62,21 +75,23 @@ export default function GitHubHeatmap() {
 
         {/* Calendar */}
         {mounted && (
-          <div className="overflow-x-auto pb-2">
+          <div className="overflow-x-auto pb-6 custom-scrollbar">
+            <div className="min-w-max">
             <GitHubCalendar
               username="amirulislambd"
               colorScheme={isDark ? "dark" : "light"}
               theme={customTheme}
-              blockSize={14}
+              blockSize={blockSize}
               blockMargin={4}
               fontSize={12}
               style={{ fontFamily: "inherit" }}
             />
           </div>
+          </div>
         )}
 
         {/* Stats Row */}
-        <div className="grid grid-cols-3 gap-4 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
           {[
             { label: "Public Repos", value: "10+", color: "text-purple-500" },
             { label: "Contributions", value: "200+", color: "text-blue-500" },
