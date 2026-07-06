@@ -13,7 +13,7 @@ export default function ProjectCard({ project, index }) {
 
   return (
     <div
-      className="relative h-[480px] md:h-[520px] w-full group"
+      className="relative h-full w-full group"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -56,12 +56,17 @@ export default function ProjectCard({ project, index }) {
             {project.title}
           </h3>
 
-          <div className="flex flex-wrap gap-2 mb-6 md:mb-8">
-            {project.tech.map((tag) => (
-              <span key={tag} className="rounded-md md:rounded-lg px-2.5 py-1 text-[10px] md:text-[11px] font-bold border bg-purple-500/10 dark:bg-white/10 border-purple-500/20 dark:border-white/10 text-purple-700 dark:text-purple-200">
+          <div className="flex flex-wrap gap-2 mb-6 md:mb-8 h-6 sm:h-7 overflow-hidden">
+            {project.tech.slice(0, 3).map((tag) => (
+              <span key={tag} className="rounded-md md:rounded-lg px-2.5 py-1 text-[10px] md:text-[11px] font-bold border bg-purple-500/10 dark:bg-white/10 border-purple-500/20 dark:border-white/10 text-purple-700 dark:text-purple-200 whitespace-nowrap">
                 {tag}
               </span>
             ))}
+            {project.tech.length > 3 && (
+              <span className="rounded-md md:rounded-lg px-2 py-1 text-[10px] md:text-[11px] font-bold text-slate-500 dark:text-slate-400">
+                +{project.tech.length - 3}
+              </span>
+            )}
           </div>
 
           <div className="mb-5 h-px w-full opacity-20" style={{ background: project.accent }} />
