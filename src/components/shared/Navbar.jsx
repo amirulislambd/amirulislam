@@ -8,6 +8,7 @@ import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
 import { RiMenuFold2Fill, RiMenuUnfold2Line } from "react-icons/ri";
 import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi2";
+import { HiOutlineSearch } from "react-icons/hi";
 import logo from "@/assets/logo.png";
 
 const NAV_LINKS = [
@@ -133,6 +134,28 @@ export default function Navbar() {
           </nav>
 
           <div className="flex items-center gap-3">
+            {/* ⌘K Search Button — desktop only */}
+            <button
+              aria-label="Open command palette"
+              onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true, bubbles: true }))}
+              className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium border transition-all duration-300 hover:border-purple-500/50 hover:text-purple-500 group"
+              style={{
+                background: dark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.04)",
+                borderColor: dark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)",
+                color: dark ? "#94a3b8" : "#64748b",
+              }}
+            >
+              <HiOutlineSearch size={15} className="group-hover:text-purple-500 transition-colors" />
+              <span>Search</span>
+              <span className="flex items-center gap-0.5 ml-1">
+                <kbd className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-white/10 dark:bg-white/10 border border-white/10">
+                  Ctrl
+                </kbd>
+                <kbd className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-white/10 dark:bg-white/10 border border-white/10">
+                  K
+                </kbd>
+              </span>
+            </button>
             <ThemeToggle />
             <button
               aria-label="Toggle menu"
