@@ -6,6 +6,7 @@ import NextThemeProvider from "@/components/provider/Provider";
 import GalaxyBackground from "@/components/GalaxyBackground";
 import FloatingBackground from "@/components/FloatingBackground";
 import ScrollToTop from "@/components/ScrollToTop";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -225,6 +226,7 @@ export default function RootLayout({ children }) {
           </main>
           <Footer />
           <ScrollToTop />
+          <Analytics />
         </NextThemeProvider>
       </body>
     </html>

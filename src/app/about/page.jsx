@@ -1,4 +1,5 @@
 import AboutClient from "@/components/about/AboutClient";
+import GitHubHeatmap from "@/components/about/GitHubHeatmap";
 import Image from "next/image";
 import { SKILLS, STATS, EDUCATION, EXPERIENCE } from "@/components/about/AboutData";
 import {
@@ -311,6 +312,12 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
+
+        {/* GitHub Heatmap */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-20">
+          <GitHubHeatmap />
+        </div>
+
       </div>
     </AboutClient>
   );

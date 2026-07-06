@@ -53,7 +53,7 @@ Any AI assistant can use this document as a master plan to implement these featu
 ## 🛠 Phase 4: Credibility & "Wow" Features
 *Goal: Prove your skills beyond just words.*
 
-- [ ] **GitHub Contribution Heatmap:**
+- [x] **GitHub Contribution Heatmap:**
   - Fetch and display your real-time GitHub contribution graph (using GitHub API or `react-github-calendar`).
 - [ ] **Professional Experience Section:**
   - Update the "Self-Employed" and "GitHub Community" experiences with more descriptive, professional titles (e.g., "Freelance Full Stack Developer", "Open Source Engineer"). Add specific achievements (e.g., "Optimized load time by 40%").
@@ -79,18 +79,18 @@ Any AI assistant can use this document as a master plan to implement these featu
 ## 🏆 Phase 6: Enterprise & "Top 1%" Pro-Level Features
 *Goal: Elevate the portfolio from "good" to an elite, world-class standard.*
 
-- [ ] **Interactive Case Studies (Dedicated Pages):**
+- [x] **Interactive Case Studies (Dedicated Pages):**
   - Create dedicated case study pages for the top 3 projects: 
-    - `/projects/gymvortex` (Fitness & Gym Management)
-    - `/projects/placifydev` (Job Hunting Portal)
+    - `/projects/mangobooks` (Digital Library)
+    - `/projects/zapshift` (Logistics Platform)
     - `/projects/veluxora` (Premium Car Rental)
-  - Structure each page: **The Goal** ➡️ **Tech Stack & Architecture** ➡️ **Key Challenges** ➡️ **The Solution/Impact**. This shows recruiters how you *think* and solve problems.
+  - Structure each page: **The Goal** ➡️ **Tech Stack & Architecture** ➡️ **Key Challenges** ➡️ **The Solution/Impact**.
 - [ ] **Performance & Accessibility Perfection (Lighthouse 100/100):**
   - Implement strict lazy loading for all images and off-screen components.
   - Ensure 100% ARIA accessibility (screen-reader friendly, keyboard navigable).
 - [ ] **Page Transition Animations:**
   - Use `framer-motion` `AnimatePresence` to create smooth, app-like transitions when navigating between Home, About, Projects, and Contact.
-- [ ] **Analytics & Visitor Tracking:**
+- [x] **Analytics & Visitor Tracking:**
   - Integrate **Vercel Analytics** or **Google Analytics** so you know exactly how many recruiters are visiting, where they click, and how long they stay.
 
 ---
