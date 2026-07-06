@@ -30,6 +30,8 @@ export default function ContactSection() {
     const formData = new FormData(e.target);
     // Note to User: Replace this with your actual Web3Forms access key
     formData.append("access_key", "YOUR_ACCESS_KEY_HERE"); 
+    formData.append("subject", "New message from Portfolio!");
+    formData.append("from_name", "Amirul Islam Portfolio");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -126,6 +128,9 @@ export default function ContactSection() {
             <h3 className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white mb-8">Send me a message</h3>
             
             <form onSubmit={onSubmit} className="space-y-6 relative z-10">
+              {/* Spam Protection */}
+              <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+              
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-semibold text-slate-600 dark:text-slate-300 ml-1">Your Name</label>
                 <input 

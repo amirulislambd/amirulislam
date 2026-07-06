@@ -6,7 +6,6 @@ import NextThemeProvider from "@/components/provider/Provider";
 import GalaxyBackground from "@/components/GalaxyBackground";
 import FloatingBackground from "@/components/FloatingBackground";
 import ScrollToTop from "@/components/ScrollToTop";
-import CustomCursor from "@/components/shared/CustomCursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -217,7 +216,6 @@ export default function RootLayout({ children }) {
       </head>
       <body className="min-h-full flex flex-col relative bg-white dark:bg-[#020617] transition-all duration-300">
         <NextThemeProvider>
-          <CustomCursor />
           <GalaxyBackground />
           <FloatingBackground />
 
