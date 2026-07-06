@@ -40,10 +40,10 @@ Any AI assistant can use this document as a master plan to implement these featu
 ## 💬 Phase 3: Communication & Conversion (Contact System)
 *Goal: Make it ridiculously easy for recruiters to contact you and ensure you get notified instantly.*
 
-- [ ] **Working Contact Form:**
+- [x] **Working Contact Form:**
   - Replace the static contact buttons with a functional Contact Form (Name, Email, Message).
   - **Integration:** Use **EmailJS** or **Web3Forms** to send the form data directly to your email (`amirulislambd313@gmail.com`) without needing a backend.
-- [ ] **Instant Notifications:**
+- [x] **Instant Notifications:**
   - Set up email alerts so that the moment someone submits the form, you get an immediate email notification on your phone.
 - [ ] **Direct Meeting Link:**
   - Add a "Book a Meeting" button integrated with **Calendly**, allowing recruiters to schedule a quick 15-min chat directly.
