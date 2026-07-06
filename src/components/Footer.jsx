@@ -20,7 +20,7 @@ export default function Footer() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-10 md:mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-10 md:mb-16">
           
           <div className="col-span-1 md:col-span-1">
             <Link href="/" className="inline-flex items-center gap-2 mb-4 md:mb-6 group">
@@ -68,20 +68,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="col-span-1 hidden md:block">
-            <h4 className="text-white font-bold mb-4 md:mb-6 uppercase tracking-widest text-[10px] md:text-xs">Newsletter</h4>
-            <p className="text-slate-400 text-xs md:text-sm mb-4 md:mb-6">Stay updated with my latest projects and tech insights.</p>
-            <form className="relative group" onSubmit={(e) => e.preventDefault()}>
-              <input 
-                type="email" 
-                placeholder="Email Address"
-                className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 md:py-3 px-4 text-xs md:text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-purple-500/50 transition-all"
-              />
-              <button className="absolute right-2 top-1.5 bg-purple-600 hover:bg-purple-500 text-white px-3 py-1 md:px-4 md:py-1.5 rounded-lg text-[10px] md:text-xs font-bold transition-all">
-                Join
-              </button>
-            </form>
-          </div>
+
         </div>
 
 
@@ -90,8 +77,7 @@ export default function Footer() {
             © {currentYear} Amirul Islam. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-xs text-slate-500">
-            <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
+            <span className="hover:text-white transition-colors">Made with ❤️ in Bangladesh</span>
           </div>
         </div>
       </div>

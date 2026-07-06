@@ -6,11 +6,36 @@ import { HiOutlineMail } from "react-icons/hi";
 import { SiLeetcode } from "react-icons/si";
 
 const SOCIALS = [
-  { label: "GitHub",   href: "https://github.com/amirulislambd",    Icon: FaGithub,   color: "#333" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/amirulislambd", Icon: FaLinkedin, color: "#0077b5" },
-  { label: "Twitter",  href: "https://twitter.com/amirulislambd",  Icon: FaTwitter,  color: "#1da1f2" },
-  { label: "Facebook", href: "https://facebook.com/amirulislambd",   Icon: FaFacebook, color: "#1877f2" },
-  { label: "Email",    href: "mailto:amirulislambd313@gmail.com",    Icon: HiOutlineMail, color: "#ea4335" },
+  {
+    label: "GitHub",
+    href: "https://github.com/amirulislambd",
+    Icon: FaGithub,
+    color: "#333",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/m-amirulislam",
+    Icon: FaLinkedin,
+    color: "#0077b5",
+  },
+  {
+    label: "Twitter",
+    href: "https://x.com/amirislambd313",
+    Icon: FaTwitter,
+    color: "#1da1f2",
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61583826647447",
+    Icon: FaFacebook,
+    color: "#1877f2",
+  },
+  {
+    label: "Email",
+    href: "mailto:amirulislambd313@gmail.com",
+    Icon: HiOutlineMail,
+    color: "#ea4335",
+  },
 ];
 
 

@@ -17,6 +17,53 @@ import {
 
 import heroPng from '@/assets/hero.png'
 
+export const metadata = {
+  title: "About Amirul Islam | Full Stack Developer — Skills, Education & Experience",
+  description:
+    "Learn about Amirul Islam — a Full Stack Web Developer from Dhaka, Bangladesh. Proficient in React, Next.js, Node.js, MongoDB, and Flutter. View skills, education, and work experience.",
+  alternates: {
+    canonical: "https://amirulislam.vercel.app/about",
+  },
+  keywords: [
+    "about Amirul Islam",
+    "Amirul Islam skills",
+    "Amirul Islam experience",
+    "Amirul Islam education",
+    "full stack developer skills Bangladesh",
+    "MERN stack developer skills",
+    "React developer Dhaka",
+    "Next.js developer experience",
+    "web developer portfolio Bangladesh",
+    "Amirul Islam background",
+  ],
+  openGraph: {
+    title: "About Amirul Islam | Full Stack Developer",
+    description:
+      "Full Stack Web Developer from Dhaka, Bangladesh. Expert in MERN Stack, Next.js, and Flutter. View skills, experience & education.",
+    url: "https://amirulislam.vercel.app/about",
+    siteName: "Amirul Islam — Full Stack Developer",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "About Amirul Islam — Full Stack Web Developer",
+      },
+    ],
+    locale: "en_US",
+    type: "profile",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Amirul Islam | Full Stack Developer",
+    description:
+      "MERN & Next.js expert from Dhaka, Bangladesh. View skills, experience & education.",
+    creator: "@amirulislambd",
+    images: ["/og-image.jpg"],
+  },
+};
+
+
 const WHAT_I_DO = [
   {
     icon: HiOutlineCode,
@@ -34,8 +81,8 @@ const WHAT_I_DO = [
   },
   {
     icon: HiOutlineAcademicCap,
-    title: "Islamic Scholar",
-    desc: "Merging classical wisdom with modern technology.",
+    title: "Analytical Thinker",
+    desc: "Leveraging structured logic and deep research skills to solve complex engineering problems.",
     color: "from-emerald-500/20 to-teal-500/20",
     iconColor: "text-emerald-500"
   },
@@ -94,7 +141,7 @@ export default function AboutPage() {
                 My programming journey started with a deep curiosity for how the internet works. What began as a hobby soon turned into a passion for building <span className="text-purple-500 font-bold underline decoration-purple-500/30 underline-offset-8">full-stack applications</span> that solve real-world problems.
               </p>
               <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
-                Outside of the digital world, I am a dedicated student of <span className="text-blue-500 font-bold">Islamic Sciences</span>. I find that the discipline required for scholarly research perfectly complements the logical thinking needed for software engineering.
+                My background in <span className="text-blue-500 font-bold">advanced academic studies</span> has given me a unique perspective on learning. The discipline, deep research methodology, and logical deduction required in classical studies perfectly complement the analytical thinking needed for software engineering.
               </p>
             </div>
 

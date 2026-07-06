@@ -59,8 +59,8 @@ export const EXPERIENCE = [
 export const STATS = [
   { value: "3+", label: "Years Coding" },
   { value: "15+", label: "Projects Built" },
-  { value: "100%", label: "Client Satisfaction" },
-  { value: "∞", label: "Learning Energy" },
+  { value: "10K+", label: "Lines of Code" },
+  { value: "5+", label: "Tech Stacks" },
 ];
 
 export const ORBS = [

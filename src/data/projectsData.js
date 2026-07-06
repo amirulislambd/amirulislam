@@ -30,8 +30,10 @@ export const PROJECTS_DATA = [
     accent: "#4cd7f6",
     accentSecondary: "#06b6d4",
     featured: true,
-    challenges: "Handling real-time updates for shift assignments and delivery tracking using Firebase was challenging. Ensuring secure authentication with JWT and managing different user roles (admin, driver, customer) required careful planning.",
-    improvements: "I plan to implement push notifications for drivers, a more robust reporting dashboard for admins, and a mobile-specific app using Flutter for better on-the-go access."
+    challenges:
+      "Handling real-time updates for shift assignments and delivery tracking using Firebase was challenging. Ensuring secure authentication with JWT and managing different user roles (admin, driver, customer) required careful planning.",
+    improvements:
+      "I plan to implement push notifications for drivers, a more robust reporting dashboard for admins, and a mobile-specific app using Flutter for better on-the-go access.",
   },
   {
     id: "digitools",
@@ -86,5 +88,32 @@ export const PROJECTS_DATA = [
       "Fetching and displaying GitHub API data using vanilla JavaScript without a framework, and implementing a credential-based login flow without a real backend.",
     improvements:
       "Adding real OAuth-based GitHub login, pagination for large issue lists, and filtering by label, assignee, or status.",
-  }
+  },
+  {
+    id: "veluxora",
+    title: "Veluxora",
+    tagline: "Premium dark-luxury car rental platform with cinematic UI.",
+    description:
+      "A full-stack premium car rental platform built with Next.js 14 and Express.js. Features a cinematic dark luxury design with gold accents, secure JWT authentication via NextAuth, full CRUD for car listings, a smart booking system with date range selection, and a fully responsive layout across all devices.",
+    tech: [
+      "Next.js 14",
+      "Tailwind CSS v4",
+      "Express.js",
+      "MongoDB Atlas",
+      "NextAuth",
+      "JWT",
+      "Framer Motion",
+      "React Hook Form",
+    ],
+    liveUrl: "https://veluxora.vercel.app/",
+    githubUrl: "https://github.com/amirulislambd/veluxora",
+    category: "Full Stack",
+    accent: "#C9A84C",
+    accentSecondary: "#E0C060",
+    featured: true,
+    challenges:
+      "Implementing secure JWT authentication with NextAuth JWKS verification, building a smooth Framer Motion hero car slider with cinematic transitions, and managing server/client component boundaries in Next.js App Router while keeping the dark luxury design consistent across all pages.",
+    improvements:
+      "Adding an admin dashboard for booking management, implementing real-time booking status updates with WebSocket, adding payment gateway integration, and building a review and rating system for each vehicle.",
+  },
 ];

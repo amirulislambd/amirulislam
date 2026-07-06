@@ -19,42 +19,55 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: {
-    default: "Amirul Islam | Professional Full Stack Web Developer & MERN Specialist",
-    template: "%s | Amirul Islam"
+    default: "Amirul Islam | Full Stack Web Developer — MERN & Next.js Expert",
+    template: "%s | Amirul Islam — Full Stack Developer",
   },
   description:
-    "Amirul Islam is a top-rated Full Stack Web Developer from Dhaka, Bangladesh. Specializing in MERN Stack (MongoDB, Express, React, Node.js), Next.js, and Mobile App Development (Flutter). Transforming complex ideas into high-performance web solutions.",
+    "Amirul Islam is a professional Full Stack Web Developer from Dhaka, Bangladesh. Expert in MERN Stack (MongoDB, Express.js, React, Node.js), Next.js, and Flutter. Building scalable, high-performance web apps. Available for hire.",
   metadataBase: new URL("https://amirulislam.vercel.app"),
   alternates: {
-    canonical: "/",
+    canonical: "https://amirulislam.vercel.app",
   },
   keywords: [
     "Amirul Islam",
-    "Amirul Islam Developer",
-    "Amirul Islam Portfolio",
-    "Full Stack Developer Bangladesh",
-    "MERN Stack Developer Dhaka",
-    "React Specialist Bangladesh",
-    "Next.js Developer Portfolio",
-    "Best Web Developer in Dhaka",
-    "Software Engineer Portfolio",
-    "Hire React Developer Bangladesh",
-    "Amirul Islam Web Developer",
+    "Amirul Islam developer",
+    "Amirul Islam portfolio",
+    "Amirul Islam web developer",
+    "Amirul Islam MERN developer",
+    "Amirul Islam Bangladesh",
+    "Amirul Islam Next.js",
+    "full stack developer Bangladesh",
+    "MERN stack developer Dhaka",
+    "React developer Bangladesh",
+    "Next.js developer portfolio",
+    "Node.js developer Bangladesh",
+    "web developer Dhaka Bangladesh",
+    "hire full stack developer Bangladesh",
+    "software engineer Bangladesh",
+    "JavaScript developer Bangladesh",
+    "Flutter developer Bangladesh",
+    "MongoDB developer Bangladesh",
+    "best web developer Dhaka",
+    "freelance web developer Bangladesh",
+    "portfolio Amirul Islam",
+    "amirulislambd",
   ],
   authors: [{ name: "Amirul Islam", url: "https://amirulislam.vercel.app" }],
   creator: "Amirul Islam",
   publisher: "Amirul Islam",
+  category: "technology",
   openGraph: {
-    title: "Amirul Islam | Expert Full Stack Developer Portfolio",
-    description: "Building modern, scalable, and high-performance web applications with MERN and Next.js.",
+    title: "Amirul Islam | Full Stack Web Developer Portfolio",
+    description:
+      "Professional Full Stack Developer from Bangladesh specializing in MERN Stack, Next.js & Flutter. View my projects and hire me.",
     url: "https://amirulislam.vercel.app",
-    siteName: "Amirul Islam - Full Stack Developer",
+    siteName: "Amirul Islam — Full Stack Developer",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Amirul Islam - Professional Web Developer Portfolio",
+        alt: "Amirul Islam — Full Stack Web Developer Portfolio",
       },
     ],
     locale: "en_US",
@@ -62,47 +75,127 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Amirul Islam | Full Stack Developer",
-    description: "Expert MERN & Next.js Developer crafting pixel-perfect web experiences.",
+    title: "Amirul Islam | Full Stack Web Developer",
+    description:
+      "Expert MERN & Next.js Developer from Dhaka, Bangladesh. Crafting pixel-perfect web experiences.",
     creator: "@amirulislambd",
     images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      noimageindex: false,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   verification: {
-    google: "hqLUcA89yMna2GmB8rYnhUhqAWUXBjhAaL4FrLEwQaI", 
+    google: "hqLUcA89yMna2GmB8rYnhUhqAWUXBjhAaL4FrLEwQaI",
   },
 };
 
 export default function RootLayout({ children }) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Amirul Islam",
-    "url": "https://amirulislam.vercel.app",
-    "image": "https://amirulislam.vercel.app/og-image.jpg",
-    "jobTitle": "Full Stack Web Developer",
-    "description": "Professional Full Stack Developer specializing in MERN Stack and Next.js.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Dhaka",
-      "addressCountry": "Bangladesh"
-    },
-    "knowsAbout": ["React", "Next.js", "Node.js", "MongoDB", "MERN Stack", "Flutter", "Web Development"],
-    "sameAs": [
-      "https://github.com/amirulislambd",
-      "https://linkedin.com/in/amirulislambd",
-      "https://facebook.com/amirulislambd"
-    ]
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://amirulislam.vercel.app/#person",
+        "name": "Amirul Islam",
+        "givenName": "Amirul",
+        "familyName": "Islam",
+        "url": "https://amirulislam.vercel.app",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://amirulislam.vercel.app/og-image.jpg",
+          "width": 1200,
+          "height": 630,
+        },
+        "jobTitle": "Full Stack Web Developer",
+        "description": "Amirul Islam is a professional Full Stack Web Developer from Dhaka, Bangladesh, specializing in MERN Stack (MongoDB, Express.js, React, Node.js), Next.js, and Flutter mobile app development.",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Freelance",
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dhaka",
+          "addressRegion": "Dhaka Division",
+          "addressCountry": "BD",
+        },
+        "knowsAbout": [
+          "React.js",
+          "Next.js",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "MERN Stack",
+          "Flutter",
+          "JavaScript",
+          "TypeScript",
+          "Web Development",
+          "Full Stack Development",
+          "REST API",
+          "Firebase",
+          "Tailwind CSS",
+        ],
+        "sameAs": [
+          "https://github.com/amirulislambd",
+          "https://linkedin.com/in/amirulislambd",
+          "https://facebook.com/amirulislambd",
+        ],
+        "email": "mailto:amirulislambd@gmail.com",
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://amirulislam.vercel.app/#website",
+        "url": "https://amirulislam.vercel.app",
+        "name": "Amirul Islam — Full Stack Developer Portfolio",
+        "description": "Official portfolio of Amirul Islam, a Full Stack Web Developer from Dhaka, Bangladesh. Specializing in MERN Stack and Next.js.",
+        "author": {
+          "@id": "https://amirulislam.vercel.app/#person",
+        },
+        "inLanguage": "en-US",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://amirulislam.vercel.app/?q={search_term_string}",
+          },
+          "query-input": "required name=search_term_string",
+        },
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://amirulislam.vercel.app/#webpage",
+        "url": "https://amirulislam.vercel.app",
+        "name": "Amirul Islam | Full Stack Web Developer — MERN & Next.js Expert",
+        "isPartOf": {
+          "@id": "https://amirulislam.vercel.app/#website",
+        },
+        "about": {
+          "@id": "https://amirulislam.vercel.app/#person",
+        },
+        "description": "Portfolio of Amirul Islam — Full Stack Web Developer from Dhaka, Bangladesh.",
+        "inLanguage": "en-US",
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://amirulislam.vercel.app",
+            },
+          ],
+        },
+      },
+    ],
   };
 
   return (
@@ -116,7 +209,10 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+        <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#020617" />
+        <meta name="author" content="Amirul Islam" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
       </head>
       <body className="min-h-full flex flex-col relative bg-white dark:bg-[#020617] transition-all duration-300">
         <NextThemeProvider>
