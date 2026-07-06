@@ -1,6 +1,6 @@
 "use client";
 
-import { HiOutlineMail, HiOutlinePhone } from "react-icons/hi";
+import { HiOutlineMail, HiOutlinePhone, HiOutlineCalendar } from "react-icons/hi";
 import { FaWhatsapp, FaReact, FaNodeJs } from "react-icons/fa";
 import { SiJavascript, SiTailwindcss } from "react-icons/si";
 import { motion } from "framer-motion";
@@ -84,6 +84,14 @@ export default function ContactSection() {
       link: "tel:+8801814022917",
       color: "from-purple-500 to-violet-400",
       shadow: "shadow-purple-500/20",
+    },
+    {
+      icon: HiOutlineCalendar,
+      label: "Book a Meeting",
+      value: "Schedule a 30-min chat",
+      link: "https://calendly.com/amirulislambd313/30min", 
+      color: "from-orange-500 to-red-400",
+      shadow: "shadow-orange-500/20",
     },
   ];
 
