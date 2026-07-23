@@ -32,7 +32,18 @@ export const metadata = {
     canonical: "https://amirulislam.vercel.app",
   },
   keywords: [
+    "amir",
+    "Amir",
+    "amirul",
+    "Amirul",
+    "mirul",
+    "Mirul",
     "Amirul Islam",
+    "amirul islam",
+    "Amirul islam",
+    "amirul islam gazi",
+    "amirul islmabd",
+    "Amirul Islam | Full Stack Web Developer — MERN & Next.js Expert",
     "Amirul Islam developer",
     "Amirul Islam portfolio",
     "Amirul Islam web developer",
@@ -60,7 +71,7 @@ export const metadata = {
   publisher: "Amirul Islam",
   category: "technology",
   openGraph: {
-    title: "Amirul Islam | Full Stack Web Developer Portfolio",
+    title: "Amirul Islam | Full Stack Web Developer — MERN & Next.js Expert",
     description:
       "Professional Full Stack Developer from Bangladesh specializing in MERN Stack, Next.js & Flutter. View my projects and hire me.",
     url: "https://amirulislam.vercel.app",
@@ -78,7 +89,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Amirul Islam | Full Stack Web Developer",
+    title: "Amirul Islam | Full Stack Web Developer — MERN & Next.js Expert",
     description:
       "Expert MERN & Next.js Developer from Dhaka, Bangladesh. Crafting pixel-perfect web experiences.",
     creator: "@amirulislambd",

@@ -1,4 +1,180 @@
 export const PROJECTS_DATA = [
+
+  {
+    id: "zendafund",
+    title: "ZendaFund",
+    tagline: "Hybrid Crowdfunding Platform with Role-Based Dashboards.",
+    description: "A modern, high-performance hybrid crowdfunding platform where Creators launch campaigns, Supporters fund them through a credit-based system, and Admins oversee the entire platform — including approvals, withdrawals, and reported content.",
+    tech: ["Next.js 15", "TypeScript", "Node.js", "Express.js", "MongoDB", "Better Auth", "Stripe", "ImgBB"],
+    liveUrl: "https://zendafun.vercel.app",
+    githubUrl: "https://github.com/amirulislambd/ZendaFund",
+    category: "Full Stack",
+    image: "/screenshots/zendafund.png",
+    accent: "#8b5cf6",
+    accentSecondary: "#7c3aed",
+    featured: true,
+    challenges: "Architecting a secure, role-based system for three distinct user types (Supporter, Creator, Admin) sharing one Next.js monolith, building a credit-based donation engine with accurate conversion math (10 credits/$1 to buy, 20 credits/$1 to withdraw) plus automatic refunds when campaigns are deleted or donations rejected, and wiring up ImgBB for image uploads alongside a Nodemailer/SendGrid pipeline for transactional email notifications.",
+    improvements: "Adding real-time chat between Creators and Supporters, campaign milestone tracking, and a public API for embedding campaign widgets on external sites.",
+    caseStudy: {
+      goal: "Build a one-stop crowdfunding hub where Creators can launch and manage campaigns, Supporters can discover and fund them with platform credits, and Admins can moderate the entire ecosystem from a single dashboard.",
+      architecture: [
+        { title: "Frontend", desc: "Next.js 15 App Router (TypeScript) merging the UI and API routes into a single monolith for fast, unified deployment." },
+        { title: "Authentication", desc: "Better Auth with a MongoDB adapter, using secure httpOnly cookies instead of localStorage tokens to mitigate XSS." },
+        { title: "Payments", desc: "Stripe-powered credit purchase system (100 credits for $10) with webhook-driven balance updates." },
+        { title: "Database", desc: "MongoDB Atlas storing campaigns, users, donations, and notifications, with singleton connection caching." }
+      ],
+      keyChallenge: "Enforcing role-based access control (RBAC) for Supporter, Creator, and Admin roles across both routing and API layers, while keeping the credit conversion math and refund logic consistent and error-free.",
+      solution: "Built middleware-level session and role verification on every protected route and API endpoint, paired with an automated refund mechanism that returns credits to a Supporter's wallet whenever a Creator deletes a campaign or rejects a donation.",
+      impact: [
+        "Secure, cookie-based session architecture with strong XSS mitigation",
+        "Automated, error-free credit conversion and refund flow",
+        "Real-time notification system that keeps all three roles informed of key platform events"
+      ]
+    }
+  },
+  {
+    id: "zenithmind-ai",
+    title: "ZenithMind AI",
+    tagline: "AI-Powered Cognitive Health & Burnout Tracking Platform.",
+    description: "A premium cognitive health, stress management, and burnout tracking platform combining wellness content, an intelligent AI chat experience, personalized dashboards, and exploration tools into one polished product.",
+    tech: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "TanStack Query", "Framer Motion", "Better Auth", "MongoDB"],
+    liveUrl: "https://zenithmind-ai.vercel.app",
+    githubUrl: "https://github.com/amirulislambd/ZenithMind-AI",
+    category: "Full Stack",
+    image: "/screenshots/zenithmind.png",
+    accent: "#14b8a6",
+    accentSecondary: "#0d9488",
+    featured: true,
+    challenges: "Designing a role-aware dashboard system (user, admin) alongside AI-powered chat and analysis experiences backed by API routes, while keeping the dark navy visual theme consistent across landing, explore, and authenticated flows.",
+    improvements: "Expanding the AI analysis engine with longitudinal burnout trend insights, adding push notifications for check-in reminders, and building out richer wellness content management for admins.",
+    caseStudy: {
+      goal: "Build a single, polished product where users can track cognitive health and burnout risk over time, explore curated wellness content, and get AI-driven guidance through an integrated chat experience.",
+      architecture: [
+        { title: "Frontend", desc: "Next.js 16 App Router with React 19, TanStack Query for data fetching, and Framer Motion for the animated dark-navy UI." },
+        { title: "Authentication", desc: "Better Auth with a MongoDB adapter, providing secure, role-aware access control for user and admin flows." },
+        { title: "AI Layer", desc: "Backend API routes powering the AI chat and analysis experience for personalized wellness guidance." },
+        { title: "Database", desc: "MongoDB storing user profiles, burnout tracking data, and explorable wellness content." }
+      ],
+      keyChallenge: "Keeping the AI chat and analysis experience responsive and coherent while layering it on top of authenticated, role-aware dashboards without breaking the app's polished SaaS-style UX.",
+      solution: "Structured the codebase around clear src/app (routes + API), src/components (dashboard/home/explore), and src/lib (auth + API helpers) boundaries, letting the AI features plug into existing auth and data layers cleanly.",
+      impact: [
+        "Cohesive SaaS-style experience across landing, explore, and dashboard sections",
+        "Role-aware access control keeping admin and user flows properly separated",
+        "AI-driven guidance layered naturally into everyday wellness tracking"
+      ]
+    }
+  },
+  {
+    id: "gymvortex",
+    title: "GYMVORTEXT",
+    tagline: "Comprehensive Fitness & Gym Management Platform.",
+    description: "A comprehensive platform built for fitness enthusiasts, professional trainers, and administrators. It provides a seamless experience for discovering and booking fitness classes, participating in community discussions, and managing the entire gym ecosystem.",
+    tech: ["Next.js 15", "Tailwind CSS", "Stripe", "MongoDB", "Better Auth"],
+    liveUrl: "https://gymvortex.vercel.app/",
+    githubUrl: "https://github.com/amirulislambd/GymVortex",
+    category: "Full Stack",
+    image: "/screenshots/gymvortex.png",
+    accent: "#f97316",
+    accentSecondary: "#ea580c",
+    featured: true,
+    challenges: "Building a unified platform with role-based access control for Admins, Trainers, and Members. Integrating Stripe checkout for class bookings and building a complete community forum with pagination and liking systems.",
+    improvements: "Adding real-time chat between trainers and members, and video uploading functionality for fitness tutorials.",
+    caseStudy: {
+      goal: "Create a one-stop fitness hub where members can book classes, trainers can manage their schedule and students, and admins can oversee the entire platform.",
+      architecture: [
+        { title: "Frontend", desc: "Next.js 15 App Router with Framer Motion for animations and Tailwind CSS for styling." },
+        { title: "Authentication", desc: "Better Auth supporting both Email/Password and Google OAuth login with JWT stored in HTTPOnly cookies." },
+        { title: "Payments", desc: "Stripe integration for processing class bookings securely." },
+        { title: "Database", desc: "MongoDB Atlas utilizing $regex search and $in filters for advanced class discovery." }
+      ],
+      keyChallenge: "Handling three distinct user roles (Admin, Trainer, Member) securely within a single application, ensuring users only see relevant dashboard routes and actions.",
+      solution: "Implemented comprehensive Role-Based Access Control (RBAC) at both the routing level (protecting dashboard paths) and API level, driven by robust JWT verification.",
+      impact: [
+        "Streamlined onboarding for trainers with a dedicated application and approval workflow",
+        "Secure, friction-less payment flow with Stripe Checkout",
+        "Engaging community forum that increases user retention and interaction"
+      ]
+    }
+  },
+  {
+    id: "veluxora",
+    title: "Veluxora",
+    tagline: "Premium dark-luxury car rental platform with cinematic UI.",
+    description:
+      "A full-stack premium car rental platform built with Next.js 14 and Express.js. Features a cinematic dark luxury design with gold accents, secure JWT authentication via NextAuth, full CRUD for car listings, a smart booking system with date range selection, and a fully responsive layout across all devices.",
+    tech: [
+      "Next.js 14",
+      "Tailwind CSS v4",
+      "Express.js",
+      "MongoDB Atlas",
+      "NextAuth",
+      "JWT",
+      "Framer Motion",
+      "React Hook Form",
+    ],
+    liveUrl: "https://veluxora.vercel.app/",
+    githubUrl: "https://github.com/amirulislambd/veluxora",
+    category: "Full Stack",
+    image: "/screenshots/veluxora.png",
+    accent: "#C9A84C",
+    accentSecondary: "#E0C060",
+    featured: true,
+    challenges:
+      "Implementing secure JWT authentication with NextAuth JWKS verification, building a smooth Framer Motion hero car slider with cinematic transitions, and managing server/client component boundaries in Next.js App Router while keeping the dark luxury design consistent across all pages.",
+    improvements:
+      "Adding an admin dashboard for booking management, implementing real-time booking status updates with WebSocket, adding payment gateway integration, and building a review and rating system for each vehicle.",
+    caseStudy: {
+      goal: "Design and build a world-class, luxury car rental platform that rivals commercial services — with cinematic visuals, secure bookings, and a seamless end-to-end user experience.",
+      architecture: [
+        { title: "Frontend", desc: "Next.js 14 App Router with Framer Motion for cinematic hero animations and page transitions. Tailwind CSS v4 for the dark luxury design system." },
+        { title: "Backend API", desc: "Express.js REST API with full CRUD for car listings, bookings, and user management — deployed separately on Render." },
+        { title: "Authentication", desc: "NextAuth.js with JWT and JWKS verification for stateless, highly secure session management across Next.js client and server components." },
+        { title: "Database", desc: "MongoDB Atlas with indexed collections for fast car listing queries, booking conflict detection, and user history retrieval." },
+      ],
+      keyChallenge: "The most complex part was implementing JWT-based authentication that works seamlessly across Next.js App Router's server components, client components, and the separate Express.js API — all while preventing token leakage and ensuring booking data is always user-scoped.",
+      "solution": "Used NextAuth's JWT callback to embed custom claims (userId, role) into the token. The Express API verifies tokens using a JWKS endpoint exposed by NextAuth — creating a stateless, cryptographically secure bridge between the two systems without sharing secrets.",
+      "impact": [
+        "Cinematic hero slider with 60fps Framer Motion transitions elevates perceived quality",
+        "Date-range conflict detection prevents double-bookings at the database query level",
+        "Stateless JWT auth eliminates session storage overhead and scales horizontally",
+        "Full CRUD admin panel built with React Hook Form for zero-boilerplate form validation"
+      ]
+    }
+  },
+
+  {
+    id: "placifydev",
+    title: "Placifydev",
+    tagline: "The Modern Job Hunting Portal.",
+    description: "A full-featured job hunting portal bridging the gap between job seekers and employers. Features role-based dynamic dashboards, subscription-based premium features via Stripe, applicant tracking (ATS), and an advanced management toolkit for platform administrators.",
+    tech: ["Next.js", "Express.js", "MongoDB", "Stripe", "Firebase Auth"],
+    liveUrl: "https://placifydev.vercel.app/",
+    githubUrl: "https://github.com/amirulislambd/placifydev",
+    category: "Full Stack",
+    image: "/screenshots/placifydev.png",
+    accent: "#3b82f6",
+    accentSecondary: "#2563eb",
+    featured: true,
+    challenges: "Developing an Applicant Tracking System (ATS) for recruiters while simultaneously providing a job discovery portal for seekers. Integrating Stripe for recurring prorated subscription billing across multiple tiers.",
+    improvements: "Implementing AI-powered resume parsing and job matching algorithms to connect seekers with the most relevant roles automatically.",
+    caseStudy: {
+      goal: "Streamline job discovery, application management, and company recruitment—all in one unified platform with premium monetization features.",
+      architecture: [
+        { title: "Frontend", desc: "React.js / Next.js with Recharts for visual data analytics and Tailwind CSS." },
+        { title: "Backend", desc: "Node.js & Express.js REST API connected to MongoDB for scalable data storage." },
+        { title: "Authentication", desc: "Firebase Auth integrated with custom JWTs for secure sessions." },
+        { title: "Monetization", desc: "Stripe integration for managing Free, Pro/Growth, and Premium/Enterprise subscription tiers." }
+      ],
+      keyChallenge: "Building a complex state flow for applications (Applied ➡️ Under Review ➡️ Shortlisted ➡️ Offered/Rejected) that updates in real-time across both Seeker and Recruiter dashboards.",
+      solution: "Engineered a robust database schema and API layer that triggers automated email notifications upon status changes, keeping both parties synchronized.",
+      impact: [
+        "Enabled companies to manage entire recruitment pipelines directly on the platform",
+        "Created a new revenue stream through tiered subscription plans via Stripe",
+        "Provided actionable insights to both seekers and recruiters using visual data charts"
+      ]
+    }
+  },
+
   {
     id: "mangobooks",
     title: "Mango Books",
@@ -126,113 +302,5 @@ export const PROJECTS_DATA = [
     improvements:
       "Adding real OAuth-based GitHub login, pagination for large issue lists, and filtering by label, assignee, or status.",
   },
-  {
-    id: "veluxora",
-    title: "Veluxora",
-    tagline: "Premium dark-luxury car rental platform with cinematic UI.",
-    description:
-      "A full-stack premium car rental platform built with Next.js 14 and Express.js. Features a cinematic dark luxury design with gold accents, secure JWT authentication via NextAuth, full CRUD for car listings, a smart booking system with date range selection, and a fully responsive layout across all devices.",
-    tech: [
-      "Next.js 14",
-      "Tailwind CSS v4",
-      "Express.js",
-      "MongoDB Atlas",
-      "NextAuth",
-      "JWT",
-      "Framer Motion",
-      "React Hook Form",
-    ],
-    liveUrl: "https://veluxora.vercel.app/",
-    githubUrl: "https://github.com/amirulislambd/veluxora",
-    category: "Full Stack",
-    image: "/screenshots/veluxora.png",
-    accent: "#C9A84C",
-    accentSecondary: "#E0C060",
-    featured: true,
-    challenges:
-      "Implementing secure JWT authentication with NextAuth JWKS verification, building a smooth Framer Motion hero car slider with cinematic transitions, and managing server/client component boundaries in Next.js App Router while keeping the dark luxury design consistent across all pages.",
-    improvements:
-      "Adding an admin dashboard for booking management, implementing real-time booking status updates with WebSocket, adding payment gateway integration, and building a review and rating system for each vehicle.",
-    caseStudy: {
-      goal: "Design and build a world-class, luxury car rental platform that rivals commercial services — with cinematic visuals, secure bookings, and a seamless end-to-end user experience.",
-      architecture: [
-        { title: "Frontend", desc: "Next.js 14 App Router with Framer Motion for cinematic hero animations and page transitions. Tailwind CSS v4 for the dark luxury design system." },
-        { title: "Backend API", desc: "Express.js REST API with full CRUD for car listings, bookings, and user management — deployed separately on Render." },
-        { title: "Authentication", desc: "NextAuth.js with JWT and JWKS verification for stateless, highly secure session management across Next.js client and server components." },
-        { title: "Database", desc: "MongoDB Atlas with indexed collections for fast car listing queries, booking conflict detection, and user history retrieval." },
-      ],
-      keyChallenge: "The most complex part was implementing JWT-based authentication that works seamlessly across Next.js App Router's server components, client components, and the separate Express.js API — all while preventing token leakage and ensuring booking data is always user-scoped.",
-      "solution": "Used NextAuth's JWT callback to embed custom claims (userId, role) into the token. The Express API verifies tokens using a JWKS endpoint exposed by NextAuth — creating a stateless, cryptographically secure bridge between the two systems without sharing secrets.",
-      "impact": [
-        "Cinematic hero slider with 60fps Framer Motion transitions elevates perceived quality",
-        "Date-range conflict detection prevents double-bookings at the database query level",
-        "Stateless JWT auth eliminates session storage overhead and scales horizontally",
-        "Full CRUD admin panel built with React Hook Form for zero-boilerplate form validation"
-      ]
-    }
-  },
-  {
-    id: "gymvortex",
-    title: "GYMVORTEXT",
-    tagline: "Comprehensive Fitness & Gym Management Platform.",
-    description: "A comprehensive platform built for fitness enthusiasts, professional trainers, and administrators. It provides a seamless experience for discovering and booking fitness classes, participating in community discussions, and managing the entire gym ecosystem.",
-    tech: ["Next.js 15", "Tailwind CSS", "Stripe", "MongoDB", "Better Auth"],
-    liveUrl: "https://gymvortex.vercel.app/",
-    githubUrl: "https://github.com/amirulislambd/GymVortex",
-    category: "Full Stack",
-    image: "/screenshots/gymvortex.png",
-    accent: "#f97316",
-    accentSecondary: "#ea580c",
-    featured: true,
-    challenges: "Building a unified platform with role-based access control for Admins, Trainers, and Members. Integrating Stripe checkout for class bookings and building a complete community forum with pagination and liking systems.",
-    improvements: "Adding real-time chat between trainers and members, and video uploading functionality for fitness tutorials.",
-    caseStudy: {
-      goal: "Create a one-stop fitness hub where members can book classes, trainers can manage their schedule and students, and admins can oversee the entire platform.",
-      architecture: [
-        { title: "Frontend", desc: "Next.js 15 App Router with Framer Motion for animations and Tailwind CSS for styling." },
-        { title: "Authentication", desc: "Better Auth supporting both Email/Password and Google OAuth login with JWT stored in HTTPOnly cookies." },
-        { title: "Payments", desc: "Stripe integration for processing class bookings securely." },
-        { title: "Database", desc: "MongoDB Atlas utilizing $regex search and $in filters for advanced class discovery." }
-      ],
-      keyChallenge: "Handling three distinct user roles (Admin, Trainer, Member) securely within a single application, ensuring users only see relevant dashboard routes and actions.",
-      solution: "Implemented comprehensive Role-Based Access Control (RBAC) at both the routing level (protecting dashboard paths) and API level, driven by robust JWT verification.",
-      impact: [
-        "Streamlined onboarding for trainers with a dedicated application and approval workflow",
-        "Secure, friction-less payment flow with Stripe Checkout",
-        "Engaging community forum that increases user retention and interaction"
-      ]
-    }
-  },
-  {
-    id: "placifydev",
-    title: "Placifydev",
-    tagline: "The Modern Job Hunting Portal.",
-    description: "A full-featured job hunting portal bridging the gap between job seekers and employers. Features role-based dynamic dashboards, subscription-based premium features via Stripe, applicant tracking (ATS), and an advanced management toolkit for platform administrators.",
-    tech: ["Next.js", "Express.js", "MongoDB", "Stripe", "Firebase Auth"],
-    liveUrl: "https://placifydev.vercel.app/",
-    githubUrl: "https://github.com/amirulislambd/placifydev",
-    category: "Full Stack",
-    image: "/screenshots/placifydev.png",
-    accent: "#3b82f6",
-    accentSecondary: "#2563eb",
-    featured: true,
-    challenges: "Developing an Applicant Tracking System (ATS) for recruiters while simultaneously providing a job discovery portal for seekers. Integrating Stripe for recurring prorated subscription billing across multiple tiers.",
-    improvements: "Implementing AI-powered resume parsing and job matching algorithms to connect seekers with the most relevant roles automatically.",
-    caseStudy: {
-      goal: "Streamline job discovery, application management, and company recruitment—all in one unified platform with premium monetization features.",
-      architecture: [
-        { title: "Frontend", desc: "React.js / Next.js with Recharts for visual data analytics and Tailwind CSS." },
-        { title: "Backend", desc: "Node.js & Express.js REST API connected to MongoDB for scalable data storage." },
-        { title: "Authentication", desc: "Firebase Auth integrated with custom JWTs for secure sessions." },
-        { title: "Monetization", desc: "Stripe integration for managing Free, Pro/Growth, and Premium/Enterprise subscription tiers." }
-      ],
-      keyChallenge: "Building a complex state flow for applications (Applied ➡️ Under Review ➡️ Shortlisted ➡️ Offered/Rejected) that updates in real-time across both Seeker and Recruiter dashboards.",
-      solution: "Engineered a robust database schema and API layer that triggers automated email notifications upon status changes, keeping both parties synchronized.",
-      impact: [
-        "Enabled companies to manage entire recruitment pipelines directly on the platform",
-        "Created a new revenue stream through tiered subscription plans via Stripe",
-        "Provided actionable insights to both seekers and recruiters using visual data charts"
-      ]
-    }
-  }
+
 ];

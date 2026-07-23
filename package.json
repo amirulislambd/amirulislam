@@ -11,6 +11,7 @@
   "dependencies": {
     "@heroui/react": "^3.0.3",
     "@heroui/styles": "^3.0.3",
+    "@next/bundle-analyzer": "^16.2.10",
     "@vercel/analytics": "^2.0.1",
     "cmdk": "^1.1.1",
     "framer-motion": "^12.38.0",

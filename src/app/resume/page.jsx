@@ -1,5 +1,4 @@
-"use client";
-
+import ResumePrintButton from "@/components/resume/ResumePrintButton";
 
 export default function ResumePage() {
   return (
@@ -12,12 +11,7 @@ export default function ResumePage() {
         >
           ← Back to Portfolio
         </a>
-        <button
-          onClick={() => window.print()}
-          className="flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold shadow-lg hover:shadow-purple-500/30 transition-all hover:-translate-y-0.5 active:translate-y-0"
-        >
-          🖨 Print / Save as PDF
-        </button>
+        <ResumePrintButton />
       </div>
 
       {/* Resume Paper */}
@@ -27,9 +21,13 @@ export default function ResumePage() {
         style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-blue-600 print:bg-none px-8 py-10 print:px-8 print:py-8 print:border-b-2 print:border-slate-300">
-          <h1 className="text-4xl font-black text-white print:text-slate-900 mb-1">Amirul Islam</h1>
-          <p className="text-purple-200 print:text-purple-700 font-semibold text-lg mb-4">Full Stack Web Developer (MERN & Next.js)</p>
+        <div className="bg-linear-to-r from-purple-600 to-blue-600 print:bg-none px-8 py-10 print:px-8 print:py-8 print:border-b-2 print:border-slate-300">
+          <h1 className="text-4xl font-black text-white print:text-slate-900 mb-1">
+            Amirul Islam
+          </h1>
+          <p className="text-purple-200 print:text-purple-700 font-semibold text-lg mb-4">
+            Full Stack Web Developer (MERN & Next.js)
+          </p>
           <div className="flex flex-wrap gap-4 text-sm text-purple-100 print:text-slate-600">
             <span>📧 amirulislambd313@gmail.com</span>
             <span>🌐 amirulislam.vercel.app</span>
@@ -39,16 +37,18 @@ export default function ResumePage() {
         </div>
 
         <div className="p-8 print:p-8 space-y-8 print:space-y-6">
-
           {/* Summary */}
           <section>
             <h2 className="text-base font-black uppercase tracking-widest text-purple-600 mb-3 pb-1 border-b-2 border-purple-200 dark:border-purple-500/30 print:border-slate-300">
               Professional Summary
             </h2>
             <p className="text-slate-600 dark:text-slate-300 print:text-slate-700 leading-relaxed">
-              Passionate Full Stack Web Developer with hands-on experience in building production-grade web applications using the MERN stack and Next.js. 
-              Strong analytical mindset built through advanced academic studies and self-driven software engineering. 
-              Focused on writing clean, scalable code and delivering high-performance user experiences.
+              Passionate Full Stack Web Developer with hands-on experience in
+              building production-grade web applications using the MERN stack
+              and Next.js. Strong analytical mindset built through advanced
+              academic studies and self-driven software engineering. Focused on
+              writing clean, scalable code and delivering high-performance user
+              experiences.
             </p>
           </section>
 
@@ -59,14 +59,31 @@ export default function ResumePage() {
             </h2>
             <div className="grid sm:grid-cols-2 gap-4 print:grid-cols-2">
               {[
-                { label: "Frontend", skills: "React.js, Next.js, JavaScript (ES6+), Tailwind CSS, Framer Motion" },
-                { label: "Backend", skills: "Node.js, Express.js, REST API, JWT Authentication" },
-                { label: "Database", skills: "MongoDB, Mongoose, Firebase Firestore" },
-                { label: "Tools", skills: "Git, GitHub, Vercel, Postman, Figma, VS Code" },
+                {
+                  label: "Frontend",
+                  skills:
+                    "React.js, Next.js, JavaScript (ES6+), Tailwind CSS, Framer Motion",
+                },
+                {
+                  label: "Backend",
+                  skills: "Node.js, Express.js, REST API, JWT Authentication",
+                },
+                {
+                  label: "Database",
+                  skills: "MongoDB, Mongoose, Firebase Firestore",
+                },
+                {
+                  label: "Tools",
+                  skills: "Git, GitHub, Vercel, Postman, Figma, VS Code",
+                },
               ].map(({ label, skills }) => (
                 <div key={label}>
-                  <h3 className="font-bold text-slate-900 dark:text-white print:text-slate-900 text-sm mb-1">{label}</h3>
-                  <p className="text-slate-500 dark:text-slate-400 print:text-slate-600 text-sm leading-relaxed">{skills}</p>
+                  <h3 className="font-bold text-slate-900 dark:text-white print:text-slate-900 text-sm mb-1">
+                    {label}
+                  </h3>
+                  <p className="text-slate-500 dark:text-slate-400 print:text-slate-600 text-sm leading-relaxed">
+                    {skills}
+                  </p>
                 </div>
               ))}
             </div>
@@ -103,14 +120,25 @@ export default function ResumePage() {
                 <div key={exp.role} className="break-inside-avoid">
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <h3 className="font-bold text-slate-900 dark:text-white print:text-slate-900">{exp.role}</h3>
-                      <p className="text-purple-600 text-sm font-semibold">{exp.company}</p>
+                      <h3 className="font-bold text-slate-900 dark:text-white print:text-slate-900">
+                        {exp.role}
+                      </h3>
+                      <p className="text-purple-600 text-sm font-semibold">
+                        {exp.company}
+                      </p>
                     </div>
-                    <span className="text-slate-500 dark:text-slate-400 print:text-slate-500 text-sm shrink-0 mt-0.5">{exp.duration}</span>
+                    <span className="text-slate-500 dark:text-slate-400 print:text-slate-500 text-sm shrink-0 mt-0.5">
+                      {exp.duration}
+                    </span>
                   </div>
                   <ul className="list-disc list-inside space-y-1">
                     {exp.points.map((p, i) => (
-                      <li key={i} className="text-slate-600 dark:text-slate-400 print:text-slate-600 text-sm leading-relaxed">{p}</li>
+                      <li
+                        key={i}
+                        className="text-slate-600 dark:text-slate-400 print:text-slate-600 text-sm leading-relaxed"
+                      >
+                        {p}
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -146,10 +174,19 @@ export default function ResumePage() {
                   tech: "Next.js, MongoDB, NextAuth",
                 },
               ].map((project) => (
-                <div key={project.name} className="break-inside-avoid p-4 rounded-xl border border-slate-200 dark:border-white/10 print:border-slate-300">
-                  <h3 className="font-bold text-slate-900 dark:text-white print:text-slate-900 mb-1">{project.name}</h3>
-                  <p className="text-slate-500 dark:text-slate-400 print:text-slate-600 text-xs mb-2 leading-relaxed">{project.desc}</p>
-                  <p className="text-purple-600 text-xs font-bold">{project.tech}</p>
+                <div
+                  key={project.name}
+                  className="break-inside-avoid p-4 rounded-xl border border-slate-200 dark:border-white/10 print:border-slate-300"
+                >
+                  <h3 className="font-bold text-slate-900 dark:text-white print:text-slate-900 mb-1">
+                    {project.name}
+                  </h3>
+                  <p className="text-slate-500 dark:text-slate-400 print:text-slate-600 text-xs mb-2 leading-relaxed">
+                    {project.desc}
+                  </p>
+                  <p className="text-purple-600 text-xs font-bold">
+                    {project.tech}
+                  </p>
                 </div>
               ))}
             </div>
@@ -175,18 +212,30 @@ export default function ResumePage() {
                   note: "Jayed Jiddan (Very Good) — Al-Haiatul Ulya Board",
                 },
               ].map((edu) => (
-                <div key={edu.degree} className="flex items-start justify-between break-inside-avoid">
+                <div
+                  key={edu.degree}
+                  className="flex items-start justify-between break-inside-avoid"
+                >
                   <div>
-                    <h3 className="font-bold text-slate-900 dark:text-white print:text-slate-900 text-sm">{edu.degree}</h3>
-                    <p className="text-slate-500 dark:text-slate-400 print:text-slate-600 text-sm">{edu.institution}</p>
-                    {edu.note && <p className="text-emerald-600 text-xs font-semibold mt-0.5">{edu.note}</p>}
+                    <h3 className="font-bold text-slate-900 dark:text-white print:text-slate-900 text-sm">
+                      {edu.degree}
+                    </h3>
+                    <p className="text-slate-500 dark:text-slate-400 print:text-slate-600 text-sm">
+                      {edu.institution}
+                    </p>
+                    {edu.note && (
+                      <p className="text-emerald-600 text-xs font-semibold mt-0.5">
+                        {edu.note}
+                      </p>
+                    )}
                   </div>
-                  <span className="text-slate-500 dark:text-slate-400 print:text-slate-500 text-sm shrink-0 ml-4">{edu.duration}</span>
+                  <span className="text-slate-500 dark:text-slate-400 print:text-slate-500 text-sm shrink-0 ml-4">
+                    {edu.duration}
+                  </span>
                 </div>
               ))}
             </div>
           </section>
-
         </div>
       </div>
 
