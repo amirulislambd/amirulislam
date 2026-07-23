@@ -12,17 +12,17 @@ import { TypeAnimation } from 'react-type-animation';
 
 const ORBS = [
   { size: 420, x: "-10%", y: "-15%", delay: 0 },
-  { size: 320, x: "75%",  y: "55%",  delay: 1.4 },
-  { size: 200, x: "60%",  y: "-5%",  delay: 2.1 },
-  { size: 160, x: "10%",  y: "70%",  delay: 0.8 },
+  { size: 320, x: "75%", y: "55%", delay: 1.4 },
+  { size: 200, x: "60%", y: "-5%", delay: 2.1 },
+  { size: 160, x: "10%", y: "70%", delay: 0.8 },
 ];
 
 const PARTICLES = [
-  { id:0,  x:"8%",  y:"15%", size:2.5, delay:0.2, duration:8  },
-  { id:1,  x:"23%", y:"72%", size:1.8, delay:1.1, duration:7  },
-  { id:2,  x:"38%", y:"5%",  size:3.2, delay:2.3, duration:9  },
-  { id:3,  x:"55%", y:"82%", size:1.5, delay:0.7, duration:11 },
-  { id:4,  x:"67%", y:"30%", size:2.8, delay:3.1, duration:8  },
+  { id: 0, x: "8%", y: "15%", size: 2.5, delay: 0.2, duration: 8 },
+  { id: 1, x: "23%", y: "72%", size: 1.8, delay: 1.1, duration: 7 },
+  { id: 2, x: "38%", y: "5%", size: 3.2, delay: 2.3, duration: 9 },
+  { id: 3, x: "55%", y: "82%", size: 1.5, delay: 0.7, duration: 11 },
+  { id: 4, x: "67%", y: "30%", size: 2.8, delay: 3.1, duration: 8 },
 ];
 
 const fadeUpVariants = {
@@ -122,10 +122,10 @@ export default function Hero() {
             shouldReduceMotion
               ? { opacity: 0.6 }
               : {
-                  scale: [1, 1.15, 1],
-                  opacity: [0.5, 0.9, 0.5],
-                  y: [0, -30, 0],
-                }
+                scale: [1, 1.15, 1],
+                opacity: [0.5, 0.9, 0.5],
+                y: [0, -30, 0],
+              }
           }
           transition={{
             duration: 12 + i,
@@ -258,7 +258,7 @@ export default function Hero() {
                 className="btn-shine-effect group relative inline-flex w-full sm:w-auto items-center justify-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 border-2 border-purple-500/30 dark:border-purple-500/50 text-purple-600 dark:text-purple-300 rounded-xl sm:rounded-2xl font-bold hover:bg-purple-500/5 transition-all"
               >
                 <HiOutlineDocumentArrowDown className="text-xl" />
-                Download CV
+                Download Resume
               </a>
             </motion.div>
           </motion.div>
